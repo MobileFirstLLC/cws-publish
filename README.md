@@ -16,11 +16,12 @@ comparable CI environment.
 
 ----
 
-##### Table of Contents
-1. [Usage](#1-usage)
-2. [Parameters](#2-parameters)
-3. [Advanced Usage](#3-advanced-usage)
-4. [Notes & FAQs](#4-faqs)
+### Table of Contents
+
+1. **[Usage](#1-usage)**
+2. **[Parameters](#2-parameters)**
+3. **[Advanced Usage](#3-advanced-usage)**
+4. **[Notes & FAQs](#4-faqs)**
 
 ---
 
@@ -152,7 +153,7 @@ store_publish:
     - tags
 ```
 
-**To keep your CI configuration file clutter free, you can use environment variables for all parameters, including <ZIP_FILE> and <EXTENSION_ID>**
+To keep your CI configuration file clutter free, you can use environment variables for all parameters, including <ZIP_FILE> and <EXTENSION_ID>
 
 ```
 npx cws-upload $client_id $secret $token $zip_path $extension_id
@@ -164,7 +165,7 @@ npx cws-upload $client_id $secret $token $zip_path $extension_id
 
 **Q1: Can I use an API key to access chrome web store API?**
 
-No. When dealing with private user data simple API key will not suffice.
+No. When dealing with private user data simple API key is not enough.
 
 **Q2: Can I use service account to access chrome web store API?**
 
