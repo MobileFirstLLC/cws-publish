@@ -15,7 +15,7 @@ comparable CI environment.
 1. [Usage](#1-usage)
 2. [Parameters](#2-parameters)
 3. [Advanced Usage](#3-advanced-usage)
-4. [Random Notes](#4-notes)
+4. [Random Notes](#4-faqs)
 
 ---
 
@@ -135,13 +135,25 @@ store_publish:
 
 **To keep your CI configuration file clutter free, you can use environment variables for all parameters, including <ZIP_FILE> and <EXTENSION_ID>**
 
-```$xslt
+```
 npx cws-upload $client_id $secret $token $zip_path $extension_id
 ```
 
+**Notes on specifying paths**: 
+
+- when using **travis CI**, 
+  the path to the release file is just the file name if zip file will be generated in the root of the repository
+    
+  for example, set environment variable to `release.zip` 
+
+- when using **gitlab pipeline**,
+  the path the release should (must?) include relative path, 
+  
+  for example, set environment variable to `./public/release.zip` if the zip file is generated as a build artifact.
+
 * * *
 
-## 4 Notes
+## 4 FAQs
 
 **Q1: Can I use an API key to access chrome web store API?**
 
