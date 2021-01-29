@@ -85,15 +85,29 @@ Once you have `$client_id` `$client_secret` and `$refresh_token` **save them as 
 
 #### Obtaining `<ZIP_FILE>`
 
-Generating a zip file is outside the scope of this package. It is assumed that you have already generated a zip file during previous build steps. Please see for example [gulp-zip](https://www.npmjs.com/package/gulp-zip) for instructions if necessary. 
+Generating a zip file is outside the scope of this package. It is assumed that you have already generated a zip file during previous build steps. 
+Please use tools such as [extension-cli](https://github.com/MobileFirstLLC/extension-cli) for programmatic way to generate a zip file for an extension project.
 
 Once you know the location of the zip file, update the upload/publish command and replace `<ZIP_FILE>` with path to file. 
 
-EXAMPLE: if the zip file is `my.zip` in a directory called `build`, the upload command would now look like this:
+EXAMPLE: if using Gitlab CI and the zip file is `my.zip` in a directory called `build`, the upload command would now look like this (see notes on specifying paths below):
 
 ```
 npx cws-upload $client_id $client_secret $refresh_token ./build/my.zip <EXTENSION_ID>
 ```
+
+**Notes on specifying paths**: 
+
+- when using **Travis CI**, 
+  the path to the release file is just the file name if zip file will be generated in the root of the repository
+    
+  for example: `release.zip` 
+
+- when using **Gitlab pipeline**,
+  the path the release should (must?) include explicit relative path to file, 
+  
+  for example: `./public/release.zip` if the zip file is generated as a build artifact in the root.
+
 
 <br/>
 
@@ -143,18 +157,6 @@ store_publish:
 ```
 npx cws-upload $client_id $secret $token $zip_path $extension_id
 ```
-
-**Notes on specifying paths**: 
-
-- when using **travis CI**, 
-  the path to the release file is just the file name if zip file will be generated in the root of the repository
-    
-  for example, set environment variable to `release.zip` 
-
-- when using **gitlab pipeline**,
-  the path the release should (must?) include relative path, 
-  
-  for example, set environment variable to `./public/release.zip` if the zip file is generated as a build artifact.
 
 * * *
 
