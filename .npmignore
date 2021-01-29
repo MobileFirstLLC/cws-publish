@@ -1,0 +1,9 @@
+.idea/
+node_modules/
+.nyc_output/
+coverage/
+out/
+test/
+.gitignore
+.travis.yml
+.gitlab-ci.yml

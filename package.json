@@ -1,0 +1,35 @@
+{
+  "name": "cws-publish",
+  "version": "1.1.0",
+  "description": "Upload chrome extensions to chrome web store using CI",
+  "scripts": {
+    "test": "nyc mocha ./test/*.spec.js",
+    "release": "git add -A && git commit -m \"release\" && npx standard-version"
+  },
+  "keywords": [
+    "chrome web store",
+    "continuous integration",
+    "chrome extension",
+    "chrome theme"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "bin": {
+    "cws-upload": "src/upload.js",
+    "cws-publish": "src/publish.js"
+  },
+  "dependencies": {
+    "commander": "^7.0.0",
+    "googleapis": "^67.0.0",
+    "q-io": "^1.13.6",
+    "superagent": "^6.1.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.2.1",
+    "nyc": "^15.1.0",
+    "sinon": "^9.2.4",
+    "standard-version": "^9.1.0"
+  }
+}
