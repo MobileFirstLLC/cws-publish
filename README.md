@@ -20,7 +20,7 @@ comparable CI environment.
 1. [Usage](#1-usage)
 2. [Parameters](#2-parameters)
 3. [Advanced Usage](#3-advanced-usage)
-4. [Random Notes](#4-faqs)
+4. [Notes & FAQs](#4-faqs)
 
 ---
 
