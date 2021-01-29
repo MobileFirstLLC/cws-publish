@@ -1,10 +1,12 @@
-# CWS Publish
+# Chrome Web Store Publish
 
 [![Build Status](https://travis-ci.com/MobileFirstLLC/cws-publish.svg?branch=master)](https://travis-ci.com/MobileFirstLLC/cws-publish)
 [![Coverage Status](https://coveralls.io/repos/github/MobileFirstLLC/cws-publish/badge.svg?branch=master)](https://coveralls.io/github/MobileFirstLLC/cws-publish?branch=master)
 ![npm](https://img.shields.io/npm/v/cws-publish)
 
-### This package enables uploading chrome extensions (`.zip` files) to Chrome Web Store programmatically, using continuous integration.
+### This package enables uploading chrome extensions to Chrome Web Store programmatically, using continuous integration.
+
+### `npm i cws-publish --save-dev`
 
 Moderate effort is required to setup and to obtain necessary OAuth credentials, but the same setup
 can be used across multiple projects. If your extensions are built by multiple collaborators and
@@ -21,7 +23,7 @@ comparable CI environment.
 1. **[Usage](#1-usage)**
 2. **[Parameters](#2-parameters)**
 3. **[Advanced Usage](#3-advanced-usage)**
-4. **[Notes & FAQs](#4-faqs)**
+4. **[FAQs](#4-faqs)**
 
 ---
 
