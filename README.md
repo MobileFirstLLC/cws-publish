@@ -1,8 +1,12 @@
 # CWS Publish
 
-This package lets you upload chrome extensions (.zip) to Chrome Web Store using continuous integration.
+[![Build Status](https://travis-ci.com/MobileFirstLLC/cws-publish.svg?branch=master)](https://travis-ci.com/MobileFirstLLC/cws-publish)
+[![Coverage Status](https://coveralls.io/repos/github/MobileFirstLLC/cws-publish/badge.svg?branch=master)](https://coveralls.io/github/MobileFirstLLC/cws-publish?branch=master)
+![npm](https://img.shields.io/npm/v/cws-publish)
 
-This packages has been used successfully with travis CI and gitlab CI, but should work with any 
+### This package enables uploading chrome extensions (`.zip` files) to Chrome Web Store using continuous integration.
+
+This packages has been used successfully with travis CI and gitlab CI and should work with any 
 comparable CI environment.
 
 ----

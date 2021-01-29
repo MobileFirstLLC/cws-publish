@@ -4,6 +4,5 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### 1.1.1 (2021-01-29)
 
-## 1.1.0 (2021-01-29)
-
+- update package info on NPM
 - updated packages

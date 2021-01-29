@@ -20,6 +20,9 @@
   "bugs": {
     "url": "https://github.com/MobileFirstLLC/cws-publish/issues"
   },
+  "standard-version": {
+    "infile": ".github/CHANGELOG.md"
+  },
   "license": "CC0 1.0 Universal",
   "author": {
     "name": "Mobile First LLC",
