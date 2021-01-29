@@ -9,8 +9,8 @@
 ### `npm i cws-publish --save-dev`
 
 Moderate effort is required to setup and to obtain necessary OAuth credentials, but the same setup
-can be used across multiple projects. If your extensions are built by multiple collaborators and
-you deploy those multiple extensions regularly, adding this package can significantly improve your 
+can be used across multiple projects. If your extensions are built by multiple collaborators and/or
+you deploy extensions regularly, adding this package can significantly improve your 
 productivity and publishing workflow.
 
 This packages has been used successfully with travis CI and gitlab CI and should work with any 
