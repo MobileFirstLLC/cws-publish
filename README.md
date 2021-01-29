@@ -170,4 +170,4 @@ Travis and Gitlab; possible others as long as they support Node.js runtime
 
 #### License
 
-MIT
+CC0-1.0 License
