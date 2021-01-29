@@ -4,7 +4,12 @@
 [![Coverage Status](https://coveralls.io/repos/github/MobileFirstLLC/cws-publish/badge.svg?branch=master)](https://coveralls.io/github/MobileFirstLLC/cws-publish?branch=master)
 ![npm](https://img.shields.io/npm/v/cws-publish)
 
-### This package enables uploading chrome extensions (`.zip` files) to Chrome Web Store using continuous integration.
+### This package enables uploading chrome extensions (`.zip` files) to Chrome Web Store programmatically, using continuous integration.
+
+Moderate effort is required to setup and to obtain necessary OAuth credentials, but the same setup
+can be used across multiple projects. If your extensions are built by multiple collaborators and
+you deploy those multiple extensions regularly, adding this package can significantly improve your 
+productivity and publishing workflow.
 
 This packages has been used successfully with travis CI and gitlab CI and should work with any 
 comparable CI environment.
