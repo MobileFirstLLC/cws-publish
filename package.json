@@ -2,6 +2,7 @@
   "name": "cws-publish",
   "version": "1.1.0",
   "description": "Upload chrome extensions to chrome web store using CI",
+  "homepage": "https://github.com/MobileFirstLLC/cws-publish",
   "scripts": {
     "test": "nyc mocha ./test/*.spec.js",
     "release": "git add -A && git commit -m \"release\" && npx standard-version"
@@ -12,6 +13,20 @@
     "chrome extension",
     "chrome theme"
   ],
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/MobileFirstLLC/cws-publish"
+  },
+  "bugs": {
+    "url": "https://github.com/MobileFirstLLC/cws-publish/issues"
+  },
+  "license" : "CC0 1.0 Universal",
+  "author": {
+    "name" : "Mobile First LLC"
+  , "email" : "npm@mobilefirst.me"
+  , "url" : "https://github.com/MobileFirstLLC"
+  },
+  "funding": "https://github.com/sponsors/MobileFirstLLC",
   "publishConfig": {
     "access": "public"
   },
