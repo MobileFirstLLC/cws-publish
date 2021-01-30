@@ -5,7 +5,7 @@
 ![npm](https://img.shields.io/npm/v/cws-publish)
 ![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/MobileFirstLLC/cws-publish)
 
-### This package enables uploading chrome extensions to Chrome Web Store programmatically, using continuous integration.
+### This package enables uploading chrome extensions to Chrome Web Store programmatically using continuous integration.
 
 ### `npm i cws-publish --save-dev`
 
