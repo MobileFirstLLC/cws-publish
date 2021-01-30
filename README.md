@@ -6,7 +6,7 @@
 [![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/MobileFirstLLC/cws-publish)](https://codeclimate.com/github/MobileFirstLLC/cws-publish)
 [![JSDoc](https://inch-ci.org/github/MobileFirstLLC/shortcuts-for-chrome.svg?branch=master)](https://inch-ci.org/github/mobilefirstllc/cws-publish)
 
-### This package enables uploading chrome extensions to Chrome Web Store programmatically using continuous integration.
+### This package enables uploading chrome extensions to Chrome Web Store programmatically using CI/CD pipeline.
 
 ### `npm i cws-publish --save-dev`
 
