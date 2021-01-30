@@ -10,6 +10,8 @@
 
 ### `npm i cws-publish --save-dev`
 
+<br/>
+
 ![img](https://raw.githubusercontent.com/MobileFirstLLC/cws-publish/master/.github/feature.jpg)
 
 **Is this package good fit for you?** Moderate effort is required to obtain necessary authentication credentials and to configure the workflow, but the same setup
