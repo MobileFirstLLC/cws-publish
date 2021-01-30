@@ -9,7 +9,9 @@
 
 ### `npm i cws-publish --save-dev`
 
-Moderate effort is required to setup and to obtain necessary OAuth credentials, but the same setup
+![img](https://repository-images.githubusercontent.com/334276793/38022c80-627e-11eb-88c3-6b531776aa61)
+
+Moderate effort is required to obtain necessary OAuth credentials and to configure the workflow, but the same setup
 can be used across multiple projects. If your extensions are built by multiple collaborators and/or
 you deploy extensions regularly, adding this package can significantly improve your 
 productivity and publishing workflow.
