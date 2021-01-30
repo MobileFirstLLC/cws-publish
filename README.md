@@ -64,8 +64,9 @@ npx cws-publish $client_id $client_secret $refresh_token <ZIP_FILE> <EXTENSION_I
 
 **C) upload and publish to testers:**
 
-You can only choose this option iff the extension is currently NOT published.
-Attempting to perform this operation on a published extension will fail.
+You can only choose this option iff the extension is currently NOT published publicly.
+Current state must be draft or published to testers.
+Attempting to perform this operation on a public, published extension will fail.
 
 ```
 npx cws-publish $client_id $client_secret $refresh_token <ZIP_FILE> <EXTENSION_ID> --testers
