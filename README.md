@@ -10,7 +10,7 @@
 
 ### `npm i cws-publish --save-dev`
 
-![img](https://repository-images.githubusercontent.com/334276793/38022c80-627e-11eb-88c3-6b531776aa61)
+![img](https://raw.githubusercontent.com/MobileFirstLLC/cws-publish/master/.github/feature.jpg)
 
 **Is this package good fit for you?** Moderate effort is required to obtain necessary authentication credentials and to configure the workflow, but the same setup
 can be used across multiple projects. If your extensions are built by multiple collaborators and/or
