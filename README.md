@@ -26,14 +26,14 @@ comparable CI environment.
 
 ### Table of Contents
 
-1. **[Usage](#1-usage)**
+1. **[Configuration](#1-configuration)**
 2. **[Parameters](#2-parameters)**
-3. **[Advanced Usage](#3-advanced-usage)**
+3. **[Tips and Best Practices](#3-tips-and-best-practices)**
 4. **[FAQs](#4-faqs)**
 
 ---
 
-## 1 Usage
+## 1 Configuration
 
 **1. Add package to your project**
 
@@ -42,32 +42,30 @@ npm install --save-dev cws-publish
 ```
 <br/>
 
-**2. Choose your upload behavior**
-
-There are 3 available options:
-
-A.  Upload extension as a draft<br/> 
-B.  Upload and publish extension immediately<br/>
-C.  Upload and publish extension to testers (*iff* your extension is currently NOT published)
-
-<br/>
-
-**3. Configure your upload behavior:**
+**2. Choose and configure upload behavior:**
 
 
-A) upload as a draft:
+**A) upload as a draft:**
+
+Upload the .zip file to developer console, but DO NOT publish it yet.
 
 ```
 npx cws-upload $client_id $client_secret $refresh_token <ZIP_FILE> <EXTENSION_ID>
 ```
 
-B) upload and release:
+**B) upload and publish immediately:**
+
+Web store will likely still impose a review before actual release occurs; but you are not 
+required to manually submit the update for release from the developer console.
 
 ```
 npx cws-publish $client_id $client_secret $refresh_token <ZIP_FILE> <EXTENSION_ID>
 ```
 
-C) upload and release to testers:
+**C) upload and publish to testers:**
+
+You can only choose this option iff the extension is currently NOT published.
+Attempting to perform this operation on a published extension will fail.
 
 ```
 npx cws-publish $client_id $client_secret $refresh_token <ZIP_FILE> <EXTENSION_ID> --testers
@@ -134,17 +132,20 @@ npx cws-upload $client_id $client_secret $refresh_token ./build/my.zip fpggedhge
  
 * * *
  
-## 3 Advanced Usage
+### [See `examples/` for complete platform-specific CI configuration scripts &rarr;](https://github.com/MobileFirstLLC/cws-publish/tree/master/examples)
+ 
+* * *
+ 
+## 3 Tips and Best Practices
 
-**Deploy based on some condition, such as only on tagged commits.** 
-
-The general idea is to use the same command, but run the command based on conditional check
+It often makes sense to deploy based on some condition, such as only on tagged commits.
+The general idea is to use the same command, but run the command based on some conditional check.
 
 #### Travis CI example
 ```
-  - if [ ! -z  "$TRAVIS_TAG" ]; then 
-        npx cws-upload $client_id $client_secret $refresh_token <ZIP_FILE> <EXTENSION_ID> 
-    fi    
+if [ ! -z  "$TRAVIS_TAG" ]; then 
+    npx cws-upload $client_id $client_secret $refresh_token <ZIP_FILE> <EXTENSION_ID> 
+fi    
 ```
 
 #### Gitlab CI example
@@ -166,8 +167,6 @@ To keep your CI configuration file clutter free, you can use environment variabl
 ```
 npx cws-upload $client_id $secret $token $zip_path $extension_id
 ```
-
-* * *
 
 ## 4 FAQs
 

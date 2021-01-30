@@ -1,0 +1,31 @@
+image: node:latest
+
+stages:
+  - install
+  - deploy
+
+# cache node modules between runs
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+
+# run NPM install
+install_dependencies:
+  stage: install
+  script: npm install
+  artifacts:
+    paths:
+      - node_modules/
+
+deploy:
+  stage: deploy
+  script:
+    - npm run build
+    # upload to prod channel
+    - npx cws-upload $cid $sec $tkn $zip $id;
+    # upload to beta channel
+    - npx cws-upload $cid $sec $tkn $zip $betaid;
+  artifacts:
+    paths:
+      - public/
