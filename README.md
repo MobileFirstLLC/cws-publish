@@ -2,8 +2,9 @@
 
 [![Build Status](https://travis-ci.com/MobileFirstLLC/cws-publish.svg?branch=master)](https://travis-ci.com/MobileFirstLLC/cws-publish)
 [![Coverage Status](https://coveralls.io/repos/github/MobileFirstLLC/cws-publish/badge.svg?branch=master)](https://coveralls.io/github/MobileFirstLLC/cws-publish?branch=master)
-![npm](https://img.shields.io/npm/v/cws-publish)
+![NPM](https://img.shields.io/npm/v/cws-publish)
 ![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/MobileFirstLLC/cws-publish)
+![JSDoc](https://inch-ci.org/github/MobileFirstLLC/shortcuts-for-chrome.svg?branch=master)
 
 ### This package enables uploading chrome extensions to Chrome Web Store programmatically using continuous integration.
 
@@ -191,7 +192,7 @@ Travis and Gitlab; possible others as long as they support Node.js runtime
 
 #### References
 
-[Chrome Webstore Api Reference](https://developer.chrome.com/webstore/api_index)
+[Chrome Webstore API Reference](https://developer.chrome.com/webstore/api_index)
 
 #### License
 

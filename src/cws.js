@@ -1,3 +1,17 @@
+/** * * * * * * * * * * * * * * * * * * * *
+ * CWS-publish
+ * CI packages for publishing in Chrome
+ * Web Store
+ *
+ * Author: Mobile First LLC
+ * Website: https://mobilefirst.me
+ *
+ * @description
+ * Utility methods used for uploading and
+ * publishing extensions through Chrome
+ * Web Store API
+ * * * * * * * * * * * * * * * * * * * * */
+
 const qio_fs = require('q-io/fs');
 const request = require('superagent');
 const OAuth2 = require('googleapis').google.auth.OAuth2;
@@ -37,9 +51,7 @@ const publishSuccess = (res) => {
 const getFileBlob = (filepath, callback) => {
     qio_fs.read(filepath, 'b')
         .then(callback)
-        .catch(() => {
-            callback(null);
-        });
+        .catch(() => callback(null));
 };
 
 /**
