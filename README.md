@@ -1,10 +1,10 @@
 # Chrome Web Store Publish
 
+[![NPM](https://img.shields.io/npm/v/cws-publish)](https://www.npmjs.com/package/cws-publish)
 [![Build Status](https://travis-ci.com/MobileFirstLLC/cws-publish.svg?branch=master)](https://travis-ci.com/MobileFirstLLC/cws-publish)
 [![Coverage Status](https://coveralls.io/repos/github/MobileFirstLLC/cws-publish/badge.svg?branch=master)](https://coveralls.io/github/MobileFirstLLC/cws-publish?branch=master)
-![NPM](https://img.shields.io/npm/v/cws-publish)
-![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/MobileFirstLLC/cws-publish)
-![JSDoc](https://inch-ci.org/github/MobileFirstLLC/shortcuts-for-chrome.svg?branch=master)
+[![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/MobileFirstLLC/cws-publish)](https://codeclimate.com/github/MobileFirstLLC/cws-publish)
+[![JSDoc](https://inch-ci.org/github/MobileFirstLLC/shortcuts-for-chrome.svg?branch=master)](https://inch-ci.org/github/mobilefirstllc/cws-publish)
 
 ### This package enables uploading chrome extensions to Chrome Web Store programmatically using continuous integration.
 
@@ -12,7 +12,7 @@
 
 ![img](https://repository-images.githubusercontent.com/334276793/38022c80-627e-11eb-88c3-6b531776aa61)
 
-Moderate effort is required to obtain necessary OAuth credentials and to configure the workflow, but the same setup
+**Is this package good fit for you?** Moderate effort is required to obtain necessary authentication credentials and to configure the workflow, but the same setup
 can be used across multiple projects. If your extensions are built by multiple collaborators and/or
 you deploy extensions regularly, adding this package can significantly improve your 
 productivity and publishing workflow.
