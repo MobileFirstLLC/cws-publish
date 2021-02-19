@@ -12,7 +12,8 @@
  * Web Store API
  * * * * * * * * * * * * * * * * * * * * */
 
-const qio_fs = require('q-io/fs');
+const fs = require('fs');
+// const qio_fs = require('q-io/fs');
 const request = require('superagent');
 const OAuth2 = require('googleapis').google.auth.OAuth2;
 const {NO_ZIP_ERR, AUTH_FAILURE} = require('./dict.json');
@@ -49,9 +50,11 @@ const publishSuccess = (res) => {
  * @param {function} callback
  */
 const getFileBlob = (filepath, callback) => {
-    qio_fs.read(filepath, 'b')
-        .then(callback)
-        .catch(() => callback(null));
+    try {
+        callback(fs.readFileSync(filepath));
+    } catch (e) {
+        callback(null);
+    }
 };
 
 /**

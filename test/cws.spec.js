@@ -1,7 +1,7 @@
 let
+    fs = require('fs'),
     sinon = require('sinon'),
     expect = require('chai').expect,
-    qio_fs = require('q-io/fs'),
     OAuth2 = require('googleapis').google.auth.OAuth2,
     request = require('superagent'),
     cws = require('../src/cws');
@@ -59,16 +59,16 @@ describe('CWS Publish', function () {
         sinon.spy(console, 'error');
         sinon.spy(console, 'log');
 
-        sinon.stub(qio_fs, 'read');
-        qio_fs.read.withArgs('good.zip').resolves(new Uint8Array(100));
-        qio_fs.read.withArgs('bad.zip').rejects(null);
+        sinon.stub(fs, 'readFileSync');
+        fs.readFileSync.withArgs('good.zip').resolves(new Uint8Array(100));
+        fs.readFileSync.withArgs('bad.zip').rejects(null);
 
     });
 
     afterEach(function () {
         console.error.restore();
         console.log.restore();
-        qio_fs.read.restore();
+        fs.readFileSync.restore();
     });
 
     after(function () {
@@ -78,7 +78,7 @@ describe('CWS Publish', function () {
 
     it('failing file read terminates process early', function (done) {
         cws.upload(null, null, null, 'bad.zip', null, () => {
-            expect(qio_fs.read.calledOnce, 'file read called').to.equal(true);
+            expect(fs.readFileSync.calledOnce, 'file read called').to.equal(true);
             expect(console.error.calledOnce, 'outputs error to console').to.equal(true);
             done();
         });
@@ -87,7 +87,7 @@ describe('CWS Publish', function () {
     it('failing authentication', function (done) {
         sinon.stub(OAuth2.prototype, 'refreshAccessToken').yields(true, null);
         cws.publish('1', '2', '3', 'good.zip', 'xyz', false, (access_token) => {
-            expect(qio_fs.read.calledOnce, 'file read succeeds').to.equal(true);
+            expect(fs.readFileSync.calledOnce, 'file read succeeds').to.equal(true);
             expect(access_token, 'access_token').to.equal(undefined);
             expect(console.error.calledOnce, 'outputs auth error').to.equal(true);
             OAuth2.prototype.refreshAccessToken.restore();
@@ -98,7 +98,7 @@ describe('CWS Publish', function () {
     it('successful upload', function (done) {
         sinon.stub(OAuth2.prototype, 'refreshAccessToken').yields(false, {access_token: 'hello_there'});
         cws.upload('1', '2', '3', 'good.zip', 'xyz', (access_token) => {
-            expect(qio_fs.read.calledOnce, 'file read succeeds').to.equal(true);
+            expect(fs.readFileSync.calledOnce, 'file read succeeds').to.equal(true);
             expect(access_token, 'access_token').to.equal('hello_there');
             expect(console.log.calledOnce, 'outputs webstore api response to console').to.equal(true);
 
@@ -110,7 +110,7 @@ describe('CWS Publish', function () {
     it('successful publish', function (done) {
         sinon.stub(OAuth2.prototype, 'refreshAccessToken').yields(false, {access_token: 'some_token'});
         cws.publish('1', '2', '3', 'good.zip', 'xyz', false, () => {
-            expect(qio_fs.read.calledOnce, 'file read succeeds').to.equal(true);
+            expect(fs.readFileSync.calledOnce, 'file read succeeds').to.equal(true);
             expect(console.log.calledTwice, 'outputs webstore api response to console').to.equal(true);
 
             OAuth2.prototype.refreshAccessToken.restore();
@@ -121,7 +121,7 @@ describe('CWS Publish', function () {
     it('publish to testers', function (done) {
         sinon.stub(OAuth2.prototype, 'refreshAccessToken').yields(false, {access_token: 'some_token'});
         cws.publish('1', '2', '3', 'good.zip', 'xyz', true, () => {
-            expect(qio_fs.read.calledOnce, 'file read succeeds').to.equal(true);
+            expect(fs.readFileSync.calledOnce, 'file read succeeds').to.equal(true);
             expect(console.log.calledTwice, 'outputs webstore api response to console').to.equal(true);
 
             OAuth2.prototype.refreshAccessToken.restore();
