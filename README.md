@@ -134,7 +134,7 @@ npx cws-upload $client_id $client_secret $refresh_token ./build/my.zip fpggedhge
 
 
 <h3 align="center">
- <img src='https://media0.giphy.com/media/xk9cukG3p8mcv0tlli/giphy.gif' width="42" /><br/>
+ Still feeling confused? <img src='https://media0.giphy.com/media/xk9cukG3p8mcv0tlli/giphy.gif' width="42" /><br/>
  <a href="https://github.com/MobileFirstLLC/cws-publish/tree/master/examples">See examples of platform-specific CI configuration scripts &rarr;</a></h3>
 
 * * *
