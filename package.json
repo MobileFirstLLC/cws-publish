@@ -5,7 +5,11 @@
   "homepage": "https://github.com/MobileFirstLLC/cws-publish",
   "scripts": {
     "test": "nyc mocha ./test/*.spec.js",
-    "release": "git add -A && git commit -m \"release\" && npx standard-version"
+    "release": "git add -A && git commit -m \"release\" && npx standard-version",
+    "patch:test": "npx standard-version --dry-run --release-as patch",
+    "alpha:test": "npx standard-version --dry-run --prerelease alpha",
+    "alpha": "npx standard-version --prerelease alpha",
+    "patch": "npx standard-version --release-as patch"
   },
   "keywords": [
     "chrome web store",
