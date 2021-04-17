@@ -118,7 +118,9 @@ npx cws-upload $client_id $client_secret $refresh_token ./build/my.zip <EXTENSIO
 
 #### Obtaining `<EXTENSION_ID>`
 
-Go to chrome web store [developer console](https://chrome.google.com/webstore/developer/dashboard) and click "More info". Copy the item id (approx. 32 character string) and paste it to your upload/publish command to replace `<EXTENSION_ID>`.  
+Go to chrome web store [developer console](https://chrome.google.com/webstore/developer/dashboard) and click on an existing extension. Copy the item id (approx. 32 character string) and paste it to your command to replace `<EXTENSION_ID>`.  
+
+If your extension is brand new, you must manually upload an initial draft in the developer console to obtain an id. Further, you will not be able to publish the extension until you manually complete the store listing to include uploading necessary screenshots and consenting to their policies.
  
 **EXAMPLE:** if your extension id is `fpggedhgeoicapmcammhdbmcmngbpkll`, the upload command would now look like this:
  
