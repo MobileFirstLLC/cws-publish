@@ -64,11 +64,7 @@ const getFileBlob = (filepath, callback) => {
  * @param {String} client_secret - application secret - from google api console
  * @param {*} callback
  */
-const getAccessToken = (
-    refresh_token,
-    client_id,
-    client_secret,
-    callback) => {
+const getAccessToken = (refresh_token, client_id, client_secret, callback) => {
     const oauth2Client = new OAuth2(client_id, client_secret, 'urn:ietf:wg:oauth:2.0:oob');
     const _tokens = {
         access_token: null,
@@ -91,11 +87,7 @@ const getAccessToken = (
  * @param {String} access_token
  * @param {function} callback
  */
-const uploadFile = (
-    extension_id,
-    blob,
-    access_token,
-    callback) => {
+const uploadFile = (extension_id, blob, access_token, callback) => {
     request
         .put('https://www.googleapis.com/upload/chromewebstore/v1.1/items/' + extension_id)
         .query({uploadType: 'media'})
@@ -115,11 +107,7 @@ const uploadFile = (
  * publically; you must first unpublish
  * @param {function} callback
  */
-const publishExtension = (
-    extension_id,
-    access_token,
-    beta,
-    callback) => {
+const publishExtension = (extension_id, access_token, beta, callback) => {
     request
         .post('https://www.googleapis.com/chromewebstore/v1.1/items/' + extension_id + '/publish')
         .query({publishTarget: beta ? 'trustedTesters' : 'default'})
@@ -138,11 +126,7 @@ const publishExtension = (
  * @param {function?} callback - function to call after task completes
  * @param {*} data - data to pass to callback function if defined
  */
-const handleResult = (
-    success,
-    res,
-    callback,
-    data) => {
+const handleResult = (success, res, callback, data) => {
     const logger = success ? console.log : console.error;
 
     res = (typeof res !== 'object') ? {body: res} : res;
@@ -158,16 +142,14 @@ const handleResult = (
  * @param {String} token - google api refresh token
  * @param {String} zip - path to extension zip file
  * @param {String} eid - extension id
- * @param {function} callback - function to call upon completion;
+ * @param {function|undefined} callback - function to call upon completion;
  * first param is access token if token was successfully refreshed
  */
 const upload = (
-    cid,
-    secret,
-    token,
-    zip,
-    eid,
-    callback) => {
+    cid, secret, token, zip, eid,
+    callback = undefined
+) => {
+
     const stepFailed = (msg) => handleResult(false, msg, callback);
 
     const step1 = cb => {
@@ -201,16 +183,12 @@ const upload = (
  * @param {String} zip - path to extension zip file
  * @param {String} eid - extension id
  * @param {boolean} testers - publish to testers
- * @param {function} callback - function to call upon completion
+ * @param {function|undefined} callback - function to call upon completion
  */
 const publish = (
-    cid,
-    secret,
-    token,
-    zip,
-    eid,
-    testers,
-    callback) => {
+    cid, secret, token, zip, eid, testers,
+    callback = undefined
+) => {
     upload(cid, secret, token, zip, eid, (access_token) => {
         if (access_token) {
             return publishExtension(eid, access_token, testers,
@@ -221,7 +199,7 @@ const publish = (
 };
 
 //=====================
-//  PUBLIC METHODS  ↓↓↓
+//  PUBLIC METHODS
 //=====================
 
 module.exports.upload = upload;
