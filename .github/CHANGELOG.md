@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [2.0.3](https://github.com/MobileFirstLLC/cws-publish/compare/v2.0.2...v2.0.3) (2021-06-21)
 
+- updated dependencies
+
 ### [2.0.2](https://github.com/MobileFirstLLC/cws-publish/compare/v2.0.2-alpha.0...v2.0.2) (2021-02-25)
 
 - remove `q-io` npm package dependency 
