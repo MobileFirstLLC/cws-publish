@@ -30,7 +30,7 @@
   "standard-version": {
     "infile": ".github/changelog.md"
   },
-  "license": "CC0-1.0",
+  "license": "Apache-2.0",
   "author": {
     "name": "Mobile First LLC",
     "email": "npm@mobilefirst.me",
