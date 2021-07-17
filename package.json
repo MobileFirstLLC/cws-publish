@@ -5,10 +5,13 @@
   "homepage": "https://github.com/MobileFirstLLC/cws-publish",
   "scripts": {
     "test": "nyc mocha ./test/*.spec.js",
+    "coverage": "nyc --reporter=lcov npm run test",
     "release": "git add -A && git commit -m \"release\" && npx standard-version",
+    "minor:test": "npx standard-version --dry-run --release-as minor",
     "patch:test": "npx standard-version --dry-run --release-as patch",
     "alpha:test": "npx standard-version --dry-run --prerelease alpha",
     "alpha": "npx standard-version --prerelease alpha",
+    "minor": "npx standard-version --prerelease minor",
     "patch": "npx standard-version --release-as patch"
   },
   "keywords": [
@@ -25,7 +28,7 @@
     "url": "https://github.com/MobileFirstLLC/cws-publish/issues"
   },
   "standard-version": {
-    "infile": ".github/CHANGELOG.md"
+    "infile": ".github/changelog.md"
   },
   "license": "CC0-1.0",
   "author": {

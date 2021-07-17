@@ -14,8 +14,14 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
+      - name: Cache
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+
       - run: npm install
-      - run: nyc --reporter=lcov npm run test
+      - run: npm run coverage
 
       - name: Report coverage
         uses: coverallsapp/github-action@master
