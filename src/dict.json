@@ -1,4 +1,4 @@
 {
-  "NO_ZIP_ERR": "FATAL: zip file not found",
+  "NO_ZIP_ERR": "FATAL: zip file not found or not readable",
   "AUTH_FAILURE": "FATAL: authentication failed. At least 1 of parameters $client_id, $client_secret, $refresh_token is invalid."
 }

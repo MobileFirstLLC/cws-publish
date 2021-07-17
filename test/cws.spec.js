@@ -1,5 +1,4 @@
-const
-    fs = require('fs'),
+const fs = require('fs'),
     sinon = require('sinon'),
     expect = require('chai').expect,
     OAuth2 = require('googleapis').google.auth.OAuth2,
@@ -8,13 +7,14 @@ const
     clientId = "myClientId",
     secret = "myAPISecret",
     apiToken = "xyz",
+    goodZip = 'good.zip',
     extensionId = 'fpggedhgeoicapmcammhdbmcmngbpkll';
 
-describe('Web Store Publish', function () {
+describe('Chrome Web Store (CWS) Publish', function () {
 
     let uploadReq, publishReq;
 
-    beforeEach(function () {
+    beforeEach(async function () {
         // stub web store api server upload request
         uploadReq = sinon.stub(request, 'put');
         uploadReq.returns((function () {
@@ -53,12 +53,12 @@ describe('Web Store Publish', function () {
 
         // stub readFile
         sinon.stub(fs, 'readFileSync');
-        fs.readFileSync.withArgs('good.zip').resolves(new Uint8Array(100));
-        fs.readFileSync.withArgs('bad.zip').resolves(null);
+        fs.readFileSync.withArgs(goodZip).returns(new Uint8Array(100));
+        fs.readFileSync.withArgs('bad.zip').returns(null);
         fs.readFileSync.withArgs('error.zip').throwsException();
     });
 
-    afterEach(function () {
+    afterEach(async function () {
         console.error.restore();
         console.log.restore();
         fs.readFileSync.restore();
@@ -66,78 +66,68 @@ describe('Web Store Publish', function () {
         publishReq.restore();
     });
 
-    it('Failed file read terminates process early', function (done) {
-        cws.upload(clientId, secret, apiToken, 'bad.zip', extensionId)
-            .then(() => {
-                expect(fs.readFileSync.calledOnce, 'file read called').to.equal(true);
-                expect(console.error.calledOnce, 'outputs error to console').to.equal(true);
-                done();
-            });
+    describe('\nERROR BEHAVIOR', function () {
+        it('Fails on missing arguments', async function () {
+            await cws.upload(undefined, undefined, undefined, undefined, undefined);
+            expect(console.error.calledOnce, 'outputs error to console').to.equal(true);
+        });
+
+        it('Failed file read terminates process early', async function () {
+            await cws.upload(clientId, secret, apiToken, 'bad.zip', extensionId);
+            expect(fs.readFileSync.calledOnce, 'file read called').to.equal(true);
+            expect(console.error.calledOnce, 'displays error').to.equal(true);
+        });
+
+        it('File read error is handled and terminates', async function () {
+            await cws.upload(clientId, secret, apiToken, 'error.zip', extensionId)
+            expect(fs.readFileSync.calledOnce, 'file read called').to.equal(true);
+            expect(console.error.calledOnce, 'displays error').to.equal(true);
+        });
+
+        it('Failure to obtain auth token logs error', async function () {
+            sinon.stub(OAuth2.prototype, 'refreshAccessToken').yields(true, undefined);
+            const accessToken = await cws.publish(clientId, secret, apiToken, goodZip, extensionId, false)
+            expect(accessToken, 'token').to.equal(undefined);
+            expect(fs.readFileSync.calledOnce, 'file read succeeded').to.equal(true);
+            expect(console.error.calledOnce, 'displays error').to.equal(true);
+            OAuth2.prototype.refreshAccessToken.restore();
+        });
+
+        it('Failed upload request logs error', async function () {
+            sinon.stub(OAuth2.prototype, 'refreshAccessToken').yields(false, {access_token: 'fail'});
+            await cws.upload(clientId, secret, apiToken, 'good.zip', extensionId)
+            expect(console.error.calledOnce, 'displays error').to.equal(true);
+            OAuth2.prototype.refreshAccessToken.restore();
+        });
     });
 
-    it('File read error is caught', function (done) {
-        cws.upload(clientId, secret, apiToken, 'error.zip', extensionId)
-            .then(() => {
-                expect(fs.readFileSync.calledOnce, 'file read called').to.equal(true);
-                expect(console.error.calledOnce, 'outputs error to console').to.equal(true);
-                done();
-            });
-    });
+    describe('\nSUCCESSFUL REQUESTS', function () {
 
-    it('Failed authentication logs error', function (done) {
-        sinon.stub(OAuth2.prototype, 'refreshAccessToken').yields(true, undefined);
-        cws.publish(clientId, secret, apiToken, 'good.zip', extensionId, false)
-            .then(accessToken => {
-                expect(fs.readFileSync.calledOnce, 'file read succeeds').to.equal(true);
-                expect(accessToken, 'token').to.equal(undefined);
-                expect(console.error.calledOnce, 'outputs auth error').to.equal(true);
-                OAuth2.prototype.refreshAccessToken.restore();
-                done();
-            });
-    });
+        beforeEach(async function () {
+            sinon.stub(OAuth2.prototype, 'refreshAccessToken').yields(false, {access_token: 'some_token'});
+        });
 
-    it('Failed upload logs error', function (done) {
-        sinon.stub(OAuth2.prototype, 'refreshAccessToken').yields(false, {access_token: 'fail'});
-        cws.upload(clientId, secret, apiToken, 'good.zip', extensionId)
-            .then(() => {
-                expect(console.error.calledOnce, 'outputs web store api response to console').to.equal(true);
-                OAuth2.prototype.refreshAccessToken.restore();
-                done();
-            });
-    });
+        afterEach(async function () {
+            OAuth2.prototype.refreshAccessToken.restore();
+        });
 
-    it('Successful upload', function (done) {
-        sinon.stub(OAuth2.prototype, 'refreshAccessToken').yields(false, {access_token: 'hello_there'});
-        cws.upload(clientId, secret, apiToken, 'good.zip', extensionId)
-            .then(token => {
-                expect(fs.readFileSync.calledOnce, 'file read succeeds').to.equal(true);
-                expect(token, 'access_token').to.equal('hello_there');
-                expect(console.log.calledOnce, 'outputs web store api response to console').to.equal(true);
-                OAuth2.prototype.refreshAccessToken.restore();
-                done();
-            });
-    });
+        it('Successful upload', async function () {
+            const token = await cws.upload(clientId, secret, apiToken, goodZip, extensionId)
+            expect(token, 'access_token').to.equal('some_token');
+            expect(fs.readFileSync.calledOnce, 'file read succeeds').to.equal(true);
+            expect(console.log.calledOnce, 'outputs 1 good response to console').to.equal(true);
+        });
 
-    it('Successful publish', function (done) {
-        sinon.stub(OAuth2.prototype, 'refreshAccessToken').yields(false, {access_token: 'some_token'});
-        cws.publish(clientId, secret, apiToken, 'good.zip', extensionId, false)
-            .then(token => {
-                expect(fs.readFileSync.calledOnce, 'file read succeeds').to.equal(true);
-                expect(token, 'access_token').to.equal('some_token');
-                expect(console.log.calledTwice, 'outputs two web store api responses to console').to.equal(true);
-                OAuth2.prototype.refreshAccessToken.restore();
-                done();
-            });
-    });
+        it('Successful publish', async function () {
+            await cws.publish(clientId, secret, apiToken, goodZip, extensionId, false)
+            expect(fs.readFileSync.calledOnce, 'file read succeeds').to.equal(true);
+            expect(console.log.calledTwice, 'outputs two good responses to console').to.equal(true);
+        });
 
-    it('Publish to testers', function (done) {
-        sinon.stub(OAuth2.prototype, 'refreshAccessToken').yields(false, {access_token: 'some_token'});
-        cws.publish(clientId, secret, apiToken, 'good.zip', 'xyz', true)
-            .then(() => {
-                expect(fs.readFileSync.calledOnce, 'file read succeeds').to.equal(true);
-                expect(console.log.calledTwice, 'outputs two web store api responses to console').to.equal(true);
-                OAuth2.prototype.refreshAccessToken.restore();
-                done();
-            });
+        it('Publish to testers', async function () {
+            await cws.publish(clientId, secret, apiToken, goodZip, extensionId, true)
+            expect(fs.readFileSync.calledOnce, 'file read succeeds').to.equal(true);
+            expect(console.log.calledTwice, 'outputs two good responses to console').to.equal(true);
+        });
     });
 });
