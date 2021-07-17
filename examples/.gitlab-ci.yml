@@ -23,9 +23,9 @@ deploy:
   script:
     - npm run build
     # upload to prod channel
-    - npx cws-upload $cid $sec $tkn $zip $id;
+    - npx cws-upload $client_id $secret $token $zip_path $extension_id;
     # upload to beta channel
-    - npx cws-upload $cid $sec $tkn $zip $betaid;
+    - npx cws-upload $client_id $secret $token $zip_path $beta_id;
   artifacts:
     paths:
       - public/

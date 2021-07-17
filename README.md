@@ -16,21 +16,24 @@ can be used across multiple projects. If your extensions are built by multiple c
 you deploy extensions regularly, adding this package can significantly improve your 
 productivity and publishing workflow.
 
-This packages has been used successfully with travis CI and gitlab CI and should work with any 
-comparable CI environment.
+This packages has been used successfully with **[Travis CI](https://www.travis-ci.com/)**, **[Gitlab CI](https://docs.gitlab.com/ee/ci/)** and **[Github actions](https://github.com/features/actions)**. It should work with any comparable CI environment.
 
 ----
 
 ### Table of Contents
 
-1. **[Configuration](#1-configuration)**
-2. **[Parameters](#2-parameters)**
+1. **Configuration**
+   1. **[Package Installation](#11-package-installation)**
+   2. **[Obtaining Credentials](#12-obtaining-credentials)**
+2. **[Configuration Examples](#2-ci-configuration-examples)** 
 3. **[Tips and Best Practices](#3-tips-and-best-practices)**
 4. **[FAQs](#4-faqs)**
 
 ---
 
 ## 1 Configuration
+
+### 1.1 Package Installation
 
 **1. Add package to your project**
 
@@ -68,10 +71,9 @@ Attempting to perform this operation on a public, published extension will fail.
 ```
 npx cws-publish $client_id $client_secret $refresh_token <ZIP_FILE> <EXTENSION_ID> --testers
 ```
+<br/>
 
-* * *
-
-## 2 Parameters
+### 1.2 Obtaining Credentials
 
 #### Obtaining Google API Credentials
 
@@ -132,39 +134,24 @@ npx cws-upload $client_id $client_secret $refresh_token ./build/my.zip fpggedhge
  
 * * *
 
+## 2 CI Configuration Examples
 
+<h3>Feeling confused? <img src='https://media0.giphy.com/media/xk9cukG3p8mcv0tlli/giphy.gif' width="42" /></h3>
 
-<h3 align="center">
- Still feeling confused? <img src='https://media0.giphy.com/media/xk9cukG3p8mcv0tlli/giphy.gif' width="42" /><br/>
- <a href="https://github.com/MobileFirstLLC/cws-publish/tree/master/examples">See examples of platform-specific CI configuration scripts &rarr;</a></h3>
+See examples of platform-specific CI configuration scripts:
+
+- [Github Actions configuration example](https://github.com/MobileFirstLLC/cws-publish/tree/master/examples/gh-actions.yml)
+- [Gitlab CI configuration example](https://github.com/MobileFirstLLC/cws-publish/tree/master/examples/.gitlab-ci.yml)
+- [Travis CI configuration example](https://github.com/MobileFirstLLC/cws-publish/tree/master/examples/.travis.yml)
 
 * * *
  
 ## 3 Tips and Best Practices
 
-It often makes sense to deploy based on some condition, such as only on tagged commits.
+Package deployment is generally done based on some condition, such as only on tagged commits.
 The general idea is to use the same command, but run the command based on some conditional check.
-
-#### Travis CI example
-```
-if [ ! -z  "$TRAVIS_TAG" ]; then 
-    npx cws-upload $client_id $client_secret $refresh_token <ZIP_FILE> <EXTENSION_ID> 
-fi    
-```
-
-#### Gitlab CI example
-
-```
-store_publish:
-  stage: publish
-  script:
-    - npx cws-upload $client_id $client_secret $refresh_token <ZIP_FILE> <EXTENSION_ID> 
-  artifacts:
-    paths:
-      - <ZIP_FILE>
-  only:
-    - tags
-```
+See [examples](https://github.com/MobileFirstLLC/cws-publish/tree/master/examples) which show how to setup
+this behavior for different CI environments.
 
 To keep your CI configuration file clutter free, you can use environment variables for all parameters, including <ZIP_FILE> and <EXTENSION_ID>
 
