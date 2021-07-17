@@ -3,13 +3,10 @@ node_js:
   - "latest"
 
 script:
+  # steps to generate zip file
   - npm install
-
-before_deploy:
   - npm run build
-
-deploy:
-  # on tagged commit upload .zip to chrome web store
+  # require tagged commit to run cws-upload command
   - if [ ! -z  "$TRAVIS_TAG" ]; then
       npx cws-upload $client_id $secret $token $zip $extension_id;
     fi

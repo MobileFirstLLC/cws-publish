@@ -95,7 +95,7 @@ describe('Chrome Web Store (CWS) Publish', function () {
 
         it('Failed upload request logs error', async function () {
             sinon.stub(OAuth2.prototype, 'refreshAccessToken').yields(false, {access_token: 'fail'});
-            await cws.upload(clientId, secret, apiToken, 'good.zip', extensionId)
+            await cws.upload(clientId, secret, apiToken, goodZip, extensionId)
             expect(console.error.calledOnce, 'displays error').to.equal(true);
             OAuth2.prototype.refreshAccessToken.restore();
         });

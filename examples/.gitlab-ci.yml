@@ -4,13 +4,6 @@ stages:
   - install
   - deploy
 
-# cache node modules between runs
-cache:
-  key: ${CI_COMMIT_REF_SLUG}
-  paths:
-    - node_modules/
-
-# run NPM install
 install_dependencies:
   stage: install
   script: npm install
@@ -22,7 +15,7 @@ deploy:
   stage: deploy
   script:
     - npm run build
-    # upload to prod channel
+    # upload to production channel
     - npx cws-upload $client_id $secret $token $zip_path $extension_id;
     # upload to beta channel
     - npx cws-upload $client_id $secret $token $zip_path $beta_id;

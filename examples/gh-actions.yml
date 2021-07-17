@@ -1,5 +1,6 @@
 name: Publish
 
+# run only on tagged commits
 on:
   push:
     tags:

@@ -130,7 +130,7 @@ If your extension is brand new, you must manually upload an initial draft in the
 npx cws-upload $client_id $client_secret $refresh_token ./build/my.zip fpggedhgeoicapmcammhdbmcmngbpkll
  ```
   
-**This completes the configuration steps.** 
+_This completes configuration steps._ 
  
 * * *
 
