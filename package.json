@@ -45,14 +45,14 @@
     "cws-publish": "src/publish.js"
   },
   "dependencies": {
-    "commander": "^7.2.0",
-    "googleapis": "^77.0.0",
+    "commander": "^8.0.0",
+    "googleapis": "^82.0.0",
     "superagent": "^6.1.0"
   },
   "devDependencies": {
     "chai": "^4.3.4",
-    "coveralls": "^3.1.0",
-    "mocha": "^9.0.1",
+    "coveralls": "^3.1.1",
+    "mocha": "^9.0.2",
     "nyc": "^15.1.0",
     "sinon": "^11.1.1"
   }
