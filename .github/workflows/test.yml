@@ -15,4 +15,9 @@ jobs:
         with:
           node-version: '14'
       - run: npm install
-      - run: nyc npm test && nyc report --reporter=text-lcov | coveralls
+      - run: nyc --reporter=lcov npm run test
+
+      - name: Report coverage
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
