@@ -159,6 +159,8 @@ To keep your CI configuration file clutter free, you can use environment variabl
 npx cws-upload $client_id $secret $token $zip_path $extension_id
 ```
 
+* * *
+
 ## 4 FAQs
 
 **Q1: Can I use an API key to access chrome web store API?**
@@ -185,7 +187,3 @@ It should be compatible with any CI/CD environment that supports Node.js runtime
 #### References
 
 [Chrome Webstore API Reference](https://developer.chrome.com/webstore/api_index)
-
-#### License
-
-CC0-1.0 License
