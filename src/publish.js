@@ -1,16 +1,15 @@
 #!/usr/bin/env node
 
-/** * * * * * * * * * * * * * * * * * * * *
+/** * * * * * * * * * * * * * * * * * * * * * * * * * *
  * CWS-publish
- * CI packages for publishing in Chrome
- * Web Store
+ * CI packages for publishing in Chrome Web Store
  *
  * Author: Mobile First LLC
  * Website: https://mobilefirst.me
  *
  * @description
  * Entry point for publish command
- * * * * * * * * * * * * * * * * * * * * */
+ * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 const program = require('commander');
 const cws = require('./cws');
@@ -22,7 +21,6 @@ program
     .arguments('<zip_file>')
     .arguments('<extension_id>')
     .option('-t, --testers', 'publish to testers')
-    .action((a, b, c, d, e) => {
+    .action((a, b, c, d, e) =>
         cws.publish(a, b, c, d, e, program.testers)
-    })
-    .parse(process.argv);
+    ).parse(process.argv);
