@@ -1,7 +1,7 @@
 # Chrome Web Store Publish
 
 [![NPM](https://img.shields.io/npm/v/cws-publish)](https://www.npmjs.com/package/cws-publish)
-[![Build Status](https://travis-ci.com/MobileFirstLLC/cws-publish.svg?branch=master)](https://travis-ci.com/MobileFirstLLC/cws-publish)
+[![Test](https://github.com/MobileFirstLLC/cws-publish/actions/workflows/test.yml/badge.svg)](https://github.com/MobileFirstLLC/cws-publish/actions/workflows/test.yml)
 [![Coverage Status](https://coveralls.io/repos/github/MobileFirstLLC/cws-publish/badge.svg?branch=master)](https://coveralls.io/github/MobileFirstLLC/cws-publish?branch=master)
 [![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/MobileFirstLLC/cws-publish)](https://codeclimate.com/github/MobileFirstLLC/cws-publish)
 
@@ -22,7 +22,7 @@ This packages has been used successfully with **[Travis CI](https://www.travis-c
 
 ### Table of Contents
 
-1. **Configuration**
+1. **[Configuration](#1-configuration)**
    1. **[Package Installation](#11-package-installation)**
    2. **[Obtaining Credentials](#12-obtaining-credentials)**
 2. **[Configuration Examples](#2-ci-configuration-examples)** 
@@ -105,22 +105,22 @@ npx cws-upload $client_id $client_secret $refresh_token ./build/my.zip <EXTENSIO
 
 **Notes on specifying paths**: 
 
-- when using **Travis CI**, 
-  the path to the release file is just the file name if zip file will be generated in the root of the repository
+- when using **Travis CI** or **Github actions**,
+  if zip file will be generated in the root of the repository, the path to the release file is the file name without path.
     
-  for example: `release.zip` 
+  For example: `release.zip` 
 
 - when using **Gitlab pipeline**,
-  the path the release should (must?) include explicit relative path to file, 
+  if the zip file is generated as a build artifact in the root, path to the release should include explicit relative path.
   
-  for example: `./public/release.zip` if the zip file is generated as a build artifact in the root.
+  For example: `./public/release.zip` 
 
 
 <br/>
 
 #### Obtaining `<EXTENSION_ID>`
 
-Go to chrome web store [developer console](https://chrome.google.com/webstore/developer/dashboard) and click on an existing extension. Copy the item id (approx. 32 character string) and paste it to your command to replace `<EXTENSION_ID>`.  
+Go to chrome web store [developer console](https://chrome.google.com/webstore/developer/dashboard) and click on an existing extension. Copy the item id (32 alpha-character string) and paste it to your command to replace `<EXTENSION_ID>`.  
 
 If your extension is brand new, you must manually upload an initial draft in the developer console to obtain an id. Further, you will not be able to publish the extension until you manually complete the store listing to include uploading necessary screenshots and consenting to their policies.
  
@@ -178,7 +178,7 @@ Yes
 
 **Q4: What CI providers is this compatible with?**
 
-Travis and Gitlab; possible others as long as they support Node.js runtime
+It should be compatible with any CI/CD environment that supports Node.js runtime
 
 ---
 
