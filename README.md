@@ -5,6 +5,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/MobileFirstLLC/cws-publish/badge.svg?branch=master)](https://coveralls.io/github/MobileFirstLLC/cws-publish?branch=master)
 [![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/MobileFirstLLC/cws-publish)](https://codeclimate.com/github/MobileFirstLLC/cws-publish)
 ![Dependency status](https://img.shields.io/librariesio/release/npm/cws-publish)
+![npm](https://img.shields.io/npm/dt/cws-publish)
 
 ### This package enables uploading chrome extensions to Chrome Web Store programmatically using CI/CD pipeline.
 
