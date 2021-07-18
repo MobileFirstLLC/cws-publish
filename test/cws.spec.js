@@ -86,8 +86,7 @@ describe('Chrome Web Store (CWS) Publish', function () {
 
         it('Failure to obtain auth token logs error', async function () {
             sinon.stub(OAuth2.prototype, 'refreshAccessToken').yields(true, undefined);
-            const accessToken = await cws.publish(clientId, secret, apiToken, goodZip, extensionId, false)
-            expect(accessToken, 'token').to.equal(undefined);
+            await cws.publish(clientId, secret, apiToken, goodZip, extensionId, false)
             expect(fs.readFileSync.calledOnce, 'file read succeeded').to.equal(true);
             expect(console.error.calledOnce, 'displays error').to.equal(true);
             OAuth2.prototype.refreshAccessToken.restore();

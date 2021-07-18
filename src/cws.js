@@ -156,7 +156,6 @@ const publish = async (apiClientId, apiSecret, apiToken, zipPath, extensionId, t
         const [success, result] = await publishExtension(extensionId, accessToken, testers);
         handleResult(success, result);
     }
-    return accessToken;
 };
 
 /** PUBLIC METHODS **/
