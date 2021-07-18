@@ -120,10 +120,7 @@ const handleResult = (success, result) => {
  * @param {String} extensionId - extension id
  * first param is access token if token was successfully refreshed
  */
-const upload = async (
-    apiClientId, apiSecret, apiToken, zipPath,
-    extensionId
-) => {
+const upload = async (apiClientId, apiSecret, apiToken, zipPath, extensionId) => {
     const onStepFail = msg => {
         handleResult(false, msg);
         return undefined;
@@ -153,10 +150,7 @@ const upload = async (
  * @param {String} extensionId - extension id
  * @param {boolean} testers - publish to testers
  */
-const publish = async (
-    apiClientId, apiSecret, apiToken, zipPath,
-    extensionId, testers
-) => {
+const publish = async (apiClientId, apiSecret, apiToken, zipPath, extensionId, testers) => {
     const accessToken = await upload(apiClientId, apiSecret, apiToken, zipPath, extensionId);
     if (accessToken) {
         const [success, result] = await publishExtension(extensionId, accessToken, testers);

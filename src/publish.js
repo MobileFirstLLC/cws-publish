@@ -21,6 +21,5 @@ program
     .arguments('<zip_file>')
     .arguments('<extension_id>')
     .option('-t, --testers', 'publish to testers')
-    .action((a, b, c, d, e) =>
-        cws.publish(a, b, c, d, e, program.testers)
-    ).parse(process.argv);
+    .action((a, b, c, d, e) => cws.publish(a, b, c, d, e, program.testers))
+    .parse(process.argv);

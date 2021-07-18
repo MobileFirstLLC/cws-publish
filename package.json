@@ -10,15 +10,18 @@
     "minor:test": "npx standard-version --dry-run --release-as minor",
     "patch:test": "npx standard-version --dry-run --release-as patch",
     "alpha:test": "npx standard-version --dry-run --prerelease alpha",
-    "alpha": "npx standard-version --prerelease alpha",
-    "minor": "npx standard-version --prerelease minor",
-    "patch": "npx standard-version --release-as patch"
+    "alpha": "npx standard-version --prerelease alpha && git push --follow-tags origin master",
+    "minor": "npx standard-version --prerelease minor && git push --follow-tags origin master",
+    "patch": "npx standard-version --release-as patch && git push --follow-tags origin master"
   },
   "keywords": [
     "chrome web store",
     "continuous integration",
     "chrome extension",
-    "chrome theme"
+    "chrome theme",
+    "ci/cd",
+    "publish",
+    "deployment"
   ],
   "repository": {
     "type": "git",
