@@ -3,7 +3,7 @@
 [![NPM](https://img.shields.io/npm/v/cws-publish)](https://www.npmjs.com/package/cws-publish)
 [![Test](https://github.com/MobileFirstLLC/cws-publish/actions/workflows/test.yml/badge.svg)](https://github.com/MobileFirstLLC/cws-publish/actions/workflows/test.yml)
 [![Coverage Status](https://coveralls.io/repos/github/MobileFirstLLC/cws-publish/badge.svg?branch=master)](https://coveralls.io/github/MobileFirstLLC/cws-publish?branch=master)
-[![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/MobileFirstLLC/cws-publish)](https://codeclimate.com/github/MobileFirstLLC/cws-publish)
+[![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/MobileFirstLLC/cws-publish)](https://codeclimate.com/github/MobileFirstLLC/cws-publish)<br/>
 ![Dependency status](https://img.shields.io/librariesio/release/npm/cws-publish)
 ![npm](https://img.shields.io/npm/dt/cws-publish)
 
