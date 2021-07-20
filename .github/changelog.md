@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.5-alpha.0](https://github.com/MobileFirstLLC/cws-publish/compare/v2.0.4...v2.0.5-alpha.0) (2021-07-20)
+
 ### [2.0.4](https://github.com/MobileFirstLLC/cws-publish/compare/v2.0.3...v2.0.4) (2021-07-18)
 
 - updated dependencies
