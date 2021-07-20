@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [2.0.5-alpha.0](https://github.com/MobileFirstLLC/cws-publish/compare/v2.0.4...v2.0.5-alpha.0) (2021-07-20)
 
+- raise non-zero exit code on failure [#5](https://github.com/MobileFirstLLC/cws-publish/issues/5) 
+
 ### [2.0.4](https://github.com/MobileFirstLLC/cws-publish/compare/v2.0.3...v2.0.4) (2021-07-18)
 
 - updated dependencies
