@@ -56,12 +56,16 @@ describe('Chrome Web Store (CWS) Publish', function () {
         fs.readFileSync.withArgs(goodZip).returns(new Uint8Array(100));
         fs.readFileSync.withArgs('bad.zip').returns(null);
         fs.readFileSync.withArgs('error.zip').throwsException();
+
+        // stub system exit
+        sinon.stub(process, 'exit');
     });
 
     afterEach(async function () {
         console.error.restore();
         console.log.restore();
         fs.readFileSync.restore();
+        process.exit.restore();
         uploadReq.restore();
         publishReq.restore();
     });
@@ -70,32 +74,37 @@ describe('Chrome Web Store (CWS) Publish', function () {
         it('Fails on missing arguments', async function () {
             await cws.upload(undefined, undefined, undefined, undefined, undefined);
             expect(console.error.calledOnce, 'outputs error to console').to.equal(true);
+            expect(process.exit.calledWith(1)).to.be.true;
         });
 
-        it('Failed file read terminates process early', async function () {
+        it('Failed file read terminates process with error', async function () {
             await cws.upload(clientId, secret, apiToken, 'bad.zip', extensionId);
             expect(fs.readFileSync.calledOnce, 'file read called').to.equal(true);
             expect(console.error.calledOnce, 'displays error').to.equal(true);
+            expect(process.exit.calledWith(1)).to.be.true;
         });
 
-        it('File read error is handled and terminates', async function () {
+        it('File read error is handled and terminates process with error', async function () {
             await cws.upload(clientId, secret, apiToken, 'error.zip', extensionId)
             expect(fs.readFileSync.calledOnce, 'file read called').to.equal(true);
             expect(console.error.calledOnce, 'displays error').to.equal(true);
+            expect(process.exit.calledWith(1)).to.be.true;
         });
 
-        it('Failure to obtain auth token logs error', async function () {
+        it('Failure to obtain auth token terminates process with error', async function () {
             sinon.stub(OAuth2.prototype, 'refreshAccessToken').yields(true, undefined);
             await cws.publish(clientId, secret, apiToken, goodZip, extensionId, false)
             expect(fs.readFileSync.calledOnce, 'file read succeeded').to.equal(true);
             expect(console.error.calledOnce, 'displays error').to.equal(true);
+            expect(process.exit.calledWith(1)).to.be.true;
             OAuth2.prototype.refreshAccessToken.restore();
         });
 
-        it('Failed upload request logs error', async function () {
+        it('Failed upload request terminates process with error', async function () {
             sinon.stub(OAuth2.prototype, 'refreshAccessToken').yields(false, {access_token: 'fail'});
             await cws.upload(clientId, secret, apiToken, goodZip, extensionId)
             expect(console.error.calledOnce, 'displays error').to.equal(true);
+            expect(process.exit.calledWith(1)).to.be.true;
             OAuth2.prototype.refreshAccessToken.restore();
         });
     });
@@ -115,18 +124,21 @@ describe('Chrome Web Store (CWS) Publish', function () {
             expect(token, 'access_token').to.equal('some_token');
             expect(fs.readFileSync.calledOnce, 'file read succeeds').to.equal(true);
             expect(console.log.calledOnce, 'outputs 1 good response to console').to.equal(true);
+            expect(process.exit.notCalled).to.be.true;
         });
 
         it('Successful publish', async function () {
             await cws.publish(clientId, secret, apiToken, goodZip, extensionId, false)
             expect(fs.readFileSync.calledOnce, 'file read succeeds').to.equal(true);
             expect(console.log.calledTwice, 'outputs two good responses to console').to.equal(true);
+            expect(process.exit.notCalled).to.be.true;
         });
 
         it('Publish to testers', async function () {
             await cws.publish(clientId, secret, apiToken, goodZip, extensionId, true)
             expect(fs.readFileSync.calledOnce, 'file read succeeds').to.equal(true);
             expect(console.log.calledTwice, 'outputs two good responses to console').to.equal(true);
+            expect(process.exit.notCalled).to.be.true;
         });
     });
 });
