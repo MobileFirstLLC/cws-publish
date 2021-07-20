@@ -22,7 +22,7 @@ const {NO_ZIP_ERR, AUTH_FAILURE} = require('./dict.json');
  * @param {String} value - expected success value
  */
 const checkApiResponse = (res, key, value) =>
-    (!!(res && res.ok && res.body && res.body[key] === value))
+    (!!(res && res.ok && res.body && res.body[key] === value));
 
 /**
  * @description Determine if upload response indicates it succeeded
@@ -44,7 +44,7 @@ const getFileBlob = filepath => {
     try {
         return fs.readFileSync(filepath);
     } catch (e) {
-        return null
+        return null;
     }
 };
 
@@ -108,7 +108,10 @@ const handleResult = (success, result) => {
     const {body} = (typeof result !== 'object') ? {body: result} : result;
 
     if (success) console.log(body);
-    else console.error(body);
+    else {
+        console.error(body);
+        process.exit(1);
+    }
 };
 
 /**
@@ -124,7 +127,7 @@ const upload = async (apiClientId, apiSecret, apiToken, zipPath, extensionId) =>
     const onStepFail = msg => {
         handleResult(false, msg);
         return undefined;
-    }
+    };
     // read file
     const blob = getFileBlob(zipPath);
     if (!blob) return onStepFail(NO_ZIP_ERR);
