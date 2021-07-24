@@ -1,14 +1,8 @@
-/** * * * * * * * * * * * * * * * * * * * * * * * * * *
- * CWS-publish
- * CI packages for publishing in Chrome Web Store
- *
- * Author: Mobile First LLC
- * Website: https://mobilefirst.me
- *
+/**
  * @description
  * Utility methods used for uploading and publishing
  * extensions through Chrome Web Store API.
- * * * * * * * * * * * * * * * * * * * * * * * * * * */
+ */
 
 const fs = require('fs');
 const request = require('superagent');
@@ -16,25 +10,24 @@ const OAuth2 = require('googleapis').google.auth.OAuth2;
 const {NO_ZIP_ERR, AUTH_FAILURE} = require('./dict.json');
 
 /**
- * @description Check that api response contains expected success indicator
+ * @description Check that API response contains response body
  * @param {Object} res - full response
- * @param {String} key - response property indicating success
- * @param {String} value - expected success value
  */
-const checkApiResponse = (res, key, value) =>
-    (!!(res && res.ok && res.body && res.body[key] === value));
+const checkApiResponse = res => !!(res && res.body);
 
 /**
- * @description Determine if upload response indicates it succeeded
+ * @description Determine if upload response indicates it succeeded based on uploadState
  * @param {Object} res - response details
  */
-const uploadSuccess = (res) => checkApiResponse(res, 'uploadState', 'SUCCESS');
+const uploadSuccess = (res) => checkApiResponse(res) &&
+    (res.body.uploadState === 'SUCCESS' || res.body.uploadState === 'IN_PROGRESS');
 
 /**
- * @description Determine if publish response indicates it succeeded
+ * @description Determine if publish response indicates it succeeded based on status
  * @param {Object} res - response details
  */
-const publishSuccess = (res) => checkApiResponse(res, 'status', 'OK');
+const publishSuccess = (res) => checkApiResponse(res) && Array.isArray(res.body.status) &&
+    (res.body.status.includes('OK') || res.body.status.includes('ITEM_PENDING_REVIEW'));
 
 /**
  * @description read file from disk as a blob
@@ -102,7 +95,7 @@ const publishExtension = (extension_id, access_token, beta) =>
 /**
  * @description Display result of some workflow task
  * @param {boolean} success - task succeeded / failed
- * @param {String|Object} result - success or error details
+ * @param {String|Object} result - success or failure details
  */
 const handleResult = (success, result) => {
     const {body} = (typeof result !== 'object') ? {body: result} : result;
