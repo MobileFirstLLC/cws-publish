@@ -109,7 +109,7 @@ const handleResult = (success, result) => {
 
 /**
  * @description Upload file to chrome web store
- * @param {String} apiClientId - googleapi client id
+ * @param {String} apiClientId - google api client id
  * @param {String} apiSecret - google api secret
  * @param {String} apiToken - google api refresh token
  * @param {String} zipPath - path to extension zip file
@@ -126,9 +126,8 @@ const upload = async (apiClientId, apiSecret, apiToken, zipPath, extensionId) =>
 
     // upload to store
     const [success, result] = await uploadFile(extensionId, blob, accessToken);
-    if (!success) return handleResult(false, result);
-
     handleResult(success, result);
+
     return accessToken;
 };
 
