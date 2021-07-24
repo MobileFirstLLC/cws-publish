@@ -6,17 +6,19 @@
   "scripts": {
     "test": "nyc mocha ./test/*.spec.js",
     "coverage": "nyc --reporter=lcov npm run test",
-    "release": "git add -A && git commit -m \"release\" && npx standard-version",
+    "push_tags": "git push --follow-tags origin master",
     "patch:alpha:test": "npx standard-version --dry-run --release-as patch --prerelease alpha",
+    "minor:alpha:test": "npx standard-version --dry-run --release-as minor --prerelease alpha",
     "patch:beta:test": "npx standard-version --dry-run --release-as patch --prerelease beta",
+    "minor:beta:test": "npx standard-version --dry-run --release-as minor --prerelease beta",
     "minor:test": "npx standard-version --dry-run --release-as minor",
     "patch:test": "npx standard-version --dry-run --release-as patch",
-    "alpha:test": "npx standard-version --dry-run --prerelease alpha",
-    "patch:alpha": "npx standard-version --release-as patch --prerelease alpha && git push --follow-tags origin master",
-    "patch:beta": "npx standard-version --release-as patch --prerelease beta && git push --follow-tags origin master",
-    "alpha": "npx standard-version --prerelease alpha && git push --follow-tags origin master",
-    "minor": "npx standard-version --prerelease minor && git push --follow-tags origin master",
-    "patch": "npx standard-version --release-as patch && git push --follow-tags origin master"
+    "patch:alpha": "npx standard-version --release-as patch --prerelease alpha && npm run push_tags",
+    "minor:alpha": "npx standard-version --release-as minor --prerelease alpha && npm run push_tags",
+    "patch:beta": "npx standard-version --release-as patch --prerelease beta && npm run push_tags",
+    "minor:beta": "npx standard-version --release-as minor --prerelease beta && npm run push_tags",
+    "patch": "npx standard-version --release-as patch && npm run push_tags",
+    "minor": "npx standard-version --release-as minor && npm run push_tags"
   },
   "keywords": [
     "chrome web store",
