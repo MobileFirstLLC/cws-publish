@@ -4,15 +4,12 @@
  * CWS-publish
  * CI packages for publishing in Chrome Web Store
  *
- * Author: Mobile First LLC
- * Website: https://mobilefirst.me
- *
  * @description
  * Entry point for upload command
  * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-const program = require('commander');
-const cws = require('./cws');
+import {program} from 'commander';
+import {upload} from './cws';
 
 program
     .arguments('<client_id>')
@@ -20,5 +17,5 @@ program
     .arguments('<refresh_token>')
     .arguments('<zip_file>')
     .arguments('<extension_id>')
-    .action(cws.upload)
+    .action((a, b, c, d, e) => (upload(a, b, c, d, e) as Promise<any>))
     .parse(process.argv);
