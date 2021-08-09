@@ -1,5 +1,4 @@
-// TODO: This test suite is not actually typed, just called .ts. maybe missing deps?
-// TODO: figure out how to get sinon methods to work in ts
+// TODO: figure out how to get sinon methods to work in ts (all @ts-ignores)
 
 const fs = require('fs'),
     sinon = require('sinon'),
@@ -7,55 +6,12 @@ const fs = require('fs'),
     OAuth2 = require('googleapis').google.auth.OAuth2,
     request = require('superagent'),
     cws = require('../dist/cws'),
+    {MockApiServer, ApiResponses} = require('./mocks.spec.ts'),
     clientId = 'myClientId',
     secret = 'myAPISecret',
     apiToken = 'xyz',
     goodZip = 'good.zip',
     extensionId = 'fpggedhgeoicapmcammhdbmcmngbpkll';
-
-// Mock web store server
-const MockApiServer = (response) => {
-    let _query, module = {
-        end(cb) {
-            cb(response.ok !== true, response)
-        },
-        q() {
-            return _query;
-        },
-        query(q) {
-            _query = q;
-            return module;
-        },
-        send() {
-            return module
-        },
-        set() {
-            return module
-        }
-    };
-    return module;
-};
-
-// possible responses from server
-const ApiResponses = {
-    upload: {
-        success: {ok: true, body: {uploadState: 'SUCCESS'}},
-        progress: {ok: true, body: {uploadState: 'IN_PROGRESS'}},
-        failure: {ok: false, body: {uploadState: 'FAILURE'}},
-        notfound: {ok: false, body: {uploadState: 'NOT_FOUND'}}
-    },
-    publish: {
-        ok: {ok: true, body: {status: ['OK']}},
-        review: {ok: true, body: {status: ['ITEM_PENDING_REVIEW']}},
-        invalid_dev: {ok: false, body: {status: ['INVALID_DEVELOPER']}},
-        not_owner: {ok: false, body: {status: ['DEVELOPER_NO_OWNERSHIP']}},
-        suspended_dev: {ok: false, body: {status: ['DEVELOPER_SUSPENDED']}},
-        taken_down: {ok: false, body: {status: ['ITEM_TAKEN_DOWN']}},
-        suspended_publisher: {ok: false, body: {status: ['PUBLISHER_SUSPENDED']}},
-        notfound: {ok: false, body: {status: ['ITEM_NOT_FOUND']}},
-        unauthorized: {ok: false, body: {status: ['NOT_AUTHORIZED']}},
-    }
-};
 
 describe('Chrome Web Store (CWS) Publish', function () {
 
@@ -83,8 +39,11 @@ describe('Chrome Web Store (CWS) Publish', function () {
     });
 
     afterEach(async function () {
+        // @ts-ignore
         console.error.restore();
+        // @ts-ignore
         console.log.restore();
+        // @ts-ignore
         process.exit.restore();
         fs.readFileSync.restore();
         global.uploadResponse = undefined;
@@ -96,21 +55,27 @@ describe('Chrome Web Store (CWS) Publish', function () {
     describe('\nError behavior', function () {
         it('Fails on missing arguments', async function () {
             await cws.upload(undefined, undefined, undefined, undefined, undefined);
+            // @ts-ignore
             expect(console.error.calledOnce, 'outputs failure to console').to.equal(true);
+            // @ts-ignore
             expect(process.exit.calledWith(1)).to.be.true;
         });
 
         it('Failed file read terminates process with failure', async function () {
             await cws.upload(clientId, secret, apiToken, 'bad.zip', extensionId);
             expect(fs.readFileSync.calledOnce, 'file read called').to.equal(true);
+            // @ts-ignore
             expect(console.error.calledOnce, 'displays failure').to.equal(true);
+            // @ts-ignore
             expect(process.exit.calledWith(1)).to.be.true;
         });
 
         it('File read failure is handled and terminates process with failure', async function () {
             await cws.upload(clientId, secret, apiToken, 'failure.zip', extensionId);
             expect(fs.readFileSync.calledOnce, 'file read called').to.equal(true);
+            // @ts-ignore
             expect(console.error.calledOnce, 'displays failure').to.equal(true);
+            // @ts-ignore
             expect(process.exit.calledWith(1)).to.be.true;
         });
 
@@ -118,7 +83,9 @@ describe('Chrome Web Store (CWS) Publish', function () {
             sinon.stub(OAuth2.prototype, 'refreshAccessToken').yields(true, undefined);
             await cws.publish(clientId, secret, apiToken, goodZip, extensionId, false);
             expect(fs.readFileSync.calledOnce, 'file read succeeded').to.equal(true);
+            // @ts-ignore
             expect(console.error.calledOnce, 'displays failure').to.equal(true);
+            // @ts-ignore
             expect(process.exit.calledWith(1)).to.be.true;
             OAuth2.prototype.refreshAccessToken.restore();
         });
@@ -127,7 +94,9 @@ describe('Chrome Web Store (CWS) Publish', function () {
             global.uploadReq.returns(MockApiServer(ApiResponses.upload.failure));
             sinon.stub(OAuth2.prototype, 'refreshAccessToken').yields(false, {access_token: 'fail'});
             await cws.upload(clientId, secret, apiToken, goodZip, extensionId);
+            // @ts-ignore
             expect(console.error.calledOnce, 'displays failure').to.equal(true);
+            // @ts-ignore
             expect(process.exit.calledWith(1)).to.be.true;
             OAuth2.prototype.refreshAccessToken.restore();
         });
@@ -137,8 +106,11 @@ describe('Chrome Web Store (CWS) Publish', function () {
             global.publishReq.returns(MockApiServer(ApiResponses.publish.taken_down));
             sinon.stub(OAuth2.prototype, 'refreshAccessToken').yields(false, {access_token: 'some_token'});
             await cws.publish(clientId, secret, apiToken, goodZip, extensionId, false);
+            // @ts-ignore
             expect(console.log.calledOnce, 'first request succeeds').to.equal(true);
+            // @ts-ignore
             expect(console.error.calledOnce, 'second request fails').to.equal(true);
+            // @ts-ignore
             expect(process.exit.calledWith(1)).to.be.true;
             OAuth2.prototype.refreshAccessToken.restore();
         });
@@ -159,7 +131,9 @@ describe('Chrome Web Store (CWS) Publish', function () {
             const token = await cws.upload(clientId, secret, apiToken, goodZip, extensionId);
             expect(token, 'access_token').to.equal('some_token');
             expect(fs.readFileSync.calledOnce, 'file read succeeds').to.equal(true);
+            // @ts-ignore
             expect(console.log.calledOnce, 'outputs 1 good response to console').to.equal(true);
+            // @ts-ignore
             expect(process.exit.notCalled).to.be.true;
         });
 
@@ -167,7 +141,9 @@ describe('Chrome Web Store (CWS) Publish', function () {
             global.uploadReq.returns(MockApiServer(ApiResponses.upload.success));
             await cws.upload(clientId, secret, apiToken, goodZip, extensionId);
             expect(fs.readFileSync.calledOnce, 'file read succeeds').to.equal(true);
+            // @ts-ignore
             expect(console.log.calledOnce, 'outputs 1 good response to console').to.equal(true);
+            // @ts-ignore
             expect(process.exit.notCalled).to.be.true;
         });
 
@@ -176,7 +152,9 @@ describe('Chrome Web Store (CWS) Publish', function () {
             global.publishReq.returns(MockApiServer(ApiResponses.publish.ok));
             await cws.publish(clientId, secret, apiToken, goodZip, extensionId, false);
             expect(fs.readFileSync.calledOnce, 'file read succeeds').to.equal(true);
+            // @ts-ignore
             expect(console.log.calledTwice, 'outputs two good responses to console').to.equal(true);
+            // @ts-ignore
             expect(process.exit.notCalled).to.be.true;
         });
 
@@ -185,7 +163,9 @@ describe('Chrome Web Store (CWS) Publish', function () {
             global.publishReq.returns(MockApiServer(ApiResponses.publish.review));
             await cws.publish(clientId, secret, apiToken, goodZip, extensionId, true);
             expect(fs.readFileSync.calledOnce, 'file read succeeds').to.equal(true);
+            // @ts-ignore
             expect(console.log.calledTwice, 'outputs two good responses to console').to.equal(true);
+            // @ts-ignore
             expect(process.exit.notCalled).to.be.true;
         });
 
@@ -195,7 +175,9 @@ describe('Chrome Web Store (CWS) Publish', function () {
             await cws.publish(clientId, secret, apiToken, goodZip, extensionId, true);
             expect(fs.readFileSync.calledOnce, 'file read succeeds').to.equal(true);
             expect(global.publishReq().q().publishTarget, 'publishes to testers').to.equal('trustedTesters');
+            // @ts-ignore
             expect(console.log.calledTwice, 'outputs two good responses to console').to.equal(true);
+            // @ts-ignore
             expect(process.exit.notCalled).to.be.true;
         });
     });
