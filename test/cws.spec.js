@@ -3,7 +3,7 @@ const fs = require('fs'),
     expect = require('chai').expect,
     OAuth2 = require('googleapis').google.auth.OAuth2,
     request = require('superagent'),
-    cws = require('../src/cws'),
+    cws = require('../dist/cws'),
     clientId = 'myClientId',
     secret = 'myAPISecret',
     apiToken = 'xyz',
@@ -55,9 +55,9 @@ describe('Chrome Web Store (CWS) Publish', function () {
         global.uploadReq = sinon.stub(request, 'put');
         global.publishReq = sinon.stub(request, 'post');
 
-        // spy console outputs
-        sinon.spy(console, 'error');
-        sinon.spy(console, 'log');
+        // stub console outputs
+        sinon.stub(console, 'error');
+        sinon.stub(console, 'log');
 
         // stub system exit
         sinon.stub(process, 'exit');
@@ -80,7 +80,7 @@ describe('Chrome Web Store (CWS) Publish', function () {
         global.publishReq.restore();
     });
 
-    describe('\nERROR BEHAVIOR', function () {
+    describe('\nError behavior', function () {
         it('Fails on missing arguments', async function () {
             await cws.upload(undefined, undefined, undefined, undefined, undefined);
             expect(console.error.calledOnce, 'outputs failure to console').to.equal(true);
@@ -131,7 +131,7 @@ describe('Chrome Web Store (CWS) Publish', function () {
         });
     });
 
-    describe('\nSUCCESSFUL REQUESTS', function () {
+    describe('\nSuccessful requests', function () {
 
         beforeEach(async function () {
             sinon.stub(OAuth2.prototype, 'refreshAccessToken').yields(false, {access_token: 'some_token'});

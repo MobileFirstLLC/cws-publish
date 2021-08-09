@@ -4,15 +4,12 @@
  * CWS-publish
  * CI packages for publishing in Chrome Web Store
  *
- * Author: Mobile First LLC
- * Website: https://mobilefirst.me
- *
  * @description
  * Entry point for publish command
  * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-const program = require('commander');
-const cws = require('./cws');
+import {program, OptionValues} from 'commander';
+import {publish} from './cws';
 
 program
     .arguments('<client_id>')
@@ -21,5 +18,5 @@ program
     .arguments('<zip_file>')
     .arguments('<extension_id>')
     .option('-t, --testers', 'publish to testers')
-    .action((a, b, c, d, e) => cws.publish(a, b, c, d, e, program.testers))
+    .action((a, b, c, d, e) => publish(a, b, c, d, e, (program as OptionValues).testers))
     .parse(process.argv);
