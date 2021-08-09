@@ -5,7 +5,7 @@
   "homepage": "https://github.com/MobileFirstLLC/cws-publish",
   "scripts": {
     "build": "tsc --project tsconfig.json",
-    "test": "nyc mocha ./test/*.spec.js",
+    "test": "nyc mocha ./test/*.spec.ts",
     "coverage": "nyc --reporter=lcov npm run test",
     "push_tags": "git push --follow-tags origin master",
     "patch:alpha:test": "npx standard-version --dry-run --release-as patch --prerelease alpha",
@@ -60,6 +60,7 @@
     "superagent": "^6.1.0"
   },
   "devDependencies": {
+    "@types/mocha": "^9.0.0",
     "@types/node": "^16.4.13",
     "chai": "^4.3.4",
     "coveralls": "^3.1.1",
