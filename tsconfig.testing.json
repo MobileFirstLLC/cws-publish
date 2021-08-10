@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "allowJs": false,
-    "outDir": "./dist",
     "target": "es5"
   },
   "include": ["./test/**/*"]

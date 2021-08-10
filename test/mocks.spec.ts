@@ -10,7 +10,7 @@ interface NetworkRequest {
 
 // Mock superagent and web store server
 export const ApiServer = (result: APIResult) => {
-    let superAgent: NetworkRequest = {
+    const superAgent: NetworkRequest = {
         q: undefined,
         send: () => superAgent,
         set: () => superAgent,
