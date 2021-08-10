@@ -4,14 +4,12 @@
  * extensions through Chrome Web Store API.
  */
 
+const fs = require('fs');
+const OAuth2 = require('googleapis').google.auth.OAuth2;
 
+import * as request from 'superagent';
 import {APIResult, UploadResult, PublishResult, RequestResult} from './types'
 import dictionary from './dictionary';
-
-const fs = require('fs');
-const request = require('superagent');
-const OAuth2 = require('googleapis').google.auth.OAuth2;
-const {zipError, authError} = dictionary;
 
 /**
  * @description Check that API response contains response body.
@@ -127,11 +125,11 @@ export const upload = async (
 ) => {
     // read file
     const blob = getFileBlob(zipPath);
-    if (!blob) return handleResult(false, zipError);
+    if (!blob) return handleResult(false, dictionary.zipError);
 
     // obtain access token
     const accessToken = (await getAccessToken(apiToken, apiClientId, apiSecret)) as string;
-    if (!accessToken) return handleResult(false, authError);
+    if (!accessToken) return handleResult(false, dictionary.authError);
 
     // upload to store
     const {success, result} = (await uploadFile(extensionId, blob, accessToken) as RequestResult);

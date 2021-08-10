@@ -1,54 +1,72 @@
-// TODO: type this thing; may need babel?
+import {PublishResult, RequestResult, UploadResult} from "../src/types";
 
-// const {RequestResult} = require('../src/types');
-// interface Server {
-//     end: Function,
-//     q: Function,
-//     query: Function,
-//     send: Function,
-//     set: Function
-// };
+interface NetworkRequest {
+    q: Function,
+    end: Function,
+    query: Function,
+    send: Function,
+    set: Function
+}
 
-// Web store server
-module.exports.MockApiServer = (response) => {
-    let _query, module = {
-        end(cb) {
-            cb(response.ok !== true, response)
-        },
-        q() {
-            return _query;
-        },
-        query(q) {
+// Mock superagent and web store server
+export const ApiServer = ({success, result}: RequestResult) => {
+    let _query: string;
+    let _superAgent: NetworkRequest = {
+        end: (cb: Function) => cb(!success, result),
+        q: () => _query,
+        send: () => _superAgent,
+        set: () => _superAgent,
+        query: (q: string) => {
             _query = q;
-            return module;
+            return _superAgent;
         },
-        send() {
-            return module
-        },
-        set() {
-            return module
-        }
     };
-    return module;
+    return _superAgent
 };
 
 // Possible responses from server
-module.exports.ApiResponses = {
+export const ApiResponses = {
     upload: {
-        success: {ok: true, body: {uploadState: 'SUCCESS'}}, // as RequestResult
-        progress: {ok: true, body: {uploadState: 'IN_PROGRESS'}},
-        failure: {ok: false, body: {uploadState: 'FAILURE'}},
-        notfound: {ok: false, body: {uploadState: 'NOT_FOUND'}}
+        success: {
+            success: true, result: {body: {uploadState: 'SUCCESS'}} as UploadResult
+        } as RequestResult,
+        progress: {
+            success: true, result: {body: {uploadState: 'IN_PROGRESS'}} as UploadResult
+        } as RequestResult,
+        failure: {
+            success: false, result: {body: {uploadState: 'FAILURE'}} as UploadResult
+        } as RequestResult,
+        notfound: {
+            success: false, result: {body: {uploadState: 'NOT_FOUND'}} as UploadResult
+        } as RequestResult
     },
     publish: {
-        ok: {ok: true, body: {status: ['OK']}},
-        review: {ok: true, body: {status: ['ITEM_PENDING_REVIEW']}},
-        invalid_dev: {ok: false, body: {status: ['INVALID_DEVELOPER']}},
-        not_owner: {ok: false, body: {status: ['DEVELOPER_NO_OWNERSHIP']}},
-        suspended_dev: {ok: false, body: {status: ['DEVELOPER_SUSPENDED']}},
-        taken_down: {ok: false, body: {status: ['ITEM_TAKEN_DOWN']}},
-        suspended_publisher: {ok: false, body: {status: ['PUBLISHER_SUSPENDED']}},
-        notfound: {ok: false, body: {status: ['ITEM_NOT_FOUND']}},
-        unauthorized: {ok: false, body: {status: ['NOT_AUTHORIZED']}},
+        ok: {
+            success: true, result: {body: {status: ['OK']}} as PublishResult
+        } as RequestResult,
+        review: {
+            success: true, result: {body: {status: ['ITEM_PENDING_REVIEW']}} as PublishResult
+        } as RequestResult,
+        invalid_dev: {
+            success: false, result: {body: {status: ['INVALID_DEVELOPER']}} as PublishResult
+        } as RequestResult,
+        not_owner: {
+            success: false, result: {body: {status: ['DEVELOPER_NO_OWNERSHIP']}} as PublishResult
+        } as RequestResult,
+        suspended_dev: {
+            success: false, result: {body: {status: ['DEVELOPER_SUSPENDED']}} as PublishResult
+        } as RequestResult,
+        taken_down: {
+            success: false, result: {body: {status: ['ITEM_TAKEN_DOWN']}} as PublishResult
+        } as RequestResult,
+        suspended_publisher: {
+            success: false, result: {body: {status: ['PUBLISHER_SUSPENDED']}} as PublishResult
+        } as RequestResult,
+        notfound: {
+            success: false, result: {body: {status: ['ITEM_NOT_FOUND']}} as PublishResult
+        } as RequestResult,
+        unauthorized: {
+            success: false, result: {body: {status: ['NOT_AUTHORIZED']}} as PublishResult
+        } as RequestResult,
     }
 };
