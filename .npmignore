@@ -6,6 +6,5 @@ node_modules/
 src/
 test/
 .gitignore
-.travis.yml
 tsconfig.json
 tsconfig.testing.json

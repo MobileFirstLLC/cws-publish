@@ -60,7 +60,6 @@
     "superagent": "^6.1.0"
   },
   "devDependencies": {
-    "@types/chai": "4.2.11",
     "@types/mocha": "^9.0.0",
     "@types/node": "^16.4.13",
     "chai": "^4.3.4",
