@@ -34,11 +34,3 @@ export class PublishResult implements APIResult {
         status: Array<string>
     }
 }
-
-/**
- * Internally wrap the API response into a success flag, and the raw response.
- */
-export interface RequestResult {
-    success: boolean,
-    result: APIResult
-}

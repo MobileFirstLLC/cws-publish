@@ -8,7 +8,7 @@ const fs = require('fs');
 const OAuth2 = require('googleapis').google.auth.OAuth2;
 
 import * as request from 'superagent';
-import {APIResult, UploadResult, PublishResult, RequestResult} from './types'
+import {APIResult, UploadResult, PublishResult} from './types'
 import dictionary from './dictionary';
 
 /**
@@ -51,14 +51,14 @@ const getFileBlob = (filepath: string) => {
  * @param {string} refresh_token - use oauth2 refresh token
  * @param {string} client_id - application client_id - from google API console
  * @param {string} client_secret - application secret - from google API console
- * @returns {Promise<string>} - if request succeed this method returns access token, and null otherwise.
+ * @returns {Promise<string|undefined>} - if request succeed this method returns access token, and undefined otherwise.
  */
 const getAccessToken = (refresh_token: string, client_id: string, client_secret: string) =>
     new Promise((resolve) => {
         const oauth2Client = new OAuth2(client_id, client_secret, 'urn:ietf:wg:oauth:2.0:oob');
         oauth2Client.setCredentials({access_token: null, refresh_token});
         oauth2Client.refreshAccessToken((err, tokens) =>
-            resolve((err || !tokens || !tokens.access_token) ? null : tokens.access_token));
+            resolve((err || !tokens || !tokens.access_token) ? undefined : tokens.access_token));
     });
 
 /**
@@ -66,7 +66,7 @@ const getAccessToken = (refresh_token: string, client_id: string, client_secret:
  * @param {string} extension_id - Chrome extension ID
  * @param {Blob} blob - zip file data as a Blob
  * @param {string} access_token - WebStore API access token
- * @returns {Promise<RequestResult>} - response from WebStore API.
+ * @returns {Promise<[boolean, UploadResult]>} - response succeeded (flag), response from WebStore API.
  */
 const uploadFile = (extension_id: string, blob: Blob, access_token: string) =>
     new Promise(resolve => request
@@ -74,7 +74,7 @@ const uploadFile = (extension_id: string, blob: Blob, access_token: string) =>
         .query({uploadType: 'media'})
         .set({Authorization: 'Bearer ' + access_token})
         .send(blob)
-        .end((error, result) => resolve({success: !error && uploadSuccess(result), result})));
+        .end((e, r) => resolve([e, r])));
 
 /**
  * @description Publish extension
@@ -83,14 +83,14 @@ const uploadFile = (extension_id: string, blob: Blob, access_token: string) =>
  * @param {boolean} beta - set `true` to publish to testers; else publish to everyone
  * Note that publish to testers will be rejected if the extension is already published
  * publicly; you must un-publish first.
- * @returns {Promise<RequestResult>} - response from WebStore API.
+ * @returns {Promise<[boolean, PublishResult]>} - response succeeded (flag), response from WebStore API.
  */
 const publishExtension = (extension_id: string, access_token: string, beta: boolean) =>
     new Promise(resolve => request
         .post(`https://www.googleapis.com/chromewebstore/v1.1/items/${extension_id}/publish`)
         .query({publishTarget: beta ? 'trustedTesters' : 'default'})
         .set({Authorization: 'Bearer ' + access_token})
-        .end((error, result) => resolve({success: !error && publishSuccess(result), result})));
+        .end((e, r) => resolve([e, r])));
 
 /**
  * @description Display result of some workflow task
@@ -114,7 +114,7 @@ const handleResult = (success: boolean, result: string | APIResult) => {
  * @param {string} apiToken - google api refresh token
  * @param {string} zipPath - path to extension zip file
  * @param {string} extensionId - extension id
- * @returns {Promise<string>}
+ * @returns {Promise<string|undefined>} - access token if successful, and undefined otherwise
  */
 export const upload = async (
     apiClientId: string,
@@ -132,10 +132,11 @@ export const upload = async (
     if (!accessToken) return handleResult(false, dictionary.authError);
 
     // upload to store
-    const {success, result} = (await uploadFile(extensionId, blob, accessToken) as RequestResult);
+    const [error, result] = (await uploadFile(extensionId, blob, accessToken)) as [boolean, UploadResult];
+    const success = !error && uploadSuccess(result);
     handleResult(success, result);
 
-    return accessToken;
+    return success ? accessToken : undefined;
 };
 
 /**
@@ -146,7 +147,7 @@ export const upload = async (
  * @param {string} zipPath - path to extension zip file
  * @param {string} extensionId - extension id
  * @param {boolean} testers - publish to testers
- * @returns {Promise<void>}
+ * @returns {Promise<void>} - undefined
  */
 export const publish = async (
     apiClientId: string,
@@ -161,8 +162,8 @@ export const publish = async (
 
     // if upload succeeds, proceed to publish
     if (accessToken) {
-        const {success, result} = (await publishExtension(extensionId, accessToken, testers)) as RequestResult;
-        handleResult(success, result);
+        const [error, result] = (await publishExtension(extensionId, accessToken, testers)) as [boolean, PublishResult];
+        handleResult(!error && publishSuccess(result), result);
     }
 };
 

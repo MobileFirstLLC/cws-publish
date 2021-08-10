@@ -9,6 +9,7 @@ import {upload, publish} from "../dist/cws";
 const apiClient = 'myClientId',
     apiSecret = 'myAPISecret',
     apiToken = 'xyz',
+    access_token = 'some_token',
     badZip = 'bad.zip',
     goodZip = 'good.zip',
     zipThatThrowsError = 'fail.zip',
@@ -36,10 +37,11 @@ describe('Chrome Web Store (CWS) Publish', function () {
 
     afterEach(async function () {
         sinon.restore();
+        global.uploadReq.restore();
+        global.publishReq.restore();
     });
 
-    describe('\nError behavior', function () {
-
+    describe('\n\tFailing behavior', function () {
         it('Fails on missing arguments', async function () {
             await upload(undefined, undefined, undefined, undefined, undefined);
             expect((console.error as any).calledOnce, 'outputs failure to console').to.equal(true);
@@ -68,49 +70,62 @@ describe('Chrome Web Store (CWS) Publish', function () {
             expect((process.exit as any).calledWith(1)).to.be.true;
             OAuth2.prototype.refreshAccessToken.restore();
         });
-
-        it('Failed upload request terminates process with failure', async function () {
-            global.uploadReq.returns(ApiServer(ApiResponses.upload.failure));
-            sinon.stub(OAuth2.prototype, 'refreshAccessToken').yields(false, {access_token: 'fail'});
-            await upload(apiClient, apiSecret, apiToken, goodZip, extensionId);
-            expect((console.error as any).calledOnce, 'displays failure').to.equal(true);
-            expect((process.exit as any).calledWith(1)).to.be.true;
-            OAuth2.prototype.refreshAccessToken.restore();
-        });
-
-        it('Successful upload followed by failing publish fails', async function () {
-            global.uploadReq.returns(ApiServer(ApiResponses.upload.success));
-            global.publishReq.returns(ApiServer(ApiResponses.publish.taken_down));
-            sinon.stub(OAuth2.prototype, 'refreshAccessToken').yields(false, {access_token: 'some_token'});
-            await publish(apiClient, apiSecret, apiToken, goodZip, extensionId, false);
-            expect((console.log as any).calledOnce, 'first request succeeds').to.equal(true);
-            expect((console.error as any).calledOnce, 'second request fails').to.equal(true);
-            expect((process.exit as any).calledWith(1)).to.be.true;
-            OAuth2.prototype.refreshAccessToken.restore();
-        });
     });
 
-    describe('\nSuccessful requests', function () {
+    describe('\n\tFailing requests', function () {
 
         beforeEach(async function () {
-            sinon.stub(OAuth2.prototype, 'refreshAccessToken').yields(false, {access_token: 'some_token'});
+            sinon.stub(OAuth2.prototype, 'refreshAccessToken').yields(false, {access_token});
         });
 
         afterEach(async function () {
             OAuth2.prototype.refreshAccessToken.restore();
         });
 
-        it('OK if result is "In progress"', async function () {
+        it('Failed upload request terminates process with failure', async function () {
+            global.uploadReq.returns(ApiServer(ApiResponses.upload.failure));
+            const token = await upload(apiClient, apiSecret, apiToken, goodZip, extensionId);
+            expect(global.uploadReq.calledOnce, 'calls upload').to.equal(true);
+            expect((console.log as any).notCalled, 'does not display success').to.equal(true);
+            expect((console.error as any).calledOnce, 'displays failure').to.equal(true);
+            expect(token, 'does not return token when upload fails').to.be.undefined;
+            expect((process.exit as any).calledWith(1)).to.be.true;
+        });
+
+        it('Successful upload followed by failing publish fails', async function () {
+            global.uploadReq.returns(ApiServer(ApiResponses.upload.success));
+            global.publishReq.returns(ApiServer(ApiResponses.publish.taken_down));
+            await publish(apiClient, apiSecret, apiToken, goodZip, extensionId, false);
+            expect(global.uploadReq.calledOnce, 'calls upload').to.equal(true);
+            expect((console.log as any).calledOnce, 'second request fails').to.equal(true);
+            expect(global.publishReq.calledOnce, 'proceeds to calls publish').to.equal(true);
+            expect((console.error as any).calledOnce, 'second request fails').to.equal(true);
+            expect((process.exit as any).calledWith(1)).to.be.true;
+        });
+    });
+
+    describe('\n\tSuccessful Requests', function () {
+
+        beforeEach(async function () {
+            global.uploadReq.returns(ApiServer(ApiResponses.upload.success));
+            global.publishReq.returns(ApiServer(ApiResponses.publish.ok));
+            sinon.stub(OAuth2.prototype, 'refreshAccessToken').yields(false, {access_token});
+        });
+
+        afterEach(async function () {
+            OAuth2.prototype.refreshAccessToken.restore();
+        });
+
+        it('"In progress" counts as success', async function () {
             global.uploadReq.returns(ApiServer(ApiResponses.upload.progress));
             const token = await upload(apiClient, apiSecret, apiToken, goodZip, extensionId);
-            expect(token, 'access_token').to.equal('some_token');
             expect(fs.readFileSync.calledOnce, 'file read succeeds').to.equal(true);
-            expect((console.log as any).calledOnce, 'outputs 1 good response to console').to.equal(true);
+            expect(token, 'returns expected access_token').to.equal(access_token);
+            expect((console.log as any).calledOnce, 'outputs response to console').to.equal(true);
             expect((process.exit as any).notCalled).to.be.true;
         });
 
         it('Successful upload', async function () {
-            global.uploadReq.returns(ApiServer(ApiResponses.upload.success));
             await upload(apiClient, apiSecret, apiToken, goodZip, extensionId);
             expect(fs.readFileSync.calledOnce, 'file read succeeds').to.equal(true);
             expect((console.log as any).calledOnce, 'outputs 1 good response to console').to.equal(true);
@@ -118,30 +133,26 @@ describe('Chrome Web Store (CWS) Publish', function () {
         });
 
         it('Immediate publish', async function () {
-            global.uploadReq.returns(ApiServer(ApiResponses.upload.success));
-            global.publishReq.returns(ApiServer(ApiResponses.publish.ok));
             await publish(apiClient, apiSecret, apiToken, goodZip, extensionId, false);
             expect(fs.readFileSync.calledOnce, 'file read succeeds').to.equal(true);
-            expect((console.log as any).calledTwice, 'outputs two good responses to console').to.equal(true);
+            expect((console.log as any).calledTwice, 'outputs 2 good responses to console').to.equal(true);
             expect((process.exit as any).notCalled).to.be.true;
         });
 
         it('Publish that requires review', async function () {
-            global.uploadReq.returns(ApiServer(ApiResponses.upload.success));
             global.publishReq.returns(ApiServer(ApiResponses.publish.review));
-            await publish(apiClient, apiSecret, apiToken, goodZip, extensionId, true);
+            await publish(apiClient, apiSecret, apiToken, goodZip, extensionId, false);
             expect(fs.readFileSync.calledOnce, 'file read succeeds').to.equal(true);
-            expect((console.log as any).calledTwice, 'outputs two good responses to console').to.equal(true);
+            expect(global.publishReq().q.publishTarget, 'publishes to default').to.equal('default');
+            expect((console.log as any).calledTwice, 'outputs 2 good responses to console').to.equal(true);
             expect((process.exit as any).notCalled).to.be.true;
         });
 
         it('Publish to testers', async function () {
-            global.uploadReq.returns(ApiServer(ApiResponses.upload.success));
-            global.publishReq.returns(ApiServer(ApiResponses.publish.ok));
             await publish(apiClient, apiSecret, apiToken, goodZip, extensionId, true);
             expect(fs.readFileSync.calledOnce, 'file read succeeds').to.equal(true);
-            expect(global.publishReq().q().publishTarget, 'publishes to testers').to.equal('trustedTesters');
-            expect((console.log as any).calledTwice, 'outputs two good responses to console').to.equal(true);
+            expect(global.publishReq().q.publishTarget, 'publishes to testers').to.equal('trustedTesters');
+            expect((console.log as any).calledTwice, 'outputs 2 good responses to console').to.equal(true);
             expect((process.exit as any).notCalled).to.be.true;
         });
     });
