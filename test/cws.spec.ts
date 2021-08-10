@@ -4,7 +4,7 @@ import {expect} from 'chai';
 import * as request from 'superagent';
 import * as sinon from 'sinon';
 import {ApiServer, ApiResponses} from './mocks.spec';
-import {upload, publish} from "../src/cws";
+import {upload, publish} from "../dist/cws";
 
 const apiClient = 'myClientId',
     apiSecret = 'myAPISecret',
