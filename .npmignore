@@ -1,9 +1,11 @@
 .idea/
-node_modules/
+.github/
 .nyc_output/
 examples/
+node_modules/
 src/
 test/
 .gitignore
 .travis.yml
-.github
+tsconfig.json
+tsconfig.testing.json
