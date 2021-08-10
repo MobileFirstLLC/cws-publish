@@ -1,8 +1,8 @@
 const fs = require('fs');
 const OAuth2 = require('googleapis').google.auth.OAuth2;
-import {expect} from 'chai';
 import * as request from 'superagent';
 import * as sinon from 'sinon';
+import {expect} from 'chai';
 import {ApiServer, ApiResponses} from './mocks.spec';
 import {upload, publish} from "../dist/cws";
 

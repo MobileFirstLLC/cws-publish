@@ -1,4 +1,4 @@
-import {PublishResult, RequestResult, UploadResult} from "../src/types";
+import {PublishResult, APIResult, UploadResult} from "../src/types";
 
 interface NetworkRequest {
     q: Function,
@@ -9,10 +9,9 @@ interface NetworkRequest {
 }
 
 // Mock superagent and web store server
-export const ApiServer = ({success, result}: RequestResult) => {
+export const ApiServer = (result: APIResult) => {
     let _query: string;
     let _superAgent: NetworkRequest = {
-        end: (cb: Function) => cb(!success, result),
         q: () => _query,
         send: () => _superAgent,
         set: () => _superAgent,
@@ -20,6 +19,7 @@ export const ApiServer = ({success, result}: RequestResult) => {
             _query = q;
             return _superAgent;
         },
+        end: (cb: Function) => cb(false, result)
     };
     return _superAgent
 };
@@ -27,46 +27,20 @@ export const ApiServer = ({success, result}: RequestResult) => {
 // Possible responses from server
 export const ApiResponses = {
     upload: {
-        success: {
-            success: true, result: {body: {uploadState: 'SUCCESS'}} as UploadResult
-        } as RequestResult,
-        progress: {
-            success: true, result: {body: {uploadState: 'IN_PROGRESS'}} as UploadResult
-        } as RequestResult,
-        failure: {
-            success: false, result: {body: {uploadState: 'FAILURE'}} as UploadResult
-        } as RequestResult,
-        notfound: {
-            success: false, result: {body: {uploadState: 'NOT_FOUND'}} as UploadResult
-        } as RequestResult
+        success: {body: {uploadState: 'SUCCESS'}} as UploadResult,
+        progress: {body: {uploadState: 'IN_PROGRESS'}} as UploadResult,
+        failure: {body: {uploadState: 'FAILURE'}} as UploadResult,
+        notfound: {body: {uploadState: 'NOT_FOUND'}} as UploadResult,
     },
     publish: {
-        ok: {
-            success: true, result: {body: {status: ['OK']}} as PublishResult
-        } as RequestResult,
-        review: {
-            success: true, result: {body: {status: ['ITEM_PENDING_REVIEW']}} as PublishResult
-        } as RequestResult,
-        invalid_dev: {
-            success: false, result: {body: {status: ['INVALID_DEVELOPER']}} as PublishResult
-        } as RequestResult,
-        not_owner: {
-            success: false, result: {body: {status: ['DEVELOPER_NO_OWNERSHIP']}} as PublishResult
-        } as RequestResult,
-        suspended_dev: {
-            success: false, result: {body: {status: ['DEVELOPER_SUSPENDED']}} as PublishResult
-        } as RequestResult,
-        taken_down: {
-            success: false, result: {body: {status: ['ITEM_TAKEN_DOWN']}} as PublishResult
-        } as RequestResult,
-        suspended_publisher: {
-            success: false, result: {body: {status: ['PUBLISHER_SUSPENDED']}} as PublishResult
-        } as RequestResult,
-        notfound: {
-            success: false, result: {body: {status: ['ITEM_NOT_FOUND']}} as PublishResult
-        } as RequestResult,
-        unauthorized: {
-            success: false, result: {body: {status: ['NOT_AUTHORIZED']}} as PublishResult
-        } as RequestResult,
+        ok: {body: {status: ['OK']}} as PublishResult,
+        review: {body: {status: ['ITEM_PENDING_REVIEW']}} as PublishResult,
+        invalid_dev: {body: {status: ['INVALID_DEVELOPER']}} as PublishResult,
+        not_owner: {body: {status: ['DEVELOPER_NO_OWNERSHIP']}} as PublishResult,
+        suspended_dev: {body: {status: ['DEVELOPER_SUSPENDED']}} as PublishResult,
+        taken_down: {body: {status: ['ITEM_TAKEN_DOWN']}} as PublishResult,
+        suspended_publisher: {body: {status: ['PUBLISHER_SUSPENDED']}} as PublishResult,
+        notfound: {body: {status: ['ITEM_NOT_FOUND']}} as PublishResult,
+        unauthorized: {body: {status: ['NOT_AUTHORIZED']}} as PublishResult,
     }
 };
