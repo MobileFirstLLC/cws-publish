@@ -1,8 +1,13 @@
 {
   "compilerOptions": {
     "allowJs": false,
+    "noImplicitAny": true,
     "outDir": "./dist",
-    "target": "es5"
+    "target": "es5",
+    "moduleResolution": "node",
+    "removeComments": true
   },
-  "include": ["./src/**/*"]
+  "include": [
+    "./src/**/*"
+  ]
 }

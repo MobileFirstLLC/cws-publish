@@ -1,7 +1,7 @@
 import {APIResult, PublishResult, UploadResult} from "../src/types";
 
-interface NetworkRequest {
-    q: string,
+interface SuperAgentRequest {
+    q: object,
     end: Function,
     query: Function,
     send: Function,
@@ -10,12 +10,12 @@ interface NetworkRequest {
 
 // Mock superagent and web store server
 export const ApiServer = (result: APIResult) => {
-    const superAgent: NetworkRequest = {
+    const superAgent: SuperAgentRequest = {
         q: undefined,
         send: () => superAgent,
         set: () => superAgent,
-        end: cb => cb(false, result),
-        query: q => {
+        end: (cb: Function) => cb(false, result),
+        query: (q: object) => {
             superAgent.q = q;
             return superAgent;
         },

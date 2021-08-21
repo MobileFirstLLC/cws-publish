@@ -1,3 +1,6 @@
+/** 3rd party library types **/
+export {Credentials} from "google-auth-library/build/src/auth/credentials";
+
 /**
  * Represents some Chrome WebStore API response.
  */

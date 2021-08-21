@@ -5,10 +5,11 @@
  */
 
 const fs = require('fs');
-const OAuth2 = require('googleapis').google.auth.OAuth2;
+import {Credentials, APIResult, UploadResult, PublishResult} from './types'
 
+// @ts-ignore
 import * as request from 'superagent';
-import {APIResult, UploadResult, PublishResult} from './types'
+import {google} from 'googleapis';
 import dictionary from './dictionary';
 
 /**
@@ -55,10 +56,11 @@ const getFileBlob = (filepath: string) => {
  */
 const getAccessToken = (refresh_token: string, client_id: string, client_secret: string) =>
     new Promise((resolve) => {
-        const oauth2Client = new OAuth2(client_id, client_secret, 'urn:ietf:wg:oauth:2.0:oob');
+        const oauth2Client = new google.auth.OAuth2(client_id, client_secret, 'urn:ietf:wg:oauth:2.0:oob');
         oauth2Client.setCredentials({access_token: null, refresh_token});
-        oauth2Client.refreshAccessToken((err, tokens) =>
-            resolve((err || !tokens || !tokens.access_token) ? undefined : tokens.access_token));
+        oauth2Client.refreshAccessToken((
+            err: object | null, credentials: Credentials | null
+        ) => resolve(!err && credentials ? credentials.access_token : undefined));
     });
 
 /**
@@ -74,7 +76,7 @@ const uploadFile = (extension_id: string, blob: Blob, access_token: string) =>
         .query({uploadType: 'media'})
         .set({Authorization: 'Bearer ' + access_token})
         .send(blob)
-        .end((e, r) => resolve([e, r])));
+        .end((e: boolean, r: UploadResult) => resolve([e, r])));
 
 /**
  * @description Publish extension
@@ -90,7 +92,7 @@ const publishExtension = (extension_id: string, access_token: string, beta: bool
         .post(`https://www.googleapis.com/chromewebstore/v1.1/items/${extension_id}/publish`)
         .query({publishTarget: beta ? 'trustedTesters' : 'default'})
         .set({Authorization: 'Bearer ' + access_token})
-        .end((e, r) => resolve([e, r])));
+        .end((e: boolean, r: UploadResult) => resolve([e, r])));
 
 /**
  * @description Display result of some workflow task
