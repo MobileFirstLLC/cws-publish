@@ -1,6 +1,6 @@
 {
   "name": "cws-publish",
-  "version": "2.1.0-alpha.0",
+  "version": "2.1.0-alpha.1",
   "description": "Upload chrome extensions to chrome web store using CI",
   "homepage": "https://github.com/MobileFirstLLC/cws-publish",
   "scripts": {
