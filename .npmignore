@@ -6,5 +6,6 @@ node_modules/
 src/
 test/
 .gitignore
+icon.png
 tsconfig.json
 tsconfig.testing.json
