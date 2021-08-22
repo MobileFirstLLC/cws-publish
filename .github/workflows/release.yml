@@ -23,7 +23,7 @@ jobs:
       - name: NPM Publish
         uses: JS-DevTools/npm-publish@v1
         with:
-          tag: ${{ env.TAG }}
+          tag: ${{ env.TAG:1 }}
           token: ${{ secrets.NPM_TOKEN }}
 
       - name: Github Release
