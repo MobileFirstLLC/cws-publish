@@ -29,5 +29,5 @@ jobs:
       - name: Github Release
         uses: ncipollo/release-action@v1
         with:
-          prerelease: "contains(env.TAG, '-')"
+          prerelease: ${{ contains(env.TAG, '-') }}
           token: ${{ secrets.GITHUB_TOKEN }}
