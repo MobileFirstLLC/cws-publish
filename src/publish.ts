@@ -18,5 +18,11 @@ program
     .arguments('<zip_file>')
     .arguments('<extension_id>')
     .option('-t, --testers', 'publish to testers')
-    .action((a, b, c, d, e) => publish(a, b, c, d, e, (program as OptionValues).testers))
+    .action((
+        clientId: string,
+        secret: string,
+        token: string,
+        zipPath: string,
+        extId: string
+    ) => publish(clientId, secret, token, zipPath, extId, (program as OptionValues).testers))
     .parse(process.argv);

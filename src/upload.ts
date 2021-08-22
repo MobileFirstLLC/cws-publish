@@ -17,5 +17,11 @@ program
     .arguments('<refresh_token>')
     .arguments('<zip_file>')
     .arguments('<extension_id>')
-    .action((a, b, c, d, e) => (upload(a, b, c, d, e) as Promise<any>))
+    .action((
+        clientId: string,
+        secret: string,
+        token: string,
+        zipPath: string,
+        extId: string
+    ) => (upload(clientId, secret, token, zipPath, extId) as Promise<any>))
     .parse(process.argv);
