@@ -4,13 +4,18 @@
  * extensions through Chrome Web Store API.
  */
 
+
 const fs = require('fs');
-import {Credentials, APIResult, UploadResult, PublishResult} from './types'
+import {Credentials, APIResult, UploadResult, PublishResult, Dictionary} from './types'
 
 // @ts-ignore
 import * as request from 'superagent';
 import {google} from 'googleapis';
-import dictionary from './dictionary';
+
+const dictionary: Dictionary = {
+    zipError: 'FATAL: zip file not found or not readable',
+    authError: 'FATAL: authentication failed. At least 1 of arguments: client_id, client_secret, refresh_token; is invalid.'
+}
 
 /**
  * @description Check that API response contains response body.

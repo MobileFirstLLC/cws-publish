@@ -9,6 +9,14 @@ export interface APIResult {
 }
 
 /**
+ * Possibles cli errors
+ */
+export interface Dictionary {
+    zipError: string
+    authError: string
+}
+
+/**
  * WebStore "Items:Update" response type.
  *
  * For endpoint specs:
