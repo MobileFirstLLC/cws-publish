@@ -12,7 +12,7 @@
     "build": "tsc --project tsconfig.json && npm run uglify",
     "test": "TS_NODE_PROJECT=\"tsconfig.testing.json\" nyc mocha -r ts-node/register ./test/*.spec.ts",
     "coverage": "nyc --reporter=lcov npm run test",
-    "push_tags": "git push --follow-tags origin master",
+    "push_tags": "git push --follow-tags origin main",
     "patch:alpha:test": "npx standard-version --dry-run --release-as patch --prerelease alpha",
     "minor:alpha:test": "npx standard-version --dry-run --release-as minor --prerelease alpha",
     "patch:beta:test": "npx standard-version --dry-run --release-as patch --prerelease beta",
