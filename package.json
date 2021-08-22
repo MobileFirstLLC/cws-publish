@@ -1,6 +1,6 @@
 {
   "name": "cws-publish",
-  "version": "2.1.0-alpha.1",
+  "version": "2.0.5",
   "description": "Upload chrome extensions to chrome web store using CI",
   "homepage": "https://github.com/MobileFirstLLC/cws-publish",
   "scripts": {
@@ -13,18 +13,18 @@
     "test": "TS_NODE_PROJECT=\"tsconfig.testing.json\" nyc mocha -r ts-node/register ./test/*.spec.ts",
     "coverage": "nyc --reporter=lcov npm run test",
     "push_tags": "git push --follow-tags origin main",
-    "patch:alpha:test": "npx standard-version --dry-run --release-as patch --prerelease alpha",
-    "minor:alpha:test": "npx standard-version --dry-run --release-as minor --prerelease alpha",
-    "patch:beta:test": "npx standard-version --dry-run --release-as patch --prerelease beta",
-    "minor:beta:test": "npx standard-version --dry-run --release-as minor --prerelease beta",
-    "minor:test": "npx standard-version --dry-run --release-as minor",
-    "patch:test": "npx standard-version --dry-run --release-as patch",
-    "patch:alpha": "npx standard-version --release-as patch --prerelease alpha && npm run push_tags",
-    "minor:alpha": "npx standard-version --release-as minor --prerelease alpha && npm run push_tags",
-    "patch:beta": "npx standard-version --release-as patch --prerelease beta && npm run push_tags",
-    "minor:beta": "npx standard-version --release-as minor --prerelease beta && npm run push_tags",
-    "patch": "npx standard-version --release-as patch && npm run push_tags",
-    "minor": "npx standard-version --release-as minor && npm run push_tags"
+    "patch:alpha:test": "npx standard-version -t \"\" --dry-run --release-as patch --prerelease alpha",
+    "minor:alpha:test": "npx standard-version -t \"\" --dry-run --release-as minor --prerelease alpha",
+    "patch:beta:test": "npx standard-version -t \"\" --dry-run --release-as patch --prerelease beta",
+    "minor:beta:test": "npx standard-version -t \"\" --dry-run --release-as minor --prerelease beta",
+    "minor:test": "npx standard-version -t \"\" --dry-run --release-as minor",
+    "patch:test": "npx standard-version -t \"\" --dry-run --release-as patch",
+    "patch:alpha": "npx standard-version -t \"\" --release-as patch --prerelease alpha && npm run push_tags",
+    "minor:alpha": "npx standard-version -t \"\" --release-as minor --prerelease alpha && npm run push_tags",
+    "patch:beta": "npx standard-version -t \"\" --release-as patch --prerelease beta && npm run push_tags",
+    "minor:beta": "npx standard-version -t \"\" --release-as minor --prerelease beta && npm run push_tags",
+    "patch": "npx standard-version -t \"\" --release-as patch && npm run push_tags",
+    "minor": "npx standard-version -t \"\" --release-as minor && npm run push_tags"
   },
   "keywords": [
     "chrome web store",
