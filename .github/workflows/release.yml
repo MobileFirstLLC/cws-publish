@@ -28,6 +28,6 @@ jobs:
 
       - name: Github Release
         uses: ncipollo/release-action@v1
-        prerelease: true
         with:
+          prerelease: "contains(env.TAG, '-')"
           token: ${{ secrets.GITHUB_TOKEN }}
