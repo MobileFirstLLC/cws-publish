@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [2.0.6](https://github.com/MobileFirstLLC/cws-publish/compare/2.0.6-alpha.0...2.0.6) (2021-08-27)
 
-### [2.0.6-alpha.0](https://github.com/MobileFirstLLC/cws-publish/compare/v2.0.5...v2.0.6-alpha.0) (2021-08-22)
+- This version is written in TypeScript
 
 ### [2.0.5](https://github.com/MobileFirstLLC/cws-publish/compare/v2.0.5-alpha.1...v2.0.5) (2021-07-28)
 
