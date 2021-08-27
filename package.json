@@ -1,6 +1,6 @@
 {
   "name": "cws-publish",
-  "version": "2.0.6-alpha.0",
+  "version": "2.0.6",
   "description": "Upload chrome extensions to chrome web store using CI",
   "homepage": "https://github.com/MobileFirstLLC/cws-publish",
   "scripts": {
@@ -66,14 +66,14 @@
   },
   "devDependencies": {
     "@types/mocha": "^9.0.0",
-    "@types/node": "^16.7.1",
+    "@types/node": "^16.7.4",
     "chai": "^4.3.4",
     "coveralls": "^3.1.1",
     "mocha": "^9.1.0",
     "nyc": "^15.1.0",
     "sinon": "^11.1.2",
     "ts-node": "^10.2.1",
-    "typescript": "^4.3.5",
+    "typescript": "^4.4.2",
     "uglify-js": "^3.14.1"
   }
 }
