@@ -61,7 +61,7 @@
   },
   "dependencies": {
     "commander": "^8.1.0",
-    "googleapis": "^84.0.0",
+    "googleapis": "85.0.0",
     "superagent": "^6.1.0"
   },
   "devDependencies": {
