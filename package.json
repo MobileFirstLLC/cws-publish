@@ -60,20 +60,20 @@
     "cws-publish": "dist/publish.js"
   },
   "dependencies": {
-    "commander": "^8.1.0",
+    "commander": "8.1.0",
     "googleapis": "85.0.0",
-    "superagent": "^6.1.0"
+    "superagent": "6.1.0"
   },
   "devDependencies": {
-    "@types/mocha": "^9.0.0",
-    "@types/node": "^16.7.4",
-    "chai": "^4.3.4",
-    "coveralls": "^3.1.1",
-    "mocha": "^9.1.0",
-    "nyc": "^15.1.0",
-    "sinon": "^11.1.2",
-    "ts-node": "^10.2.1",
-    "typescript": "^4.4.2",
-    "uglify-js": "^3.14.1"
+    "@types/mocha": "9.0.0",
+    "@types/node": "16.7.10",
+    "chai": "4.3.4",
+    "coveralls": "3.1.1",
+    "mocha": "9.1.1",
+    "nyc": "15.1.0",
+    "sinon": "11.1.2",
+    "ts-node": "10.2.1",
+    "typescript": "4.4.2",
+    "uglify-js": "3.14.1"
   }
 }
