@@ -74,6 +74,6 @@
     "sinon": "11.1.2",
     "ts-node": "10.2.1",
     "typescript": "4.4.2",
-    "uglify-js": "3.14.1"
+    "uglify-js": "3.14.2"
   }
 }
