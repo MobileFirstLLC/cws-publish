@@ -60,7 +60,7 @@
     "cws-publish": "dist/publish.js"
   },
   "dependencies": {
-    "commander": "8.2.0",
+    "commander": "8.3.0",
     "googleapis": "89.0.0",
     "superagent": "6.1.0"
   },
