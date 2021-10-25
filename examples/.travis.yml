@@ -3,10 +3,10 @@ node_js:
   - "latest"
 
 script:
-  # steps to generate zip file
   - npm install
   - npm run build
-  # require tagged commit to run cws-upload command
+  # require tagged commit
+  # omit condition to always upload
   - if [ ! -z  "$TRAVIS_TAG" ]; then
       npx cws-upload $client_id $secret $token $zip $extension_id;
     fi

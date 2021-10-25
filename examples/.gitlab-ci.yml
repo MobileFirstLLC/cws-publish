@@ -14,11 +14,12 @@ install_dependencies:
 deploy:
   stage: deploy
   script:
+    # run build steps
     - npm run build
-    # upload to production channel
+    # upload to chrome web store
     - npx cws-upload $client_id $secret $token $zip_path $extension_id;
-    # upload to beta channel
-    - npx cws-upload $client_id $secret $token $zip_path $beta_id;
   artifacts:
     paths:
       - public/
+  only:
+    - tags

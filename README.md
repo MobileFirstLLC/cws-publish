@@ -3,14 +3,14 @@
 [![NPM](https://img.shields.io/npm/v/cws-publish)](https://www.npmjs.com/package/cws-publish)
 ![npm](https://img.shields.io/npm/dt/cws-publish)
 [![Test](https://github.com/MobileFirstLLC/cws-publish/actions/workflows/test.yml/badge.svg)](https://github.com/MobileFirstLLC/cws-publish/actions/workflows/test.yml)
-[![Coverage Status](https://img.shields.io/coveralls/github/MobileFirstLLC/cws-publish)](https://coveralls.io/github/MobileFirstLLC/cws-publish?branch=master)
+[![Coverage Status](https://img.shields.io/coveralls/github/MobileFirstLLC/cws-publish)](https://coveralls.io/github/MobileFirstLLC/cws-publish?branch=main)
 [![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/MobileFirstLLC/cws-publish)](https://codeclimate.com/github/MobileFirstLLC/cws-publish)
 
 ### This package enables uploading chrome extensions to Chrome Web Store programmatically using CI/CD pipeline.
 
 <br/>
 
-![img](https://raw.githubusercontent.com/MobileFirstLLC/cws-publish/master/.github/feature.jpg)
+![img](https://raw.githubusercontent.com/MobileFirstLLC/cws-publish/main/.github/feature.jpg)
 
 **Is this package good fit for you?** Moderate effort is required to obtain necessary authentication credentials and to configure the workflow, but the same setup
 can be used across multiple projects. If your extensions are built by multiple collaborators and/or
@@ -27,8 +27,7 @@ This packages has been used successfully with **[Travis CI](https://www.travis-c
    1. **[Package Installation](#11-package-installation)**
    2. **[Obtaining Credentials](#12-obtaining-credentials)**
 2. **[Configuration Examples](#2-ci-configuration-examples)** 
-3. **[Tips and Best Practices](#3-tips-and-best-practices)**
-4. **[FAQs](#4-faqs)**
+3. **[FAQs](#3-faqs)**
 
 ---
 
@@ -141,18 +140,15 @@ _This completes configuration steps._
 
 See examples of platform-specific CI configuration scripts:
 
-- [Github Actions configuration example](https://github.com/MobileFirstLLC/cws-publish/tree/master/examples/gh-actions.yml)
-- [Gitlab CI configuration example](https://github.com/MobileFirstLLC/cws-publish/tree/master/examples/.gitlab-ci.yml)
-- [Travis CI configuration example](https://github.com/MobileFirstLLC/cws-publish/tree/master/examples/.travis.yml)
+- [Github Actions configuration example](https://github.com/MobileFirstLLC/cws-publish/tree/main/examples/gh-actions.yml)
+- [Gitlab CI configuration example](https://github.com/MobileFirstLLC/cws-publish/tree/main/examples/.gitlab-ci.yml)
+- [Travis CI configuration example](https://github.com/MobileFirstLLC/cws-publish/tree/main/examples/.travis.yml)
 
-* * *
- 
-## 3 Tips and Best Practices
+#### Tips and Best Practices
 
 Package deployment is generally done based on some condition, such as only on tagged commits.
 The general idea is to use the same command, but run the command based on some conditional check.
-See [examples](https://github.com/MobileFirstLLC/cws-publish/tree/master/examples) which show how to setup
-this behavior for different CI environments.
+See [examples](https://github.com/MobileFirstLLC/cws-publish/tree/main/examples) which show how to setup this behavior for different CI environments.
 
 To keep your CI configuration file clutter free, you can use environment variables for all parameters, including <ZIP_FILE> and <EXTENSION_ID>
 
@@ -162,7 +158,7 @@ npx cws-upload $client_id $secret $token $zip_path $extension_id
 
 * * *
 
-## 4 FAQs
+## 3 FAQs
 
 **Q1: Can I use an API key to access chrome web store API?**
 
