@@ -4,7 +4,6 @@
  * extensions through Chrome Web Store API.
  */
 
-
 const fs = require('fs');
 import {Credentials, APIResult, UploadResult, PublishResult, Dictionary} from './types'
 
