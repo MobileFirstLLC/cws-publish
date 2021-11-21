@@ -4,7 +4,7 @@
   "description": "Upload chrome extensions to chrome web store using CI",
   "homepage": "https://github.com/MobileFirstLLC/cws-publish",
   "scripts": {
-    "clean": "rm -rf ./dist",
+    "clean": "rm -rf ./dist & rm -rf ./.nyc_output",
     "lint": "npx eslint ./src/**",
     "uglify": "npm run uglify:cws && npm run uglify:publish && npm run uglify:upload",
     "uglify:cws": "uglifyjs ./dist/cws.js -m -o ./dist/cws.js",
