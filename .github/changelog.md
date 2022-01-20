@@ -4,14 +4,9 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [2.0.8](https://github.com/MobileFirstLLC/cws-publish/compare/2.0.7...2.0.8) (2022-01-20)
 
+dependency updates:
 
-### Bug Fixes
-
-* **deps:** update dependency googleapis to v91 ([37d7bbc](https://github.com/MobileFirstLLC/cws-publish/commit/37d7bbc064ab067be7738c85e98fe8f85d87bc97))
 * **deps:** update dependency googleapis to v92 ([3994ff6](https://github.com/MobileFirstLLC/cws-publish/commit/3994ff61f2efc55bd93eef33bafb4e7390cc1ae2))
-* **deps:** update dependency superagent to v7 ([07333ef](https://github.com/MobileFirstLLC/cws-publish/commit/07333ef1e8667eef11e3599b4ef808d4591695cb))
-* **deps:** update dependency superagent to v7.0.1 ([5c41196](https://github.com/MobileFirstLLC/cws-publish/commit/5c411967d09b492b111e2995067ec2e46fb02816))
-* **deps:** update dependency superagent to v7.0.2 ([459c44d](https://github.com/MobileFirstLLC/cws-publish/commit/459c44d3e47a48fc352b04ae9ede277d68670639))
 * **deps:** update dependency superagent to v7.1.1 ([462ee7a](https://github.com/MobileFirstLLC/cws-publish/commit/462ee7aafffcd2258963b2db853143499575d159))
 
 ### [2.0.7-beta.0](https://github.com/MobileFirstLLC/cws-publish/compare/2.0.6...2.0.7-beta.0) (2021-10-25)
