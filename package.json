@@ -57,7 +57,7 @@
     "cws-publish": "dist/publish.js"
   },
   "dependencies": {
-    "commander": "9.1.0",
+    "commander": "9.2.0",
     "googleapis": "100.0.0",
     "superagent": "7.1.2"
   },
