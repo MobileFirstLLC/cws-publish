@@ -13,22 +13,24 @@ jobs:
         with:
           node-version: 16
 
-      - name: Get tag name
+      - name: Get tag name 🏷️
         run: echo "TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
 
-      - name: Install, build and test
+      - name: Install and build 🏗️
         run: |
           npm ci
           npm run build
-          npm run test
 
-      - name: NPM Publish
+      - name: Run tests ⚗️
+        run: npm run test
+
+      - name: Publish NPM package 🎁
         uses: JS-DevTools/npm-publish@v1
         with:
           tag: ${{ fromJSON('["latest", "beta"]')[contains(env.TAG, '-')] }}
           token: ${{ secrets.NPM_TOKEN }}
 
-      - name: Github Release
+      - name: Github Release 🚀
         uses: ncipollo/release-action@v1
         with:
           prerelease: ${{ contains(env.TAG, '-') }}

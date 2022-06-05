@@ -21,18 +21,18 @@ jobs:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
 
-      - name: Install and build
+      - name: Install and build 🏗️
         run: |
           npm ci
           npm run build
 
-      - name: Run linter
+      - name: Run linter 🏵️
         run: npm run lint
 
-      - name: Run tests
+      - name: Run tests ⚗️
         run: npm run coverage
 
-      - name: Report coverage
+      - name: Report coverage 📈
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
