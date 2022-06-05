@@ -12,17 +12,14 @@
 
 ![img](https://raw.githubusercontent.com/MobileFirstLLC/cws-publish/main/.github/feature.jpg)
 
-**Is this package good fit for you?** Moderate effort is required to obtain necessary authentication credentials and to configure the workflow, but the same setup can be used across multiple projects. If your extensions are built by multiple collaborators and/or you deploy extensions regularly, adding this package can significantly improve your productivity and publishing workflow. This packages has been used successfully with **[Travis CI](https://www.travis-ci.com/)**, **[Gitlab CI](https://docs.gitlab.com/ee/ci/)** and **[Github actions](https://github.com/features/actions)**. It should work with any comparable CI environment.
+**Is this package good fit for you?** Moderate effort is required to obtain necessary authentication credentials and to configure the workflow, but the same setup can be used across multiple projects. If your extensions are built by multiple collaborators and/or you deploy extensions regularly, adding this package can significantly improve your productivity and publishing workflow. This packages has been used successfully with **[Travis CI](https://www.travis-ci.com/)**, **[Gitlab CI](https://docs.gitlab.com/ee/ci/)** and **[Github actions](https://github.com/features/actions)**. It should work with any comparable CI environment that supports Node.js.
 
-----
-
-### Table of Contents
+### Usage
 
 - **[Getting Started](#getting-started)**
 - **[Configuration Examples](#ci-configuration-examples)** 
 - **[FAQs](#faqs)**
 
----
 
 ## Getting Started
 
@@ -33,7 +30,6 @@ Add the NPM package to your project
 ```
 npm install --save-dev cws-publish
 ```
-<br/>
 
 ### Choose desired behavior
 
@@ -64,66 +60,59 @@ npm install --save-dev cws-publish
     npx cws-publish $client_id $client_secret $refresh_token <ZIP_FILE> <EXTENSION_ID> --testers
     ```
 
-<br/>
-
 ### Obtain necessary credentials
 
 All commands require defining 5 parameters. This section explains how to obtain each.
 
-#### Google API Credentials: `$client_id`, `$client_secret`, `$refresh_token` 
+1. **Google API Credentials: `$client_id`, `$client_secret`, `$refresh_token`** 
  
-Detailed instructions for obtaining these values are explained in this guide: **https://developer.chrome.com/webstore/using_webstore_api#beforeyoubegin**
- 
- The general process is:
- 1. Enable Chrome Web Store API in Google API Console 
- 2. Create OAuth Credentials in Google Console - this will generate `$client id` and `$client_secret`
- 3. Authorize Chrome Web Store API - from here you get the `$refresh_token`
-
-Once you have `$client_id` `$client_secret` and `$refresh_token` **save them as environment variables in you CI project settings**. <u>**NEVER share these values with anyone or commit them to your repository!**</u>
-
-<br/>
-
-#### Path to `<ZIP_FILE>`
-
-Generating a zip file is outside the scope of this package. It is assumed that you have already generated a zip file during previous build steps. 
-Please use tools such as [extension-cli](https://github.com/MobileFirstLLC/extension-cli) for programmatic way to generate a zip file for an extension project.
-
-Once you know the location of the zip file, update the upload/publish command and replace `<ZIP_FILE>` with path to file. 
-
-EXAMPLE: if using Gitlab CI and the zip file is `my.zip` in a directory called `build`, the upload command would now look like this (see notes on specifying paths below):
-
-```
-npx cws-upload $client_id $client_secret $refresh_token ./build/my.zip <EXTENSION_ID>
-```
-
-**Notes on specifying paths**: 
-
-- when using **Travis CI** or **Github actions**,
-  if zip file will be generated in the root of the repository, the path to the release file is the file name without path.
+    Detailed instructions for obtaining these values are explained in this guide: **https://developer.chrome.com/webstore/using_webstore_api#beforeyoubegin**
     
-  For example: `release.zip` 
+    The general process is:
+    1. Enable Chrome Web Store API in Google API Console 
+    2. Create OAuth Credentials in Google Console - this will generate `$client id` and `$client_secret`
+    3. Authorize Chrome Web Store API - from here you get the `$refresh_token`
+    
+    Once you have `$client_id` `$client_secret` and `$refresh_token` **save them as environment variables in you CI project settings**. <u>**NEVER share these values with anyone or commit them to your repository!**</u>
 
-- when using **Gitlab pipeline**,
-  if the zip file is generated as a build artifact in the root, path to the release should include explicit relative path.
-  
-  For example: `./public/release.zip` 
+2. **Path to `<ZIP_FILE>`**
 
+    Generating a zip file is outside the scope of this package. It is assumed that you have already generated a zip file during previous build steps. 
+    Please use tools such as [extension-cli](https://github.com/MobileFirstLLC/extension-cli) for programmatic way to generate a zip file for an extension project.
+    
+    Once you know the location of the zip file, update the upload/publish command and replace `<ZIP_FILE>` with path to file. 
+    
+    EXAMPLE: if using Gitlab CI and the zip file is `my.zip` in a directory called `build`, the upload command would now look like this (see notes on specifying paths below):
+    
+    ```
+    npx cws-upload $client_id $client_secret $refresh_token ./build/my.zip <EXTENSION_ID>
+    ```
 
-<br/>
+    **Notes on specifying paths**: 
+    
+    - when using **Travis CI** or **Github actions**,
+      if zip file will be generated in the root of the repository, the path to the release file is the file name without path.
+        
+      For example: `release.zip` 
+    
+    - when using **Gitlab pipeline**,
+      if the zip file is generated as a build artifact in the root, path to the release should include explicit relative path.
+      
+      For example: `./public/release.zip` 
+    
+3. **Extension identifier `<EXTENSION_ID>`**
 
-#### Extension identifier `<EXTENSION_ID>`
-
-Go to Chrome web store [developer console](https://chrome.google.com/webstore/developer/dashboard) and click on an existing extension. Copy the item id (32 alpha-character string) and paste it to your command to replace `<EXTENSION_ID>`.  
-
-If your extension is brand new, you must manually upload an initial draft in the developer console to obtain an id. Further, you will not be able to publish the extension until you manually complete the store listing to include uploading necessary screenshots and consenting to their policies.
- 
-**EXAMPLE:** if your extension id is `fpggedhgeoicapmcammhdbmcmngbpkll`, the upload command would now look like this:
- 
- ```
-npx cws-upload $client_id $client_secret $refresh_token ./build/my.zip fpggedhgeoicapmcammhdbmcmngbpkll
- ```
-  
-_This completes configuration steps._ 
+    Go to Chrome web store [developer console](https://chrome.google.com/webstore/developer/dashboard) and click on an existing extension. Copy the item id (32 alpha-character string) and paste it to your command to replace `<EXTENSION_ID>`.  
+    
+    If your extension is brand new, you must manually upload an initial draft in the developer console to obtain an id. Further, you will not be able to publish the extension until you manually complete the store listing to include uploading necessary screenshots and consenting to their policies.
+     
+    **EXAMPLE:** if your extension id is `fpggedhgeoicapmcammhdbmcmngbpkll`, the upload command would now look like this:
+     
+     ```
+    npx cws-upload $client_id $client_secret $refresh_token ./build/my.zip fpggedhgeoicapmcammhdbmcmngbpkll
+     ```
+      
+    _This completes configuration steps._ 
  
 * * *
 
