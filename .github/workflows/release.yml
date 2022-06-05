@@ -4,7 +4,6 @@ on:
   push:
     tags:
       - '*'
-
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -12,13 +11,16 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: 16
 
-      - name: Tag name
+      - name: Get tag name
         run: echo "TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
-      - run: npm ci
-      - run: npm run build
-      - run: npm run test
+
+      - name: Install, build and test
+      - run: |
+          npm ci
+          npm run build
+          npm run test
 
       - name: NPM Publish
         uses: JS-DevTools/npm-publish@v1
