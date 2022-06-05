@@ -17,7 +17,7 @@ jobs:
         run: echo "TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
 
       - name: Install, build and test
-      - run: |
+        run: |
           npm ci
           npm run build
           npm run test
