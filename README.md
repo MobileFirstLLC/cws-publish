@@ -12,72 +12,65 @@
 
 ![img](https://raw.githubusercontent.com/MobileFirstLLC/cws-publish/main/.github/feature.jpg)
 
-**Is this package good fit for you?** Moderate effort is required to obtain necessary authentication credentials and to configure the workflow, but the same setup
-can be used across multiple projects. If your extensions are built by multiple collaborators and/or
-you deploy extensions regularly, adding this package can significantly improve your 
-productivity and publishing workflow.
-
-This packages has been used successfully with **[Travis CI](https://www.travis-ci.com/)**, **[Gitlab CI](https://docs.gitlab.com/ee/ci/)** and **[Github actions](https://github.com/features/actions)**. It should work with any comparable CI environment.
+**Is this package good fit for you?** Moderate effort is required to obtain necessary authentication credentials and to configure the workflow, but the same setup can be used across multiple projects. If your extensions are built by multiple collaborators and/or you deploy extensions regularly, adding this package can significantly improve your productivity and publishing workflow. This packages has been used successfully with **[Travis CI](https://www.travis-ci.com/)**, **[Gitlab CI](https://docs.gitlab.com/ee/ci/)** and **[Github actions](https://github.com/features/actions)**. It should work with any comparable CI environment.
 
 ----
 
 ### Table of Contents
 
-1. **[Configuration](#1-configuration)**
-   1. **[Package Installation](#11-package-installation)**
-   2. **[Obtaining Credentials](#12-obtaining-credentials)**
-2. **[Configuration Examples](#2-ci-configuration-examples)** 
-3. **[FAQs](#3-faqs)**
+- **[Getting Started](#getting-started)**
+- **[Configuration Examples](#ci-configuration-examples)** 
+- **[FAQs](#faqs)**
 
 ---
 
-## 1 Configuration
+## Getting Started
 
-### 1.1 Package Installation
+### Install package
 
-**1. Add package to your project**
+Add the NPM package to your project
 
 ```
 npm install --save-dev cws-publish
 ```
 <br/>
 
-**2. Choose and configure upload behavior:**
+### Choose desired behavior
 
+1. **Upload as a draft**
 
-**A) upload as a draft:**
+    Upload the .zip file to developer console, but DO NOT publish it yet.
+    Manual publish is needed from developer console.
 
-Upload the .zip file to developer console, but DO NOT publish it yet.
+    ```
+    npx cws-upload $client_id $client_secret $refresh_token <ZIP_FILE> <EXTENSION_ID>
+    ```
 
-```
-npx cws-upload $client_id $client_secret $refresh_token <ZIP_FILE> <EXTENSION_ID>
-```
+2. **Upload and publish immediately**
 
-**B) upload and publish immediately:**
+    Web store will likely still impose a review before actual release occurs; but you are not required to manually submit the update for release from the developer console.
 
-Web store will likely still impose a review before actual release occurs; but you are not 
-required to manually submit the update for release from the developer console.
+    ```
+    npx cws-publish $client_id $client_secret $refresh_token <ZIP_FILE> <EXTENSION_ID>
+    ```
 
-```
-npx cws-publish $client_id $client_secret $refresh_token <ZIP_FILE> <EXTENSION_ID>
-```
+4. **Upload and publish to testers**
 
-**C) upload and publish to testers:**
+    You can only choose this option if the extension is currently NOT published publicly.
+    Current state must be draft or published to testers.
+    Attempting to perform this operation on a public, published extension will fail.
 
-You can only choose this option iff the extension is currently NOT published publicly.
-Current state must be draft or published to testers.
-Attempting to perform this operation on a public, published extension will fail.
+    ```
+    npx cws-publish $client_id $client_secret $refresh_token <ZIP_FILE> <EXTENSION_ID> --testers
+    ```
 
-```
-npx cws-publish $client_id $client_secret $refresh_token <ZIP_FILE> <EXTENSION_ID> --testers
-```
 <br/>
 
-### 1.2 Obtaining Credentials
+### Obtain necessary credentials
 
-#### Obtaining Google API Credentials
+All commands require defining 5 parameters. This section explains how to obtain each.
 
-#### `$client_id`, `$client_secret`, `$refresh_token` 
+#### Google API Credentials: `$client_id`, `$client_secret`, `$refresh_token` 
  
 Detailed instructions for obtaining these values are explained in this guide: **https://developer.chrome.com/webstore/using_webstore_api#beforeyoubegin**
  
@@ -90,7 +83,7 @@ Once you have `$client_id` `$client_secret` and `$refresh_token` **save them as 
 
 <br/>
 
-#### Obtaining `<ZIP_FILE>`
+#### Path to `<ZIP_FILE>`
 
 Generating a zip file is outside the scope of this package. It is assumed that you have already generated a zip file during previous build steps. 
 Please use tools such as [extension-cli](https://github.com/MobileFirstLLC/extension-cli) for programmatic way to generate a zip file for an extension project.
@@ -118,9 +111,9 @@ npx cws-upload $client_id $client_secret $refresh_token ./build/my.zip <EXTENSIO
 
 <br/>
 
-#### Obtaining `<EXTENSION_ID>`
+#### Extension identifier `<EXTENSION_ID>`
 
-Go to chrome web store [developer console](https://chrome.google.com/webstore/developer/dashboard) and click on an existing extension. Copy the item id (32 alpha-character string) and paste it to your command to replace `<EXTENSION_ID>`.  
+Go to Chrome web store [developer console](https://chrome.google.com/webstore/developer/dashboard) and click on an existing extension. Copy the item id (32 alpha-character string) and paste it to your command to replace `<EXTENSION_ID>`.  
 
 If your extension is brand new, you must manually upload an initial draft in the developer console to obtain an id. Further, you will not be able to publish the extension until you manually complete the store listing to include uploading necessary screenshots and consenting to their policies.
  
@@ -134,7 +127,7 @@ _This completes configuration steps._
  
 * * *
 
-## 2 CI Configuration Examples
+## CI Configuration Examples
 
 <h3>Feeling confused? <img src='https://media0.giphy.com/media/xk9cukG3p8mcv0tlli/giphy.gif' width="42" /></h3>
 
@@ -158,7 +151,7 @@ npx cws-upload $client_id $secret $token $zip_path $extension_id
 
 * * *
 
-## 3 FAQs
+## FAQs
 
 **Q1: Can I use an API key to access chrome web store API?**
 

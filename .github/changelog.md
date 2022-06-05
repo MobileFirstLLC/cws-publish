@@ -9,7 +9,7 @@ dependency updates:
 * **deps:** update dependency googleapis to v92 ([3994ff6](https://github.com/MobileFirstLLC/cws-publish/commit/3994ff61f2efc55bd93eef33bafb4e7390cc1ae2))
 * **deps:** update dependency superagent to v7.1.1 ([462ee7a](https://github.com/MobileFirstLLC/cws-publish/commit/462ee7aafffcd2258963b2db853143499575d159))
 
-### [2.0.7-beta.0](https://github.com/MobileFirstLLC/cws-publish/compare/2.0.6...2.0.7-beta.0) (2021-10-25)
+### [2.0.7-beta.0](https://github.com/MobileFirstLLC/cws-publish/compare/2.0.6...2.0.7) (2021-11-21)
 
 dependency updates:
 

@@ -16,7 +16,7 @@ deploy:
   script:
     # run build steps
     - npm run build
-    # upload to chrome web store
+    # upload to Chrome web store
     - npx cws-upload $client_id $secret $token $zip_path $extension_id;
   artifacts:
     paths:

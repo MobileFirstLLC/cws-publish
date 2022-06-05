@@ -115,7 +115,7 @@ const handleResult = (success: boolean, result: string | APIResult) => {
 }
 
 /**
- * @description Upload file to chrome web store
+ * @description Upload file to Chrome web store
  * @param {string} apiClientId - google api client id
  * @param {string} apiSecret - google api secret
  * @param {string} apiToken - google api refresh token

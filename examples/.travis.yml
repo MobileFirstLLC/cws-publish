@@ -6,7 +6,7 @@ script:
   - npm install
   - npm run build
   # require tagged commit
-  # omit condition to always upload
+  # omit this condition to always upload
   - if [ ! -z  "$TRAVIS_TAG" ]; then
       npx cws-upload $client_id $secret $token $zip $extension_id;
     fi
