@@ -6,7 +6,7 @@
 [![Coverage Status](https://img.shields.io/coveralls/github/MobileFirstLLC/cws-publish)](https://coveralls.io/github/MobileFirstLLC/cws-publish?branch=main)
 [![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/MobileFirstLLC/cws-publish)](https://codeclimate.com/github/MobileFirstLLC/cws-publish)
 
-### This package enables uploading chrome extensions to Chrome Web Store programmatically using CI/CD pipeline.
+**This package enables uploading chrome extensions to Chrome Web Store programmatically using CI/CD pipeline.**
 
 <br/>
 
@@ -14,12 +14,11 @@
 
 **Is this package good fit for you?** Moderate effort is required to obtain necessary authentication credentials and to configure the workflow, but the same setup can be used across multiple projects. If your extensions are built by multiple collaborators and/or you deploy extensions regularly, adding this package can significantly improve your productivity and publishing workflow. This packages has been used successfully with **[Travis CI](https://www.travis-ci.com/)**, **[Gitlab CI](https://docs.gitlab.com/ee/ci/)** and **[Github actions](https://github.com/features/actions)**. It should work with any comparable CI environment that supports Node.js.
 
-### Usage
+**Usage**
 
 - **[Getting Started](#getting-started)**
 - **[Configuration Examples](#ci-configuration-examples)** 
 - **[FAQs](#faqs)**
-
 
 ## Getting Started
 
@@ -104,11 +103,9 @@ All commands require defining 5 parameters. This section explains how to obtain 
 
 <br/>
 
-* * *
-
 ## CI Configuration Examples
 
-<h3>Feeling confused? <img src='https://media0.giphy.com/media/xk9cukG3p8mcv0tlli/giphy.gif' width="42" /></h3>
+<strong>Feeling confused? <img src='https://media0.giphy.com/media/xk9cukG3p8mcv0tlli/giphy.gif' width="42" /></strong>
 
 See examples of platform-specific CI configuration scripts:
 
@@ -116,7 +113,7 @@ See examples of platform-specific CI configuration scripts:
 - [Gitlab CI configuration example](https://github.com/MobileFirstLLC/cws-publish/tree/main/examples/.gitlab-ci.yml)
 - [Travis CI configuration example](https://github.com/MobileFirstLLC/cws-publish/tree/main/examples/.travis.yml)
 
-#### Tips and Best Practices
+**Tips and Best Practices**
 
 - Package deployment is generally done based on some condition, such as only on tagged commits. The general idea is to use the same command, but run the command based on some conditional check. See [examples](https://github.com/MobileFirstLLC/cws-publish/tree/main/examples), that demonstrate how to setup this behavior for different CI environments.
 
@@ -125,8 +122,6 @@ See examples of platform-specific CI configuration scripts:
    ```
    npx cws-upload $client_id $secret $token $zip_path $extension_id
    ```
-
-* * *
 
 ## FAQs
 
@@ -146,8 +141,6 @@ See examples of platform-specific CI configuration scripts:
 
    It should be compatible with any CI/CD environment that supports Node.js runtime
 
----
-
-#### References
+## References
 
 [Chrome Webstore API Reference](https://developer.chrome.com/webstore/api_index)
