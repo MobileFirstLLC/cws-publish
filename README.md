@@ -6,7 +6,7 @@
 [![Coverage Status](https://img.shields.io/coveralls/github/MobileFirstLLC/cws-publish)](https://coveralls.io/github/MobileFirstLLC/cws-publish?branch=main)
 [![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/MobileFirstLLC/cws-publish)](https://codeclimate.com/github/MobileFirstLLC/cws-publish)
 
-**This package enables uploading chrome extensions to Chrome Web Store programmatically using CI/CD pipeline.**
+**Upload chrome extensions to Chrome Web Store programmatically using CI/CD pipeline.**
 
 <br/>
 
@@ -50,7 +50,7 @@ npm install --save-dev cws-publish
 
 4. **Upload and publish to testers**
 
-    You can only choose this option if the extension is currently NOT published publicly. Current state must be draft or published to testers. Attempting to perform this operation on a public, published extension will fail.
+    You can only choose this option if the extension is currently NOT published publicly. Current state must be draft or published to testers. Attempting to perform this operation on a public published extension will fail.
 
     ```
     npx cws-publish $client_id $client_secret $refresh_token <ZIP_FILE> <EXTENSION_ID> --testers
@@ -69,7 +69,7 @@ All commands require defining 5 parameters. This section explains how to obtain 
     2. Create OAuth Credentials in Google Console - this will generate `$client id` and `$client_secret`
     3. Authorize Chrome Web Store API - from here you get the `$refresh_token`
     
-    Once you have `$client_id` `$client_secret` and `$refresh_token` **save them as environment variables in you CI project settings**. <u>**NEVER share these values with anyone or commit them to your repository!**</u>
+    Once you have `$client_id` `$client_secret` and `$refresh_token` save them as environment variables in you CI project settings. <u>**NEVER share these values with anyone or commit them to your repository!**</u>
 
 2. **Path to `<ZIP_FILE>`**
 
@@ -87,7 +87,7 @@ All commands require defining 5 parameters. This section explains how to obtain 
     
 3. **Extension identifier `<EXTENSION_ID>`**
 
-    Go to Chrome web store [developer console](https://chrome.google.com/webstore/developer/dashboard) and click on an existing extension. Copy the item id (32 alpha-character string) and paste it to your command to replace `<EXTENSION_ID>`. For example, if your extension id is `fpggedhgeoicapmcammhdbmcmngbpkll` the upload command would now look like this:
+    Go to Chrome web store [developer console](https://chrome.google.com/webstore/developer/dashboard) and click on an existing extension. Copy the item id (32 alpha-char string) and paste it to your command to replace `<EXTENSION_ID>`. For example, if your extension id is `fpggedhgeoicapmcammhdbmcmngbpkll` the upload command would now look like this:
 
     ```
     npx cws-upload $client_id $client_secret $refresh_token ./build/my.zip fpggedhgeoicapmcammhdbmcmngbpkll
