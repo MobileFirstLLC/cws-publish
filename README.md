@@ -80,39 +80,30 @@ All commands require defining 5 parameters. This section explains how to obtain 
     Generating a zip file is outside the scope of this package. It is assumed that you have already generated a zip file during previous build steps. 
     Please use tools such as [extension-cli](https://github.com/MobileFirstLLC/extension-cli) for programmatic way to generate a zip file for an extension project.
     
-    Once you know the location of the zip file, update the upload/publish command and replace `<ZIP_FILE>` with path to file. 
-    
-    EXAMPLE: if using Gitlab CI and the zip file is `my.zip` in a directory called `build`, the upload command would now look like this (see notes on specifying paths below):
-    
+    Once you know the location of the zip file, update the upload/publish command and replace `<ZIP_FILE>` with path to file, for example:
+     
     ```
     npx cws-upload $client_id $client_secret $refresh_token ./build/my.zip <EXTENSION_ID>
     ```
 
-    **Notes on specifying paths**: 
+    Notes on specifying paths for different CI environments: 
     
-    - when using **Travis CI** or **Github actions**,
-      if zip file will be generated in the root of the repository, the path to the release file is the file name without path.
-        
-      For example: `release.zip` 
+    - when using **Travis CI** or **Github actions**, if zip file will be generated in the root of the repository, the path to the release file is the file name without path, for example: `release.zip` 
     
-    - when using **Gitlab pipeline**,
-      if the zip file is generated as a build artifact in the root, path to the release should include explicit relative path.
-      
-      For example: `./public/release.zip` 
+    - when using **Gitlab pipeline**, if the zip file is generated as a build artifact in the root, path to the release should include relative path, for example: `./public/release.zip` 
     
 3. **Extension identifier `<EXTENSION_ID>`**
 
     Go to Chrome web store [developer console](https://chrome.google.com/webstore/developer/dashboard) and click on an existing extension. Copy the item id (32 alpha-character string) and paste it to your command to replace `<EXTENSION_ID>`.  
-    
-    If your extension is brand new, you must manually upload an initial draft in the developer console to obtain an id. Further, you will not be able to publish the extension until you manually complete the store listing to include uploading necessary screenshots and consenting to their policies.
-     
-    **EXAMPLE:** if your extension id is `fpggedhgeoicapmcammhdbmcmngbpkll`, the upload command would now look like this:
-     
-     ```
+    For example, if your extension id is `fpggedhgeoicapmcammhdbmcmngbpkll`, the upload command would now look like this:
+
+    ```
     npx cws-upload $client_id $client_secret $refresh_token ./build/my.zip fpggedhgeoicapmcammhdbmcmngbpkll
-     ```
-      
-    _This completes configuration steps._ 
+    ```
+       
+    If your extension is brand new, you must manually upload an initial draft in the developer console to obtain an id for your extension. Further, you will not be able to publish a new extension until you manually complete the store listing to include uploading necessary screenshots and consenting to their policies.
+
+**🏁 This completes configuration steps. 🏁** 
  
 * * *
 
