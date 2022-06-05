@@ -35,8 +35,7 @@ npm install --save-dev cws-publish
 
 1. **Upload as a draft**
 
-    Upload the .zip file to developer console, but DO NOT publish it yet.
-    Manual publish is needed from developer console.
+    Upload the .zip file to developer console, but DO NOT publish it yet. Manual publish is still needed from developer console.
 
     ```
     npx cws-upload $client_id $client_secret $refresh_token <ZIP_FILE> <EXTENSION_ID>
@@ -52,9 +51,7 @@ npm install --save-dev cws-publish
 
 4. **Upload and publish to testers**
 
-    You can only choose this option if the extension is currently NOT published publicly.
-    Current state must be draft or published to testers.
-    Attempting to perform this operation on a public, published extension will fail.
+    You can only choose this option if the extension is currently NOT published publicly. Current state must be draft or published to testers. Attempting to perform this operation on a public, published extension will fail.
 
     ```
     npx cws-publish $client_id $client_secret $refresh_token <ZIP_FILE> <EXTENSION_ID> --testers
@@ -77,10 +74,7 @@ All commands require defining 5 parameters. This section explains how to obtain 
 
 2. **Path to `<ZIP_FILE>`**
 
-    Generating a zip file is outside the scope of this package. It is assumed that you have already generated a zip file during previous build steps. 
-    Please use tools such as [extension-cli](https://github.com/MobileFirstLLC/extension-cli) for programmatic way to generate a zip file for an extension project.
-    
-    Once you know the location of the zip file, update the upload/publish command and replace `<ZIP_FILE>` with path to file, for example:
+    Generating a zip file is outside the scope of this package. It is assumed that you have already generated a zip file during previous build steps. Please use tools such as [extension-cli](https://github.com/MobileFirstLLC/extension-cli) for programmatic way to generate a zip file for an extension project. Once you know the location of the zip file, update the upload/publish command and replace `<ZIP_FILE>` with path to file, for example:
      
     ```
     npx cws-upload $client_id $client_secret $refresh_token ./build/my.zip <EXTENSION_ID>
@@ -94,8 +88,7 @@ All commands require defining 5 parameters. This section explains how to obtain 
     
 3. **Extension identifier `<EXTENSION_ID>`**
 
-    Go to Chrome web store [developer console](https://chrome.google.com/webstore/developer/dashboard) and click on an existing extension. Copy the item id (32 alpha-character string) and paste it to your command to replace `<EXTENSION_ID>`.  
-    For example, if your extension id is `fpggedhgeoicapmcammhdbmcmngbpkll`, the upload command would now look like this:
+    Go to Chrome web store [developer console](https://chrome.google.com/webstore/developer/dashboard) and click on an existing extension. Copy the item id (32 alpha-character string) and paste it to your command to replace `<EXTENSION_ID>`. For example, if your extension id is `fpggedhgeoicapmcammhdbmcmngbpkll` the upload command would now look like this:
 
     ```
     npx cws-upload $client_id $client_secret $refresh_token ./build/my.zip fpggedhgeoicapmcammhdbmcmngbpkll
@@ -103,7 +96,9 @@ All commands require defining 5 parameters. This section explains how to obtain 
        
     If your extension is brand new, you must manually upload an initial draft in the developer console to obtain an id for your extension. Further, you will not be able to publish a new extension until you manually complete the store listing to include uploading necessary screenshots and consenting to their policies.
 
-**🏁 This completes configuration steps. 🏁** 
+<p align="center">
+<strong>🏁 This completes configuration steps. 🏁</strong> 
+</p>
  
 * * *
 
@@ -119,38 +114,33 @@ See examples of platform-specific CI configuration scripts:
 
 #### Tips and Best Practices
 
-Package deployment is generally done based on some condition, such as only on tagged commits.
-The general idea is to use the same command, but run the command based on some conditional check.
-See [examples](https://github.com/MobileFirstLLC/cws-publish/tree/main/examples) which show how to setup this behavior for different CI environments.
+- Package deployment is generally done based on some condition, such as only on tagged commits. The general idea is to use the same command, but run the command based on some conditional check. See [examples](https://github.com/MobileFirstLLC/cws-publish/tree/main/examples), that demonstrate how to setup this behavior for different CI environments.
 
-To keep your CI configuration file clutter free, you can use environment variables for all parameters, including <ZIP_FILE> and <EXTENSION_ID>
+- To keep your CI configuration file clutter-free, use environment variables for all parameters:
 
-```
-npx cws-upload $client_id $secret $token $zip_path $extension_id
-```
+   ```
+   npx cws-upload $client_id $secret $token $zip_path $extension_id
+   ```
 
 * * *
 
 ## FAQs
 
-**Q1: Can I use an API key to access chrome web store API?**
+1. ** Can I use an API key to access chrome web store API?**
 
-No. When dealing with private user data simple API key is not enough.
+   No. When dealing with private user data simple API key is not enough.
 
-**Q2: Can I use service account to access chrome web store API?**
+2. **Can I use service account to access chrome web store API?**
 
-If you have a G suite business account, you may create a 
-service account to use as the identify for interacting with the API.
-Assuming the service account has access to the developer dashboard in
-Chrome web store this should work, although untested.
+   If you have a G suite business account, you may create a service account to use as the identify for interacting with the API. Assuming the service account has access to the developer dashboard in Chrome web store this should work, although untested.
 
-**Q3: Can I use same credentials across multiple extension projects?**
+3. **Can I use same credentials across multiple extension projects?**
 
-Yes
+   Yes
 
-**Q4: What CI providers is this compatible with?**
+4. **What CI providers is this compatible with?**
 
-It should be compatible with any CI/CD environment that supports Node.js runtime
+   It should be compatible with any CI/CD environment that supports Node.js runtime
 
 ---
 
