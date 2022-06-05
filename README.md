@@ -96,10 +96,14 @@ All commands require defining 5 parameters. This section explains how to obtain 
        
     If your extension is brand new, you must manually upload an initial draft in the developer console to obtain an id for your extension. Further, you will not be able to publish a new extension until you manually complete the store listing to include uploading necessary screenshots and consenting to their policies.
 
+<br/>
+
 <p align="center">
 <strong>🏁 This completes configuration steps. 🏁</strong> 
 </p>
- 
+
+<br/>
+
 * * *
 
 ## CI Configuration Examples
@@ -126,7 +130,7 @@ See examples of platform-specific CI configuration scripts:
 
 ## FAQs
 
-1. ** Can I use an API key to access chrome web store API?**
+1. **Can I use an API key to access chrome web store API?**
 
    No. When dealing with private user data simple API key is not enough.
 
