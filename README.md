@@ -12,7 +12,7 @@
 
 ![img](https://raw.githubusercontent.com/MobileFirstLLC/cws-publish/main/.github/feature.jpg)
 
-**Is this package good fit for you?** Moderate effort is required to obtain necessary authentication credentials and to configure the workflow, but the same setup can be used across multiple projects. If your extensions are built by multiple collaborators and/or you deploy extensions regularly, adding this package can significantly improve your productivity and publishing workflow. This packages has been used successfully with **[Travis CI](https://www.travis-ci.com/)**, **[Gitlab CI](https://docs.gitlab.com/ee/ci/)** and **[Github actions](https://github.com/features/actions)**. It should work with any comparable CI environment that supports Node.js.
+**Is this package a good fit for you?** Moderate effort is required to obtain necessary authentication credentials and to configure the workflow, but the same setup can be used across multiple projects. If your extensions are built by multiple collaborators and/or you deploy extensions regularly, adding this package can significantly improve your productivity and publishing workflow. This packages has been used successfully with **[Travis CI](https://www.travis-ci.com/)**, **[Gitlab CI](https://docs.gitlab.com/ee/ci/)** and **[Github actions](https://github.com/features/actions)**. It should work with any comparable CI environment that supports Node.js.
 
 **Usage**
 
