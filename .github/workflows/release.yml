@@ -4,8 +4,6 @@ on:
   push:
     tags:
       - '*'
-    tags-ignore:
-      - 'v*'
 
 jobs:
   release:
