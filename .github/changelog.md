@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/MobileFirstLLC/cws-publish/compare/2.1.0-beta.0...2.1.0) (2022-06-06)
+
 ### [2.1.0-beta.0](https://github.com/MobileFirstLLC/cws-publish/compare/2.0.8...2.1.0-beta.0) (2022-06-06)
 
 - add GitHub action
