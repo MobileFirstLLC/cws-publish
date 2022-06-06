@@ -123,8 +123,6 @@ All commands require defining 5 parameters. This section explains how to obtain 
 <strong>🏁 This completes configuration steps. 🏁</strong> 
 </p>
 
-<br/>
-
 ## CI Configuration Examples
 
 <strong>Feeling confused? <img src='https://media0.giphy.com/media/xk9cukG3p8mcv0tlli/giphy.gif' width="42" /></strong>

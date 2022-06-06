@@ -8,7 +8,7 @@ import { Credentials, APIResult, UploadResult, PublishResult, Dictionary } from 
 
 // @ts-ignore
 import * as request from 'superagent'
-import { google } from 'googleapis'
+import { OAuth2Client } from 'google-auth-library'
 
 const fs = require('fs')
 
@@ -61,7 +61,7 @@ const getFileBlob = (filepath: string) => {
  */
 const getAccessToken = (refreshToken: string, clientId: string, clientSecret: string) =>
   new Promise((resolve) => {
-    const oauth2Client = new google.auth.OAuth2(clientId, clientSecret, 'urn:ietf:wg:oauth:2.0:oob')
+    const oauth2Client = new OAuth2Client(clientId, clientSecret, 'urn:ietf:wg:oauth:2.0:oob')
     oauth2Client.setCredentials({ access_token: null, refresh_token: refreshToken })
     oauth2Client.refreshAccessToken((
       err: object | null, credentials: Credentials | null

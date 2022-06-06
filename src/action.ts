@@ -3,7 +3,7 @@
  * CI packages for publishing in Chrome Web Store
  *
  * @description
- * Github Action entry point and handler
+ * GitHub Action entry point and handler
  * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 import * as core from '@actions/core'
@@ -33,6 +33,6 @@ switch (action) {
       .catch(error => core.setFailed(error.message))
     break
   default:
-    core.setFailed('Failed with error: unknown valur for parameter action. ' +
+    core.setFailed('Failed with error: unknown value for parameter action. ' +
             'Specify one of: upload, publish, testers.')
 }
