@@ -10,7 +10,7 @@
     "uglify:cws": "uglifyjs ./dist/cws.js -m -o ./dist/cws.js",
     "uglify:publish": "uglifyjs ./dist/publish.js -m -o ./dist/publish.js",
     "uglify:upload": "uglifyjs ./dist/upload.js -m -o ./dist/upload.js",
-    "uglify:action": "uglifyjs ./dist/action.js -m -o ./.github/action.js && rm -rf ./dist/action.js",
+    "uglify:action": "uglifyjs ./dist/action.js -m -o ./dist/action.js && ncc build ./dist/action.js -o dist",
     "build": "tsc --project tsconfig.json && npm run uglify",
     "test": "TS_NODE_PROJECT=\"tsconfig.testing.json\" nyc mocha -r ts-node/register ./test/*.spec.ts",
     "coverage": "nyc --reporter=lcov npm run test",

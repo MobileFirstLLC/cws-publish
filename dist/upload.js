@@ -1,0 +1,2 @@
+#!/usr/bin/env node
+"use strict";Object.defineProperty(exports,"__esModule",{value:true});var commander_1=require("commander");var cws_1=require("./cws");commander_1.program.arguments("<client_id>").arguments("<client_secret>").arguments("<refresh_token>").arguments("<zip_file>").arguments("<extension_id>").action(function(e,r,t,n,s){return(0,cws_1.upload)(e,r,t,n,s)}).parse(process.argv);

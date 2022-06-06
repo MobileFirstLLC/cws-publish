@@ -6,6 +6,8 @@ node_modules/
 src/
 test/
 .gitignore
+action.yml
 icon.png
+renovate.json
 tsconfig.json
 tsconfig.testing.json

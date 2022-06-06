@@ -27,7 +27,7 @@
 1. Configure workflow:
 
    ```yaml
-   uses: mobilefirstllc/cws-publish@v2.0.8
+   uses: mobilefirstllc/cws-publish@v3.0.0
    with:
      action: upload  # one of: { upload, publish, testers }
      client_id: ${{ secrets.CLIENT }}

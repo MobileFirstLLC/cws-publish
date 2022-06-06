@@ -28,4 +28,4 @@ outputs:
 
 runs:
   using: 'node16'
-  main: './.github/action.js'
+  main: 'dist/action.js'
