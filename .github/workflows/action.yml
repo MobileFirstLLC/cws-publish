@@ -13,7 +13,7 @@ jobs:
         run: curl  ${{ secrets.PREBUILT_URL }} -o ./release.zip
 
       - name: Upload the zip to Chrome Web Store
-        uses: mobilefirstllc/cws-publish@v1
+        uses: mobilefirstllc/cws-publish@2.1.0-beta.0
         with:
           action: 'upload'
           client_id: ${{ secrets.CLIENT }}
