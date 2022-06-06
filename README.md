@@ -22,7 +22,6 @@
 
 ## Getting Started
 
-<!--  hide for now
 ### Usage with GitHub Actions
 
 1. Configure workflow, example:
@@ -31,17 +30,18 @@
    - name: Upload to Chrome Web Store
      uses: mobilefirstllc/cws-publish@v1
      with:
-       action: upload  # one of: { upload, publish, testers }
+       action: 'upload'  # one of: { upload, publish, testers }
        client_id: ${{ secrets.CLIENT }}
        client_secret: ${{ secrets.SECRET }}
        refresh_token: ${{ secrets.TOKEN }}
-       extension_id: abcdefghijklmnopabcdefghijklmnop 
-       zip_file: release.zip
+       extension_id: 'abcdefghijklmnopabcdefghijklmnop' 
+       zip_file: 'release.zip'
    ```
    
    Choose appropriate action based on desired behavior; see "Available commands" below for detailed descriptions of each.
+   Make sure to define all required parameters.
 
-2. see [obtain necessary credentials](#obtain-necessary-credentials) for instructions for specifying each parameter.
+3. see [obtain necessary credentials](#obtain-necessary-credentials) for instructions for specifying each parameter.
 
 ### Generic CI or CLI usage
 

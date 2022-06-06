@@ -22,10 +22,11 @@ jobs:
         run: npm run build
 
       - name: Upload to Chrome Web Store
-        run: >-
-          npx cws-upload
-          ${{ secrets.CLIENT }}
-          ${{ secrets.SECRET }}
-          ${{ secrets.TOKEN }}
-          ${{ secrets.ZIP_PATH }}
-          ${{ secrets.EXTENSION_ID }};
+        uses: mobilefirstllc/cws-publish@v1
+        with:
+          action: 'upload'  # one of: { upload, publish, testers }
+          client_id: ${{ secrets.CLIENT }}
+          client_secret: ${{ secrets.SECRET }}
+          refresh_token: ${{ secrets.TOKEN }}
+          extension_id: ${{ secrets.EXTENSION_ID }}
+          zip_file: 'release.zip'
