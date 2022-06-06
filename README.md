@@ -22,41 +22,60 @@
 
 ## Getting Started
 
-### Install package
+### Usage with GitHub Actions
 
-Add the NPM package to your project
+1. Configure workflow:
 
-```
-npm install --save-dev cws-publish
-```
+   ```
+   uses: mobilefirstllc/cws-publish@v2.0.8
+   with:
+     action: 'upload'
+     client_id: ${{ secrets.CLIENT }}
+     client_secret: ${{ secrets.SECRET }}
+     refresh_token: ${{ secrets.TOKEN }}
+     zip_file: release.zip
+     extension_id: fpggedhgeoicapmcammhdbmcmngbpkll
+   ```
 
-### Choose desired behavior
+2. see [obtain necessary credentials](#obtain-necessary-credentials) for instructions for specifying each parameter.
 
-1. **Upload as a draft**
+### Generic command line usage
 
-    Upload the .zip file to developer console, but DO NOT publish it yet. Manual publish is still needed from developer console.
+1. Add the NPM package to your project
 
-    ```
-    npx cws-upload $client_id $client_secret $refresh_token <ZIP_FILE> <EXTENSION_ID>
-    ```
+   ```
+   npm install --save-dev cws-publish
+   ```
 
-2. **Upload and publish immediately**
+2. Choose appropriate command
 
-    Web store will likely still impose a review before actual release occurs; but you are not required to manually submit the update for release from the developer console.
+   - **Upload as a draft**
 
-    ```
-    npx cws-publish $client_id $client_secret $refresh_token <ZIP_FILE> <EXTENSION_ID>
-    ```
+     Upload the .zip file to developer console, but DO NOT publish it yet. Manual publish is still needed from developer console.
 
-4. **Upload and publish to testers**
+     ```
+     npx cws-upload $client_id $client_secret $refresh_token <ZIP_FILE> <EXTENSION_ID>
+     ```
 
-    You can only choose this option if the extension is currently NOT published publicly. Current state must be draft or published to testers. Attempting to perform this operation on a public published extension will fail.
+   - **Upload and publish immediately**
 
-    ```
-    npx cws-publish $client_id $client_secret $refresh_token <ZIP_FILE> <EXTENSION_ID> --testers
-    ```
+      Web store will likely still impose a review before actual release occurs; but you are not required to manually submit the update for release from the developer console.
 
-### Obtain necessary credentials
+      ```
+      npx cws-publish $client_id $client_secret $refresh_token <ZIP_FILE> <EXTENSION_ID>
+      ```
+
+   - **Upload and publish to testers**
+
+       You can only choose this option if the extension is currently NOT published publicly. Current state must be draft or published to testers. Attempting to perform this operation on a public published extension will fail.
+
+       ```
+       npx cws-publish $client_id $client_secret $refresh_token <ZIP_FILE> <EXTENSION_ID> --testers
+       ```
+     
+3. see [obtain necessary credentials](#obtain-necessary-credentials) for instructions for specifying each parameter. 
+
+## Obtain necessary credentials
 
 All commands require defining 5 parameters. This section explains how to obtain each.
 
