@@ -1,4 +1,4 @@
-name: 'cws-publish'
+name: 'Publish Chrome extension to Chrome Web Store'
 author: 'Mobile First LLC'
 description: 'Upload and publish Chrome extensions to Chrome Web Store'
 branding:
