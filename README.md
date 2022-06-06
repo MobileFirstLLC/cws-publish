@@ -45,8 +45,6 @@
 
 ### Generic CI or CLI usage
 
--->
-
 1. Add the NPM package to your project
 
    ```
