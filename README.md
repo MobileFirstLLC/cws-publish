@@ -60,7 +60,7 @@
 
 2. **Available commands**: choose command based on desired behavior
 
-   - **Upload draft** (`upload` action)
+   - **Upload draft**
 
      Upload the .zip file to developer console, but DO NOT publish it yet. Manual publish is still needed from developer console.
 
@@ -68,7 +68,7 @@
      npx cws-upload $client_id $client_secret $refresh_token <ZIP_FILE> <EXTENSION_ID>
      ```
 
-   - **Publish immediately** (`publish` action)
+   - **Publish immediately**
 
       Web store will likely still impose a review before actual release occurs; but you are not required to manually submit the update for release from the developer console.
 
@@ -76,7 +76,7 @@
       npx cws-publish $client_id $client_secret $refresh_token <ZIP_FILE> <EXTENSION_ID>
       ```
 
-   - **Publish to testers only** (`testers` action)
+   - **Publish to testers only**
 
        You can only choose this option if the extension is currently NOT published publicly. Current state must be draft or published to testers. Attempting to perform this operation on a public published extension will fail.
 
