@@ -29,17 +29,19 @@
    ```yaml
    uses: mobilefirstllc/cws-publish@v2.0.8
    with:
-     action: upload
+     action: upload  # one of: { upload, publish, testers }
      client_id: ${{ secrets.CLIENT }}
      client_secret: ${{ secrets.SECRET }}
      refresh_token: ${{ secrets.TOKEN }}
      zip_file: release.zip
      extension_id: fpggedhgeoicapmcammhdbmcmngbpkll
    ```
+   
+   Choose appropriate action based on desired behavior; see "Available commands" below for detailed descriptions of each.
 
 2. see [obtain necessary credentials](#obtain-necessary-credentials) for instructions for specifying each parameter.
 
-### Generic command line usage
+### Generic CI (or CLI) usage
 
 1. Add the NPM package to your project
 
@@ -47,9 +49,9 @@
    npm install --save-dev cws-publish
    ```
 
-2. Choose appropriate command
+2. Available commands: choose command based on desired behavior
 
-   - **Upload as a draft**
+   - **Upload draft** (`upload` action)
 
      Upload the .zip file to developer console, but DO NOT publish it yet. Manual publish is still needed from developer console.
 
@@ -57,7 +59,7 @@
      npx cws-upload $client_id $client_secret $refresh_token <ZIP_FILE> <EXTENSION_ID>
      ```
 
-   - **Upload and publish immediately**
+   - **Publish immediately** (`publish` action)
 
       Web store will likely still impose a review before actual release occurs; but you are not required to manually submit the update for release from the developer console.
 
@@ -65,7 +67,7 @@
       npx cws-publish $client_id $client_secret $refresh_token <ZIP_FILE> <EXTENSION_ID>
       ```
 
-   - **Upload and publish to testers**
+   - **Publish to testers only** (`testers` action)
 
        You can only choose this option if the extension is currently NOT published publicly. Current state must be draft or published to testers. Attempting to perform this operation on a public published extension will fail.
 
