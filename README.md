@@ -24,7 +24,7 @@
 
 ### Usage with GitHub Actions
 
-1. Configure workflow:
+1. Configure workflow, example:
 
    ```yaml
    uses: mobilefirstllc/cws-publish@v3.0.0
@@ -33,8 +33,8 @@
      client_id: ${{ secrets.CLIENT }}
      client_secret: ${{ secrets.SECRET }}
      refresh_token: ${{ secrets.TOKEN }}
+     extension_id: abcdefghijklmnopabcdefghijklmnop 
      zip_file: release.zip
-     extension_id: fpggedhgeoicapmcammhdbmcmngbpkll
    ```
    
    Choose appropriate action based on desired behavior; see "Available commands" below for detailed descriptions of each.
@@ -108,10 +108,10 @@ All commands require defining 5 parameters. This section explains how to obtain 
     
 3. **Extension identifier `<EXTENSION_ID>`**
 
-    Go to Chrome web store [developer console](https://chrome.google.com/webstore/developer/dashboard) and click on an existing extension. Copy the item id (32 alpha-char string) and paste it to your command to replace `<EXTENSION_ID>`. For example, if your extension id is `fpggedhgeoicapmcammhdbmcmngbpkll` the upload command would now look like this:
+    Go to Chrome web store [developer console](https://chrome.google.com/webstore/developer/dashboard) and click on an existing extension. Copy the item id (32 alpha-char string) and paste it to your command to replace `<EXTENSION_ID>`. For example, if your extension id is `abcdefghijklmnopabcdefghijklmnop` the upload command would now look like this:
 
     ```
-    npx cws-upload $client_id $client_secret $refresh_token ./build/my.zip fpggedhgeoicapmcammhdbmcmngbpkll
+    npx cws-upload $client_id $client_secret $refresh_token ./build/my.zip abcdefghijklmnopabcdefghijklmnop
     ```
        
     If your extension is brand new, you must manually upload an initial draft in the developer console to obtain an id for your extension. Further, you will not be able to publish a new extension until you manually complete the store listing to include uploading necessary screenshots and consenting to their policies.
