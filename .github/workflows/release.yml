@@ -17,10 +17,6 @@ jobs:
       - name: Get tag name 🏷️
         run: echo "TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
 
-      - name: Stop if action release
-        if: ${{ contains(env.TAG, 'v') }}
-        run: exit 0
-
       - name: Install and build 🏗️
         run: |
           npm ci

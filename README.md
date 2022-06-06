@@ -22,6 +22,7 @@
 
 ## Getting Started
 
+<!--  hide for now
 ### Usage with GitHub Actions
 
 1. Configure workflow, example:
@@ -43,6 +44,8 @@
 2. see [obtain necessary credentials](#obtain-necessary-credentials) for instructions for specifying each parameter.
 
 ### Generic CI or CLI usage
+
+-->
 
 1. Add the NPM package to your project
 
