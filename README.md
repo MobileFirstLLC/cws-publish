@@ -41,7 +41,7 @@
 
 2. see [obtain necessary credentials](#obtain-necessary-credentials) for instructions for specifying each parameter.
 
-### Generic CI (or CLI) usage
+### Generic CI or CLI usage
 
 1. Add the NPM package to your project
 
@@ -49,7 +49,7 @@
    npm install --save-dev cws-publish
    ```
 
-2. Available commands: choose command based on desired behavior
+2. **Available commands**: choose command based on desired behavior
 
    - **Upload draft** (`upload` action)
 
@@ -81,7 +81,7 @@
 
 All commands require defining 5 parameters. This section explains how to obtain each.
 
-1. **Google API Credentials: `$client_id`, `$client_secret`, `$refresh_token`** 
+1. **Google API credentials: `$client_id`, `$client_secret`, `$refresh_token`** 
  
     Detailed instructions for obtaining these values are explained in this guide: **https://developer.chrome.com/webstore/using_webstore_api#beforeyoubegin**
     

@@ -3,6 +3,7 @@
 .nyc_output/
 examples/
 node_modules/
+action/
 src/
 test/
 .gitignore
