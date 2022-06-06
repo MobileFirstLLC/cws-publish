@@ -1,3 +1,4 @@
+/* eslint-disable no-undef,no-unused-expressions */
 import { ApiServer, ApiResponses } from './mocks.spec'
 // @ts-ignore
 import * as sinon from 'sinon'
@@ -13,6 +14,7 @@ const OAuth2 = require('google-auth-library').OAuth2Client
 const apiClient = 'myClientId'
 const apiSecret = 'myAPISecret'
 const apiToken = 'xyz'
+// eslint-disable-next-line camelcase
 const access_token = 'some_token'
 const badZip = 'bad.zip'
 const goodZip = 'good.zip'

@@ -127,11 +127,88 @@ All commands require defining 5 parameters. This section explains how to obtain 
 
 <strong>Feeling confused? <img src='https://media0.giphy.com/media/xk9cukG3p8mcv0tlli/giphy.gif' width="42" /></strong>
 
-See examples of platform-specific CI configuration scripts:
+Here are complete and minial examples of platform-specific CI configuration scripts.
 
-- [Github Actions configuration example](https://github.com/MobileFirstLLC/cws-publish/tree/main/examples/gh-actions.yml)
-- [Gitlab CI configuration example](https://github.com/MobileFirstLLC/cws-publish/tree/main/examples/.gitlab-ci.yml)
-- [Travis CI configuration example](https://github.com/MobileFirstLLC/cws-publish/tree/main/examples/.travis.yml)
+**Github Actions configuration example**
+
+```yaml
+name: Publish
+
+on:
+  push:
+    tags:
+      - '*' # run only on tagged commits
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build zip file
+        run: npm run build
+
+      - name: Upload to Chrome Web Store
+        uses: mobilefirstllc/cws-publish@v1
+        with:
+          action: 'upload'  # one of: { upload, publish, testers }
+          client_id: ${{ secrets.CLIENT }}
+          client_secret: ${{ secrets.SECRET }}
+          refresh_token: ${{ secrets.TOKEN }}
+          extension_id: ${{ secrets.EXTENSION_ID }}
+          zip_file: 'release.zip'
+```
+
+**Gitlab CI configuration example**
+
+```yaml
+image: node:latest
+
+stages:
+  - install
+  - deploy
+
+install_dependencies:
+  stage: install
+  script: npm install
+  artifacts:
+    paths:
+      - node_modules/
+
+deploy:
+  stage: deploy
+  script:    
+    - npm run build  # run build steps    
+    - npx cws-upload $client_id $secret $token $zip_path $extension_id;
+  artifacts:
+    paths:
+      - public/
+  only:
+    - tags
+```
+
+**Travis CI configuration example**
+
+```yaml
+language: node_js
+node_js:
+  - "latest"
+
+script:
+  - npm install
+  - npm run build
+  # require tagged commit
+  # omit this condition to always upload
+  - if [ ! -z  "$TRAVIS_TAG" ]; then
+      npx cws-upload $client_id $secret $token $zip $extension_id;
+    fi
+```
 
 **Tips and Best Practices**
 
