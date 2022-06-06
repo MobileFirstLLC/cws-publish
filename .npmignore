@@ -3,9 +3,12 @@
 .nyc_output/
 examples/
 node_modules/
+action/
 src/
 test/
 .gitignore
+action.yml
 icon.png
+renovate.json
 tsconfig.json
 tsconfig.testing.json

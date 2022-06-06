@@ -22,45 +22,66 @@
 
 ## Getting Started
 
-### Install package
+### Usage with GitHub Actions
 
-Add the NPM package to your project
+1. Configure workflow, example:
 
-```
-npm install --save-dev cws-publish
-```
+   ```yaml
+   uses: mobilefirstllc/cws-publish@v1
+   with:
+     action: upload  # one of: { upload, publish, testers }
+     client_id: ${{ secrets.CLIENT }}
+     client_secret: ${{ secrets.SECRET }}
+     refresh_token: ${{ secrets.TOKEN }}
+     extension_id: abcdefghijklmnopabcdefghijklmnop 
+     zip_file: release.zip
+   ```
+   
+   Choose appropriate action based on desired behavior; see "Available commands" below for detailed descriptions of each.
 
-### Choose desired behavior
+2. see [obtain necessary credentials](#obtain-necessary-credentials) for instructions for specifying each parameter.
 
-1. **Upload as a draft**
+### Generic CI or CLI usage
 
-    Upload the .zip file to developer console, but DO NOT publish it yet. Manual publish is still needed from developer console.
+1. Add the NPM package to your project
 
-    ```
-    npx cws-upload $client_id $client_secret $refresh_token <ZIP_FILE> <EXTENSION_ID>
-    ```
+   ```
+   npm install --save-dev cws-publish
+   ```
 
-2. **Upload and publish immediately**
+2. **Available commands**: choose command based on desired behavior
 
-    Web store will likely still impose a review before actual release occurs; but you are not required to manually submit the update for release from the developer console.
+   - **Upload draft** (`upload` action)
 
-    ```
-    npx cws-publish $client_id $client_secret $refresh_token <ZIP_FILE> <EXTENSION_ID>
-    ```
+     Upload the .zip file to developer console, but DO NOT publish it yet. Manual publish is still needed from developer console.
 
-4. **Upload and publish to testers**
+     ```
+     npx cws-upload $client_id $client_secret $refresh_token <ZIP_FILE> <EXTENSION_ID>
+     ```
 
-    You can only choose this option if the extension is currently NOT published publicly. Current state must be draft or published to testers. Attempting to perform this operation on a public published extension will fail.
+   - **Publish immediately** (`publish` action)
 
-    ```
-    npx cws-publish $client_id $client_secret $refresh_token <ZIP_FILE> <EXTENSION_ID> --testers
-    ```
+      Web store will likely still impose a review before actual release occurs; but you are not required to manually submit the update for release from the developer console.
 
-### Obtain necessary credentials
+      ```
+      npx cws-publish $client_id $client_secret $refresh_token <ZIP_FILE> <EXTENSION_ID>
+      ```
+
+   - **Publish to testers only** (`testers` action)
+
+       You can only choose this option if the extension is currently NOT published publicly. Current state must be draft or published to testers. Attempting to perform this operation on a public published extension will fail.
+
+       ```
+       npx cws-publish $client_id $client_secret $refresh_token <ZIP_FILE> <EXTENSION_ID> --testers
+       ```
+     
+3. see [obtain necessary credentials](#obtain-necessary-credentials) for instructions for specifying each parameter. 
+
+## Obtain necessary credentials
 
 All commands require defining 5 parameters. This section explains how to obtain each.
 
-1. **Google API Credentials: `$client_id`, `$client_secret`, `$refresh_token`** 
+1. **Google API credentials: `$client_id`, `$client_secret`, `$refresh_token`** 
  
     Detailed instructions for obtaining these values are explained in this guide: **https://developer.chrome.com/webstore/using_webstore_api#beforeyoubegin**
     
@@ -87,10 +108,10 @@ All commands require defining 5 parameters. This section explains how to obtain 
     
 3. **Extension identifier `<EXTENSION_ID>`**
 
-    Go to Chrome web store [developer console](https://chrome.google.com/webstore/developer/dashboard) and click on an existing extension. Copy the item id (32 alpha-char string) and paste it to your command to replace `<EXTENSION_ID>`. For example, if your extension id is `fpggedhgeoicapmcammhdbmcmngbpkll` the upload command would now look like this:
+    Go to Chrome web store [developer console](https://chrome.google.com/webstore/developer/dashboard) and click on an existing extension. Copy the item id (32 alpha-char string) and paste it to your command to replace `<EXTENSION_ID>`. For example, if your extension id is `abcdefghijklmnopabcdefghijklmnop` the upload command would now look like this:
 
     ```
-    npx cws-upload $client_id $client_secret $refresh_token ./build/my.zip fpggedhgeoicapmcammhdbmcmngbpkll
+    npx cws-upload $client_id $client_secret $refresh_token ./build/my.zip abcdefghijklmnopabcdefghijklmnop
     ```
        
     If your extension is brand new, you must manually upload an initial draft in the developer console to obtain an id for your extension. Further, you will not be able to publish a new extension until you manually complete the store listing to include uploading necessary screenshots and consenting to their policies.
