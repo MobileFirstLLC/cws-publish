@@ -6,10 +6,11 @@
   "scripts": {
     "clean": "rm -rf ./dist & rm -rf ./.nyc_output",
     "lint": "npx eslint ./src/**",
-    "uglify": "npm run uglify:cws && npm run uglify:publish && npm run uglify:upload",
+    "uglify": "npm run uglify:cws && npm run uglify:publish && npm run uglify:upload && npm run uglify:action",
     "uglify:cws": "uglifyjs ./dist/cws.js -m -o ./dist/cws.js",
     "uglify:publish": "uglifyjs ./dist/publish.js -m -o ./dist/publish.js",
     "uglify:upload": "uglifyjs ./dist/upload.js -m -o ./dist/upload.js",
+    "uglify:action": "uglifyjs ./dist/action.js -m -o ./.github/action.js && rm -rf ./dist/action.js",
     "build": "tsc --project tsconfig.json && npm run uglify",
     "test": "TS_NODE_PROJECT=\"tsconfig.testing.json\" nyc mocha -r ts-node/register ./test/*.spec.ts",
     "coverage": "nyc --reporter=lcov npm run test",
@@ -57,6 +58,8 @@
     "cws-publish": "dist/publish.js"
   },
   "dependencies": {
+    "@actions/core": "^1.8.2",
+    "@actions/github": "^5.0.3",
     "commander": "9.3.0",
     "googleapis": "100.0.0",
     "superagent": "7.1.6"

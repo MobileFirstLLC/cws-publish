@@ -1,0 +1,31 @@
+name: 'cws-publish'
+author: 'Mobile First LLC'
+description: 'Upload chrome extensions to chrome web store'
+inputs:
+  action:
+    description: 'Desired action, one of: upload, publish, testers'
+    required: true
+    default: 'upload'
+  client_id:
+    description: 'Webstore API client id parameter'
+    required: true
+  client_secret:
+    description: 'Webstore API client secret parameter'
+    required: true
+  refresh_token:
+    description: 'Webstore API refresh token'
+    required: true
+  zip_file:
+    description: 'Path to extension .zip file'
+    required: true
+  extension_id:
+    description: 'Unique identifier of the Chrome extension'
+    required: true
+
+outputs:
+  result:
+    description: 'Outcome of the requested upload action'
+
+runs:
+  using: 'node16'
+  main: './.github/action.js'
