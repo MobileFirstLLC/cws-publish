@@ -203,22 +203,11 @@ node_js:
 script:
   - npm install
   - npm run build
-  # require tagged commit
-  # omit this condition to always upload
+  # require tagged commit; omit this condition to always upload
   - if [ ! -z  "$TRAVIS_TAG" ]; then
       npx cws-upload $client_id $secret $token $zip $extension_id;
     fi
 ```
-
-**Tips and Best Practices**
-
-- Package deployment is generally done based on some condition, such as only on tagged commits. The general idea is to use the same command, but run the command based on some conditional check. See [examples](https://github.com/MobileFirstLLC/cws-publish/tree/main/examples), that demonstrate how to setup this behavior for different CI environments.
-
-- To keep your CI configuration file clutter-free, use environment variables for all parameters:
-
-   ```
-   npx cws-upload $client_id $secret $token $zip_path $extension_id
-   ```
 
 ## FAQs
 
