@@ -38,8 +38,15 @@
        zip_file: 'release.zip'
    ```
    
-   Choose appropriate action based on desired behavior; see "Available commands" below for detailed descriptions of each.
-   Make sure to define all required parameters.
+   Choose appropriate action based on desired behavior:
+    
+   | Action    | Description                                                                     |
+   |:----------|:--------------------------------------------------------------------------------|
+   | `upload`  | uploads zip file to developer console; manual publish from console is required  |
+   | `publish` | uploads zip file and submits publish request automatically                      |
+   | `testers` | uploads zip and requests publish to testers (unavailable for public extensions) |
+
+   All parameters are required -- make sure to define them all.
 
 3. see [obtain necessary credentials](#obtain-necessary-credentials) for instructions for specifying each parameter.
 
