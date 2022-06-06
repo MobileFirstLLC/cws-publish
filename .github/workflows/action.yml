@@ -9,12 +9,15 @@ jobs:
     runs-on: ubuntu-latest
     name: basic sanity check
     steps:
-      - name: Upload to Chrome Web Store
+      - name: Download pre-built zip
+        run: curl  ${{ secrets.PREBUILT_URL }} -o ./release.zip
+
+      - name: Upload the zip to Chrome Web Store
         uses: mobilefirstllc/cws-publish@v1
         with:
           action: 'upload'
           client_id: ${{ secrets.CLIENT }}
           client_secret: ${{ secrets.SECRET }}
           refresh_token: ${{ secrets.TOKEN }}
-          extension_id: 'abcdefghijklmnopabcdefghijklmnop'
+          extension_id: 'ndfbaikongjdccfekbclgfkdbgklngpe'
           zip_file: 'release.zip'
