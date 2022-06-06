@@ -1,6 +1,9 @@
 name: 'cws-publish'
 author: 'Mobile First LLC'
-description: 'Upload chrome extensions to chrome web store'
+description: 'Upload and publish Chrome extensions to Chrome Web Store'
+branding:
+  icon: 'arrow-right'
+  color: 'green'
 inputs:
   action:
     description: 'Desired action, one of: upload, publish, testers'
