@@ -26,10 +26,10 @@
 
 1. Configure workflow:
 
-   ```
+   ```yaml
    uses: mobilefirstllc/cws-publish@v2.0.8
    with:
-     action: 'upload'
+     action: upload
      client_id: ${{ secrets.CLIENT }}
      client_secret: ${{ secrets.SECRET }}
      refresh_token: ${{ secrets.TOKEN }}
