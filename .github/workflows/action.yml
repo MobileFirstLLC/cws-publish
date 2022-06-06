@@ -1,0 +1,20 @@
+name: Action test
+
+on:
+  workflow_dispatch:
+    branches: [ main ]
+
+jobs:
+  cws_job:
+    runs-on: ubuntu-latest
+    name: basic sanity check
+    steps:
+      - name: Upload to Chrome Web Store
+        uses: mobilefirstllc/cws-publish@v1
+        with:
+          action: upload
+          client_id: ${{ secrets.CLIENT }}
+          client_secret: ${{ secrets.SECRET }}
+          refresh_token: ${{ secrets.TOKEN }}
+          extension_id: abcdefghijklmnopabcdefghijklmnop
+          zip_file: release.zip

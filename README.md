@@ -27,14 +27,15 @@
 1. Configure workflow, example:
 
    ```yaml
-   uses: mobilefirstllc/cws-publish@v1
-   with:
-     action: upload  # one of: { upload, publish, testers }
-     client_id: ${{ secrets.CLIENT }}
-     client_secret: ${{ secrets.SECRET }}
-     refresh_token: ${{ secrets.TOKEN }}
-     extension_id: abcdefghijklmnopabcdefghijklmnop 
-     zip_file: release.zip
+   - name: Upload to Chrome Web Store
+     uses: mobilefirstllc/cws-publish@v1
+     with:
+       action: upload  # one of: { upload, publish, testers }
+       client_id: ${{ secrets.CLIENT }}
+       client_secret: ${{ secrets.SECRET }}
+       refresh_token: ${{ secrets.TOKEN }}
+       extension_id: abcdefghijklmnopabcdefghijklmnop 
+       zip_file: release.zip
    ```
    
    Choose appropriate action based on desired behavior; see "Available commands" below for detailed descriptions of each.
