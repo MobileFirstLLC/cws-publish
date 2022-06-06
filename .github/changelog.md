@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0-beta.0](https://github.com/MobileFirstLLC/cws-publish/compare/2.0.8...2.1.0-beta.0) (2022-06-06)
+
+
+### Bug Fixes
+
+* action.yml ([3304ce5](https://github.com/MobileFirstLLC/cws-publish/commit/3304ce596cee2c2b6962b4462aef296acd76c395))
+* **deps:** update dependency commander to v9.1.0 ([330b48c](https://github.com/MobileFirstLLC/cws-publish/commit/330b48c4f311a5c853e584478948935075ff87cc))
+* **deps:** update dependency googleapis to v94 ([41e26b7](https://github.com/MobileFirstLLC/cws-publish/commit/41e26b78f2bb8d68e8ba734b631f9cdc70522dd0))
+* **deps:** update dependency googleapis to v95 ([0b78090](https://github.com/MobileFirstLLC/cws-publish/commit/0b7809083dee1cbe0d593b5e75bf7889ccd379f5))
+* **deps:** update dependency googleapis to v96 ([4a445cd](https://github.com/MobileFirstLLC/cws-publish/commit/4a445cd9e67b51f0fd2d4c09d8b56f4cddcdb07b))
+* **deps:** update dependency googleapis to v97 ([6fbe3c5](https://github.com/MobileFirstLLC/cws-publish/commit/6fbe3c5dd29b44c26f1d9ba833dd11621f1016d8))
+* **deps:** update dependency googleapis to v98 ([969ee62](https://github.com/MobileFirstLLC/cws-publish/commit/969ee62df0f02b72924b3b5fd8a66ad9e70cbd89))
+* **deps:** update dependency googleapis to v99 ([3d676f3](https://github.com/MobileFirstLLC/cws-publish/commit/3d676f3cc9186f0e6a6ba31bdde1ba8e361478e0))
+
 ### [2.0.8](https://github.com/MobileFirstLLC/cws-publish/compare/2.0.7...2.0.8) (2022-01-20)
 
 dependency updates:
