@@ -130,7 +130,7 @@ All commands require defining 5 parameters. This section explains how to obtain 
 Here are complete and minimal examples of platform-specific CI configuration scripts. Each example is set
 to run on tagged commits -- omit or change this condition if you prefer alternative configuration.
 
-**Github Actions configuration example**
+### Github Actions :octocat:
 
 ```yaml
 name: Publish
@@ -166,7 +166,7 @@ jobs:
           zip_file: 'release.zip'
 ```
 
-**Gitlab CI configuration example**
+### Gitlab CI :fox_face:
 
 ```yaml
 image: node:latest
@@ -194,7 +194,7 @@ deploy:
     - tags
 ```
 
-**Travis CI configuration example**
+### Travis CI :construction_worker:
 
 ```yaml
 language: node_js
