@@ -58,13 +58,13 @@
     "cws-publish": "dist/publish.js"
   },
   "dependencies": {
-    "@actions/core": "^1.8.2",
-    "@actions/github": "^5.0.3",
     "commander": "9.3.0",
     "googleapis": "100.0.0",
     "superagent": "7.1.6"
   },
   "devDependencies": {
+    "@actions/core": "^1.8.2",
+    "@actions/github": "^5.0.3",
     "@types/mocha": "9.1.1",
     "@types/node": "17.0.40",
     "@typescript-eslint/eslint-plugin": "5.27.0",
