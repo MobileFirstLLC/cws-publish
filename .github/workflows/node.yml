@@ -8,9 +8,10 @@ name: Node version test
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
     tags-ignore:
-      - *
+      - '*'
   pull_request:
     branches: [ main ]
 
