@@ -28,14 +28,14 @@
 
    ```yaml
    - name: Upload to Chrome Web Store
-     uses: mobilefirstllc/cws-publish@v1
+     uses: mobilefirstllc/cws-publish@latest
      with:
-       action: 'upload'  # one of: { upload, publish, testers }
+       action: 'upload'  # one of: upload, publish, testers
        client_id: ${{ secrets.CLIENT }}
        client_secret: ${{ secrets.SECRET }}
        refresh_token: ${{ secrets.TOKEN }}
-       extension_id: 'abcdefghijklmnopabcdefghijklmnop' 
-       zip_file: 'release.zip'
+       extension_id: '32-CHAR EXTENSION ID' 
+       zip_file: 'ZIP FILE PATH'
    ```
    
    Choose appropriate action based on desired behavior:
@@ -127,7 +127,8 @@ All commands require defining 5 parameters. This section explains how to obtain 
 
 <strong>Feeling confused? <img src='https://media0.giphy.com/media/xk9cukG3p8mcv0tlli/giphy.gif' width="42" /></strong>
 
-Here are complete and minial examples of platform-specific CI configuration scripts.
+Here are complete and minimal examples of platform-specific CI configuration scripts. Each example is set
+to run on tagged commits -- omit or change this condition if you prefer alternative configuration.
 
 **Github Actions configuration example**
 
@@ -137,7 +138,7 @@ name: Publish
 on:
   push:
     tags:
-      - '*' # run only on tagged commits
+      - '*' 
 
 jobs:
   build:
@@ -155,9 +156,9 @@ jobs:
         run: npm run build
 
       - name: Upload to Chrome Web Store
-        uses: mobilefirstllc/cws-publish@v1
+        uses: mobilefirstllc/cws-publish@latest
         with:
-          action: 'upload'  # one of: { upload, publish, testers }
+          action: 'upload' 
           client_id: ${{ secrets.CLIENT }}
           client_secret: ${{ secrets.SECRET }}
           refresh_token: ${{ secrets.TOKEN }}
@@ -184,7 +185,7 @@ install_dependencies:
 deploy:
   stage: deploy
   script:    
-    - npm run build  # run build steps    
+    - npm run build
     - npx cws-upload $client_id $secret $token $zip_path $extension_id;
   artifacts:
     paths:
@@ -203,8 +204,7 @@ node_js:
 script:
   - npm install
   - npm run build
-  # require tagged commit; omit this condition to always upload
-  - if [ ! -z  "$TRAVIS_TAG" ]; then
+  - if [ ! -z  "$TRAVIS_TAG" ]; then 
       npx cws-upload $client_id $secret $token $zip $extension_id;
     fi
 ```

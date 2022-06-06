@@ -9,6 +9,8 @@ name: Node version test
 on:
   push:
     branches: [ main ]
+    tags-ignore:
+      - *
   pull_request:
     branches: [ main ]
 
@@ -27,10 +29,11 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
 
-      - name: Install and build 🏗️
-        run: |
-          npm ci
-          npm run build
+      - name: Install 🚧
+        run: npm ci
 
-      - name: Run tests ⚗️
+      - name: Build 🏗️
+        run: npm run build
+
+      - name: Run tests 🧪
         run: npm run test

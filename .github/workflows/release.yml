@@ -17,13 +17,30 @@ jobs:
       - name: Get tag name 🏷️
         run: echo "TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
 
-      - name: Install and build 🏗️
-        run: |
-          npm ci
-          npm run build
+      - name: Install 🚧
+        run: npm ci
 
-      - name: Run tests ⚗️
-        run: npm run test
+      - name: Build 🏗️
+        run: npm run build
+
+      - name: Run linter 🏵️
+        run: npm run lint
+
+      - name: Run tests 🧪️
+        run: npm run coverage
+
+      - name: Download pre-built zip ⬇️
+        run: curl  ${{ secrets.PREBUILT_URL }} -o ./release.zip
+
+      - name: Dry run with current tag ⬆️
+        uses: mobilefirstllc/cws-publish@${{ env.TAG }}
+        with:
+          action: 'upload'
+          client_id: ${{ secrets.CLIENT }}
+          client_secret: ${{ secrets.SECRET }}
+          refresh_token: ${{ secrets.TOKEN }}
+          extension_id: 'ndfbaikongjdccfekbclgfkdbgklngpe'
+          zip_file: 'release.zip'
 
       - name: Publish NPM package 🎁
         uses: JS-DevTools/npm-publish@v1
@@ -31,8 +48,28 @@ jobs:
           tag: ${{ fromJSON('["latest", "beta"]')[contains(env.TAG, '-')] }}
           token: ${{ secrets.NPM_TOKEN }}
 
+      # make release with actual tag for record keeping
       - name: Github Release 🚀
-        uses: ncipollo/release-action@v1
+        uses: ncipollo/release-action@v1.10.0
         with:
           prerelease: ${{ contains(env.TAG, '-') }}
           token: ${{ secrets.GITHUB_TOKEN }}
+          generateReleaseNotes: true
+          artifactErrorsFailBuild: true
+
+      # make release with tag "latest" for GH actions
+      - name: Github Release 🚀
+        uses: ncipollo/release-action@v1.10.0
+        with:
+          prerelease: ${{ contains(env.TAG, '-') }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          generateReleaseNotes: true
+          artifactErrorsFailBuild: true
+          replacesArtifacts: true
+          allowUpdates: true
+          tag: "latest"
+
+      - name: Report coverage 📈
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}

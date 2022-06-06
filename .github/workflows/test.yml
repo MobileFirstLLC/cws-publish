@@ -3,6 +3,8 @@ name: Test
 on:
   push:
     branches: [ main ]
+    tags-ignore:
+      - *
   pull_request:
     branches: [ main ]
 
@@ -21,15 +23,16 @@ jobs:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
 
-      - name: Install and build 🏗️
-        run: |
-          npm ci
-          npm run build
+      - name: Install 🚧
+        run: npm ci
+
+      - name: Build 🏗️
+        run: npm run build
 
       - name: Run linter 🏵️
         run: npm run lint
 
-      - name: Run tests ⚗️
+      - name: Run tests 🧪
         run: npm run coverage
 
       - name: Report coverage 📈
