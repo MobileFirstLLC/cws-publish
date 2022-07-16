@@ -61,7 +61,7 @@
     "node": ">=12.0.0"
   },
   "dependencies": {
-    "commander": "9.3.0",
+    "commander": "9.4.0",
     "google-auth-library": "8.1.1",
     "superagent": "8.0.0"
   },
