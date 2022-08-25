@@ -62,7 +62,7 @@
   },
   "dependencies": {
     "commander": "9.4.0",
-    "google-auth-library": "8.3.0",
+    "google-auth-library": "8.4.0",
     "superagent": "8.0.0"
   },
   "devDependencies": {
