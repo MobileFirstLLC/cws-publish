@@ -50,7 +50,7 @@ jobs:
 
       # make release with actual tag for record keeping
       - name: Github Release 🚀
-        uses: ncipollo/release-action@1.11.0
+        uses: ncipollo/release-action@v1.11.1
         with:
           prerelease: ${{ contains(env.TAG, '-') }}
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -59,7 +59,7 @@ jobs:
 
       # make release with tag "latest" for GH actions
       - name: Github Release 🚀
-        uses: ncipollo/release-action@1.11.0
+        uses: ncipollo/release-action@v1.11.1
         with:
           prerelease: ${{ contains(env.TAG, '-') }}
           token: ${{ secrets.GITHUB_TOKEN }}
