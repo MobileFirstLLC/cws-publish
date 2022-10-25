@@ -33,7 +33,7 @@ jobs:
         run: curl  ${{ secrets.PREBUILT_URL }} -o ./release.zip
 
       - name: Dry run with current tag ⬆️
-        uses: mobilefirstllc/cws-publish@2.1.0
+        uses: mobilefirstllc/cws-publish@2.1.1
         with:
           action: 'upload'
           client_id: ${{ secrets.CLIENT }}
