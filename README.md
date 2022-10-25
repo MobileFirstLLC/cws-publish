@@ -5,6 +5,7 @@
 [![Test](https://github.com/MobileFirstLLC/cws-publish/actions/workflows/test.yml/badge.svg)](https://github.com/MobileFirstLLC/cws-publish/actions/workflows/test.yml)
 [![Coverage Status](https://img.shields.io/coveralls/github/MobileFirstLLC/cws-publish)](https://coveralls.io/github/MobileFirstLLC/cws-publish?branch=main)
 [![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/MobileFirstLLC/cws-publish)](https://codeclimate.com/github/MobileFirstLLC/cws-publish)
+[![node-current](https://img.shields.io/node/v/cws-publish)](https://www.npmjs.com/package/cws-publish)
 
 **Upload chrome extensions to Chrome Web Store programmatically using CI/CD pipeline.**
 
