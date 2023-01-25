@@ -73,7 +73,7 @@
     "@types/node": "18.11.18",
     "@typescript-eslint/eslint-plugin": "5.49.0",
     "@typescript-eslint/parser": "5.49.0",
-    "@vercel/ncc": "0.36.0",
+    "@vercel/ncc": "0.36.1",
     "chai": "4.3.7",
     "coveralls": "3.1.1",
     "eslint": "8.32.0",
