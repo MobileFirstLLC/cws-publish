@@ -43,7 +43,7 @@ jobs:
           zip_file: 'release.zip'
 
       - name: Publish NPM package 🎁
-        uses: JS-DevTools/npm-publish@v2
+        uses: JS-DevTools/npm-publish@v3
         with:
           tag: ${{ fromJSON('["latest", "beta"]')[contains(env.TAG, '-')] }}
           token: ${{ secrets.NPM_TOKEN }}
