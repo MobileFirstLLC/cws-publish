@@ -1,19 +1,19 @@
 /** 3rd party library types **/
-export { Credentials } from 'google-auth-library/build/src/auth/credentials'
+export { Credentials } from "google-auth-library/build/src/auth/credentials";
 
 /**
  * Represents some Chrome WebStore API response.
  */
 export interface APIResult {
-    body: object
+  body: object;
 }
 
 /**
  * Possibles cli errors
  */
 export interface Dictionary {
-    zipError: string
-    authError: string
+  zipError: string;
+  authError: string;
 }
 
 /**
@@ -27,8 +27,8 @@ export interface Dictionary {
  */
 export class UploadResult implements APIResult {
   body: {
-        uploadState: string
-    }
+    uploadState: string;
+  };
 }
 
 /**
@@ -42,6 +42,6 @@ export class UploadResult implements APIResult {
  */
 export class PublishResult implements APIResult {
   body: {
-        status: Array<string>
-    }
+    status: Array<string>;
+  };
 }
