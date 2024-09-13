@@ -83,7 +83,7 @@
     "eslint-plugin-promise": "6.6.0",
     "mocha": "10.7.3",
     "nyc": "17.0.0",
-    "sinon": "15.2.0",
+    "sinon": "19.0.2",
     "ts-node": "10.9.2",
     "typescript": "5.0.4",
     "uglify-js": "3.19.3"
