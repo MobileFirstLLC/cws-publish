@@ -30,5 +30,5 @@ outputs:
     description: 'Outcome of the requested upload action'
 
 runs:
-  using: 'node16'
+  using: 'node20'
   main: 'action/index.js'
