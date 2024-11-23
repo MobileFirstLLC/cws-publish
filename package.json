@@ -70,7 +70,7 @@
     "@actions/core": "1.11.1",
     "@actions/github": "6.0.0",
     "@types/mocha": "10.0.10",
-    "@types/node": "22.9.2",
+    "@types/node": "22.9.3",
     "@typescript-eslint/eslint-plugin": "8.15.0",
     "@typescript-eslint/parser": "8.15.0",
     "@vercel/ncc": "0.38.3",
