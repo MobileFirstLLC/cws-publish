@@ -81,7 +81,7 @@
     "eslint-plugin-import": "2.31.0",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-promise": "6.6.0",
-    "mocha": "10.8.2",
+    "mocha": "11.0.1",
     "nyc": "17.0.0",
     "sinon": "15.2.0",
     "ts-node": "10.9.2",
